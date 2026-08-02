@@ -1,0 +1,106 @@
+# === Secrets — never commit ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets.json
+credentials.json
+**/serviceAccount*.json
+
+# === Private evidence: raw exports, unredacted screenshots, source documents ===
+# Anything in /private stays local. Only anonymised findings go into tracked .md files.
+/private/
+/private/**
+*.raw.json
+*_export.csv
+*_export.xlsx
+monday-export*
+**/unredacted/
+
+# === Dependencies ===
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/versions
+
+# === Build output ===
+dist/
+build/
+out/
+.next/
+.nuxt/
+.vercel/
+.turbo/
+*.tsbuildinfo
+
+# === Test & coverage ===
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# === Editor / OS ===
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# === Misc ===
+.cache/
+.temp/
+tmp/
+
+# Verification artefacts
+.playwright-mcp/
+next-env.d.ts
+
+# === Planning documents — local only, never published (pre-deploy gate) ===
+# These carry employer-internal material: the CAdmin system evaluation, the ERP
+# ownership boundary, security findings, credential-exposure notes, the internal
+# bug-report intake link, and figures excluded from publication.
+#
+# Untracked 2026-08-02 rather than moved, so they stay where they are edited.
+# Any deployment target that builds from a repository would otherwise ship them.
+# The site itself needs none of them — it is built from src/ alone.
+IMPLEMENTATION_PLAN.md
+MONDAY_WORK_ANALYSIS.md
+PORTFOLIO_CONTENT.md
+PORTFOLIO_DISCOVERY.md
+PORTFOLIO_PRD.md
+PORTFOLIO_REDESIGN.md
+PORTFOLIO_SIDEBAR_FLOW_REVISION.md
+PORTFOLIO_CASE_STUDY_SIDEBAR_REFINEMENT.md
+PORTFOLIO_SITEMAP.md
+PORTFOLIO_WIREFRAME.md
+
+# Catch-all: any future PORTFOLIO_*.md is a planning document by convention.
+# Added after PORTFOLIO_CASE_STUDY_SIDEBAR_REFINEMENT.md appeared and was
+# committed before anyone noticed — the named list only protects what exists.
+PORTFOLIO_*.md
+
+# Loose images dropped at the repo root are almost always raw captures that
+# have not been reviewed for confidentiality yet. Added after an Odoo dashboard
+# showing revenue, order values and a sales trend was committed by a git add -A
+# before anyone had looked at it. Reviewed images live in public/images/.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp

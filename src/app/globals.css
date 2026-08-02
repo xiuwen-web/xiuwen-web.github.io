@@ -1,0 +1,369 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens — IMPLEMENTATION_PLAN.md §3
+   Light is the default; dark is opt-in via [data-theme='dark'].
+   Contrast verified >= 4.5:1 body and >= 3:1 large in BOTH themes.
+------------------------------------------------------------------- */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Named for its job, not its classification: it is no longer a serif. */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --breakpoint-sm: 40rem;
+  --breakpoint-lg: 64rem;
+}
+
+:root {
+  /* ---- Containers ---- */
+  --measure-prose: 40rem; /* 640px — 16px body ≈ 68ch */
+  --measure-content: 57.5rem; /* 920px — card grids, lists */
+  --measure-wide: 72.5rem; /* 1160px — images, diagrams */
+
+  /* ---- Type scale. Seven tokens, replacing 35 hand-set sizes ---- */
+  --text-display: 2.75rem; /* 44 — hero only */
+  --text-page-title: 1.75rem; /* 28 — h1 on a subpage, and the mobile display */
+  --text-h2: 1.625rem; /* 26 — section headings */
+  --text-h3: 1.125rem; /* 18 — card titles */
+  --text-body: 1rem; /* 16 */
+  --text-small: 0.875rem; /* 14 — captions, secondary */
+  --text-label: 0.75rem; /* 12 — mono, uppercase, tracked */
+  --text-meta: 0.75rem; /* 12 — mono, tabular */
+
+  /* ---- Spacing. Compact rhythm ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ---- Radius and elevation. Two levels only ---- */
+  --radius: 8px;
+  --radius-pill: 999px;
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 4%), 0 6px 16px rgb(0 0 0 / 5%);
+
+  /* ---- Systems Blueprint ----
+     Navy ground, systems teal for validated states, amber for in progress.
+
+     Two of the supplied values cannot carry text, measured rather than assumed:
+       #2F7F79 teal  on #F3F6F5 = 4.36:1   fails AA body (needs 4.5)
+       #C98235 amber on #F3F6F5 = 2.87:1   fails AA body and AA large
+       #9FCBC5 mist  on #F3F6F5 = 1.63:1   invisible on light
+
+     So each has a text-safe sibling. The supplied value stays for fills,
+     borders, dots and diagram strokes, where 3:1 is the bar; the -ink value
+     carries anything a reader has to read. Mist teal is a dark-ground colour
+     and is used as the accent in dark mode and on the rail, where it is 9.7:1. */
+  --bg: #f3f6f5;
+  --surface: #ffffff;
+  --surface-sunk: #e9eeed;
+  --text: #172126;
+  /* Darkened from the supplied #637078, which is 4.69:1 on the background but
+     4.35:1 on --surface-sunk — and the sunk panels carry the measurement
+     blocks, which are real reading. This clears 4.5 on all three grounds. */
+  --text-muted: #5c6970; /* 5.21 bg · 5.66 surface · 4.83 sunk */
+  --rule: #dde4e3;
+
+  --navy: #162a3a;
+  --slate: #253f50;
+
+  --accent: #2f7f79; /* fills, borders, marks — 4.36:1, above the 3:1 bar */
+  --accent-ink: #2a736d; /* links and label text — 5.12:1 on bg */
+  --accent-soft: #e4efed;
+  --highlight: #9fcbc5; /* dark grounds only */
+  --focus: #2a736d;
+
+  /* Teal = validated. Amber = in progress or at risk. Slate = neither. */
+  --badge-launched: #2a736d;
+  --badge-progress: #8e5b1d; /* 5.27:1 on bg; the supplied #C98235 is 2.87:1 */
+  --badge-personal: #253f50;
+
+  /* ---- The rail ----
+     Dark in BOTH themes. That is the point of it: the glow is additive light,
+     and there is nothing to add light to on a cool off-white. The rail keeps
+     its own palette rather than following --bg, and drops below the page
+     background in dark mode so the two surfaces still separate. */
+  --rail-bg: #101c25;
+  --rail-text: #e8edef;
+  --rail-muted: #94a3ab; /* 6.66:1 on rail */
+  --rail-rule: #263a48;
+  --rail-accent: #9fcbc5; /* 9.73:1 on rail */
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  /* Written, not inverted. The supplied deep navy #162A3A becomes the raised
+     surface and the page drops below it, so cards lift instead of casting
+     shadow — shadow does not read on dark. Mist teal, unusable on light at
+     1.63:1, is the accent here at 9.73:1: the palette's one colour that only
+     works in the dark finally has a job. */
+  --bg: #101c25;
+  --surface: #162a3a;
+  --surface-sunk: #0c161d;
+  --text: #e8edef;
+  --text-muted: #94a3ab;
+  --rule: #263a48;
+
+  --navy: #0c161d;
+  --slate: #a9c0d0;
+
+  --accent: #9fcbc5;
+  --accent-ink: #9fcbc5;
+  --accent-soft: #1a3239;
+  --highlight: #2f7f79;
+  --focus: #9fcbc5;
+
+  /* Dark lifts surfaces rather than casting shadow */
+  --shadow-raised: 0 0 0 1px rgb(255 255 255 / 5%);
+
+  --badge-launched: #9fcbc5;
+  --badge-progress: #e0a85c;
+  --badge-personal: #a9c0d0;
+
+  /* Page background is #101c25, so the rail drops below it. */
+  --rail-bg: #0a1219;
+  --rail-rule: #1e2f3b;
+
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------
+   Blueprint grid
+
+   Two hairline gradients on a 32px pitch. Used on the snapshot band and the
+   case-study headers only — a grid behind body copy is noise, and this one is
+   faint enough that if you can see it under a paragraph it is already wrong.
+   It sits under the surface colour, never over it, so text contrast is
+   unaffected.
+------------------------------------------------------------------- */
+
+.blueprint {
+  background-image:
+    linear-gradient(to right, var(--rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+/* Fades the grid out rather than stopping it at a hard edge. */
+.blueprint-fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+}
+
+/* ------------------------------------------------------------------
+   Flowchart connectors
+
+   The arrows are drawn by CSS rather than rendered as elements, because a
+   flex-wrap layout cannot know where a row ends — the first attempt left an
+   arrow at the end of every row pointing into empty space.
+
+   A grid with known column counts can: the arrow is suppressed on the last
+   node of each row at each breakpoint, and on the last node overall.
+------------------------------------------------------------------- */
+
+.flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.375rem 2rem;
+}
+
+.flow > li {
+  position: relative;
+}
+
+/* Stacked: the connector points down, in the gap below each node. */
+.flow > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.375rem;
+  width: 1px;
+  height: 0.375rem;
+  background: var(--accent);
+}
+
+@media (min-width: 40rem) {
+  .flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 2rem;
+  }
+  /* Horizontal: an arrow in the column gap, pointing right. */
+  .flow > li:not(:last-child)::after {
+    left: auto;
+    bottom: auto;
+    right: -1.5rem;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translateY(-50%);
+    background: var(--accent);
+    -webkit-mask: var(--flow-arrow) center / contain no-repeat;
+    mask: var(--flow-arrow) center / contain no-repeat;
+  }
+  /* Last node of each row: no arrow, there is nothing to its right. */
+  .flow > li:nth-child(2n)::after {
+    content: none;
+  }
+}
+
+@media (min-width: 64rem) {
+  .flow {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .flow > li:nth-child(2n)::after {
+    content: '';
+  }
+  .flow > li:nth-child(4n)::after {
+    content: none;
+  }
+  .flow > li:last-child::after {
+    content: none;
+  }
+}
+
+:root {
+  --flow-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 8h11M9 4l4 4-4 4'/%3E%3C/svg%3E");
+}
+
+/* ------------------------------------------------------------------
+   Base
+------------------------------------------------------------------- */
+
+* {
+  border-color: var(--rule);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 40rem) {
+  body {
+    font-size: 1.125rem;
+  }
+}
+
+/* Anchor targets clear the sticky header — SITEMAP §3 */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* ------------------------------------------------------------------
+   Focus — never removed, always visible, >= 3:1 in both themes
+------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* ------------------------------------------------------------------
+   Theme toggle icons — swapped in CSS so the control is correct on
+   first paint with no JavaScript involved.
+------------------------------------------------------------------- */
+
+.icon-moon {
+  display: none;
+}
+
+[data-theme='dark'] .icon-sun {
+  display: none;
+}
+
+[data-theme='dark'] .icon-moon {
+  display: block;
+}
+
+/* ------------------------------------------------------------------
+   Motion — WIREFRAME §13.
+   Content is visible by default; JS adds .reveal-ready then .is-visible.
+   If JS never runs, nothing is ever hidden.
+------------------------------------------------------------------- */
+
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.reveal-ready.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Never leave content stranded behind an animation that will not run */
+  .reveal-ready,
+  .reveal-ready.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Print — PRD FR10
+------------------------------------------------------------------- */
+
+@media print {
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  a::after {
+    content: ' (' attr(href) ')';
+    font-size: 9pt;
+    color: #444;
+  }
+
+  details {
+    display: block;
+  }
+}

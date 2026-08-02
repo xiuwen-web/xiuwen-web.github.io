@@ -1,0 +1,123 @@
+import type { WorkEntry } from '@/types/content';
+import { getCaseStudy } from './caseStudies';
+import { ecosystem } from './ecosystem';
+
+/**
+ * The information architecture, in one place
+ * (PORTFOLIO_SIDEBAR_FLOW_REVISION.md, 2026-08-02).
+ *
+ * The rail, the homepage cards and the numbering all read this array, so the
+ * order and the numbers can never disagree. Numbering is positional.
+ */
+
+export const PRIMARY_NAV = [
+  { href: '/#top', label: 'Overview', key: 'overview' },
+  { href: '/#work', label: 'Selected Work', key: 'work' },
+  { href: '/#process', label: 'How I Work', key: 'process' },
+  { href: '/#about', label: 'About', key: 'about' },
+];
+
+const cadmin = getCaseStudy('cadmin-migration');
+const mobile = getCaseStudy('mobile-launch');
+const erp = getCaseStudy('erp');
+
+if (!cadmin || !mobile || !erp) {
+  throw new Error('navigation.ts: a case study named in the IA is missing');
+}
+
+export const workEntries: WorkEntry[] = [
+  {
+    href: '/work/cadmin-migration/',
+    navLabel: 'CAdmin Migration',
+    title: cadmin.title,
+    description: 'Migrating a live operational system without stopping the business.',
+    status: cadmin.status,
+    chips: cadmin.chips,
+    diagram: 'rollout',
+    /*
+     * The only CAdmin screen that can be published. The system holds live
+     * student records and its interior is never captured (PRD §22) — the front
+     * door holds no data, so it is the one safe frame. Browser chrome cropped:
+     * the address bar showed the internal hostname.
+     */
+    visual: {
+      src: '/images/cadmin-login.webp',
+      alt: 'The CAdmin sign-in screen, branded AGrader, with email and password fields.',
+      caption: 'CAdmin, at the front door.',
+      width: 1440,
+      height: 775,
+    },
+    featured: true,
+  },
+  {
+    href: '/work/everloop/',
+    navLabel: ecosystem.navLabel,
+    title: ecosystem.title,
+    description: ecosystem.summary,
+    status: ecosystem.status,
+    chips: ecosystem.chips,
+    visual: ecosystem.areas.find((a) => a.id === 'admin')?.visuals?.[0],
+    featured: true,
+  },
+  {
+    href: '/work/mobile-launch/',
+    navLabel: 'Mobile Product Launch',
+    title: mobile.title,
+    description: 'Taking the EverLoop web platform to four app-store listings.',
+    status: mobile.status,
+    chips: mobile.chips,
+    visual: {
+      src: '/images/agrader-student-app-store.webp',
+      alt: 'Four App Store screenshots of the AGrader student app.',
+      caption: 'The student app on the App Store.',
+      width: 1108,
+      height: 549,
+    },
+    featured: false,
+  },
+  {
+    href: '/work/erp/',
+    navLabel: erp.navLabel,
+    title: erp.title,
+    description:
+      'Requirements, process maps and the operations handbook for a consumer-products ERP.',
+    status: erp.status,
+    chips: erp.chips,
+    featured: false,
+  },
+  {
+    href: '/work/other/',
+    navLabel: 'Other Work',
+    title: 'Other Work',
+    description:
+      'A personal assistant I built and then cut a feature from. Everything that belongs under neither CAdmin, EverLoop nor the ERP.',
+    visual: {
+      src: '/images/nova-slack.webp',
+      alt: 'The Nova PA app profile in Slack, showing its icon and About tab.',
+      caption: 'Nova, installed in the team workspace.',
+      width: 1350,
+      height: 525,
+    },
+    featured: false,
+  },
+];
+
+/** '02' — positional, so it cannot contradict the order above. */
+export function workNumber(href: string): string | null {
+  const i = workEntries.findIndex((entry) => entry.href === href);
+  return i === -1 ? null : String(i + 1).padStart(2, '0');
+}
+
+/**
+ * Which rail entry to mark as current. Case studies reached from inside the
+ * ecosystem — WriteWise — highlight EverLoop, because that is where the reader
+ * came from and where the rail says they are.
+ */
+export const ACTIVE_KEY_TO_HREF: Record<string, string> = {
+  'cadmin-migration': '/work/cadmin-migration/',
+  everloop: '/work/everloop/',
+  writewise: '/work/everloop/',
+  'mobile-launch': '/work/mobile-launch/',
+  erp: '/work/erp/',
+  other: '/work/other/',
+};
