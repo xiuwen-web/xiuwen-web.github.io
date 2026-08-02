@@ -6,7 +6,7 @@ import { appLinks } from "./snapshot";
  *
  * Framing rules enforced here (PRD §12):
  *  - "defined / coordinated / configured", never "developed"        (F11)
- *  - CS-3 phasing is Xiu Wen's own decision; no director            (F42 revised, F45)
+ *  - CS-3 phasing is her own decision                               (F42, F45)
  *  - CS-4 described at the level she gave it, no dramatisation      (F44)
  *  - no impact, efficiency or time-saved claims anywhere            (F26)
  *  - no student, parent, teacher or colleague names                 (PRD §22)
@@ -362,8 +362,10 @@ export const caseStudies: CaseStudy[] = [
     outcome: [
       "Live, with the handbook in daily use across purchasing, operations, logistics, finance and the warehouse.",
     ],
+    /* Xiu Wen's own words, supplied 2026-08-02. The line that stood here was
+       inferred from the artefact list and has been replaced. */
     lessons:
-      "When the only developer is working outside their specialty, the specification has to carry what experience would otherwise carry. Every gap I left was a question I had to answer later, which is why the clarifications log exists at all — and why I now write the negative cases before the positive ones.",
+      "This project taught me to look beyond individual features and understand how data, workflows and people must align for an ERP system to work in practice.",
   },
 ];
 
