@@ -3,21 +3,21 @@ import type { SupportingCard } from '@/types/content';
 /**
  * Other Work — entry 04.
  *
- * Not a dumping ground (SIDEBAR_FLOW_REVISION §04). Three entries, each a
- * distinct system or piece of work that belongs under neither CAdmin nor
- * EverLoop.
+ * Not a dumping ground (SIDEBAR_FLOW_REVISION §04). What lands here is work
+ * that belongs under neither CAdmin nor EverLoop — which, now that the ERP and
+ * the data-integrity work have both found better homes, is Nova alone.
  *
- * Data integrity and Nova were full case studies until 2026-08-02. Xiu Wen
- * chose to compress them here rather than keep the pages, having been told the
- * cost: roughly 1,200 words of reasoning evidence, including the clearest
- * operations-to-product analysis on the site. Both entries below are cut from
- * that approved copy — condensed, not rewritten.
+ * Nova was a full case study until 2026-08-02. Xiu Wen chose to compress it
+ * here rather than keep the page, having been told the cost in reasoning
+ * evidence. The entry below is cut from that approved copy — condensed, not
+ * rewritten.
  *
- * Exception: the last two paragraphs of `data-integrity` are new (2026-08-02).
- * The GitHub cross-check found multi-outlet record scoping to be the most
- * recurrent engineering theme across all 26 months and every product surface,
- * not a student-list problem (F73, and F56 for the timesheet case). The entry
- * was under-claiming, so the breadth was added. Still no impact claim (F26).
+ * The data-integrity entry moved to the EverLoop page (Keeping two systems in
+ * agreement), taking with it two paragraphs added on 2026-08-02: the GitHub
+ * cross-check found multi-outlet record scoping to be the most recurrent
+ * engineering theme across all 26 months and every product surface, not a
+ * student-list problem (F73, and F56 for the timesheet case). Still no impact
+ * claim there (F26).
  */
 export const otherWork: SupportingCard[] = [
   {
