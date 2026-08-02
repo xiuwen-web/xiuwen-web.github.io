@@ -27,8 +27,13 @@ export function FeaturedCard({
           alt=""
           width={entry.visual.width}
           height={entry.visual.height}
-          className="h-44 w-full border-b object-cover object-left-top sm:h-52"
-          style={{ borderColor: 'var(--rule)' }}
+          className={`h-44 w-full border-b sm:h-52 ${
+            entry.visual.contain ? 'object-contain p-5' : 'object-cover object-left-top'
+          }`}
+          style={{
+            borderColor: 'var(--rule)',
+            background: entry.visual.contain ? 'var(--surface-sunk)' : undefined,
+          }}
           // Not priority. These cards sit below the hero and the snapshot on
           // every viewport, so preloading them competed with the element that
           // actually is the largest contentful paint.
@@ -111,8 +116,13 @@ export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | 
           alt=""
           width={entry.visual.width}
           height={entry.visual.height}
-          className="h-28 w-full border-b object-cover object-top"
-          style={{ borderColor: 'var(--rule)' }}
+          className={`h-28 w-full border-b ${
+            entry.visual.contain ? 'object-contain p-3' : 'object-cover object-top'
+          }`}
+          style={{
+            borderColor: 'var(--rule)',
+            background: entry.visual.contain ? 'var(--surface-sunk)' : undefined,
+          }}
           loading="lazy"
         />
       ) : (

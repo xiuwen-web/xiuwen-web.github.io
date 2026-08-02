@@ -65,6 +65,11 @@ export interface Visual {
   src: string;
   alt: string;
   caption: string;
+  /**
+   * Brand marks are letterboxed on a neutral ground rather than cropped to
+   * fill. A logo cropped by object-cover loses the thing that makes it a logo.
+   */
+  contain?: boolean;
   /** Rendered width in px; images are pre-sized, not optimised at request time. */
   width: number;
   height: number;

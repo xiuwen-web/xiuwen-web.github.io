@@ -56,7 +56,21 @@ export const workEntries: WorkEntry[] = [
     description: ecosystem.summary,
     status: ecosystem.status,
     chips: ecosystem.chips,
-    visual: ecosystem.areas.find((a) => a.id === 'admin')?.visuals?.[0],
+    /*
+     * Set explicitly. This previously read the first visual out of the area
+     * with id 'admin', and when that area was consolidated into
+     * 'content-access' the lookup silently returned undefined — the card lost
+     * its image and nothing failed. The guard below now catches that class of
+     * regression; this no longer depends on an area id at all.
+     */
+    visual: {
+      src: '/images/everloop-logo.webp',
+      alt: 'The EverLoop logo: an owl mascot in a navy roundel reading “Improvement Starts Here”, above the EverLoop wordmark.',
+      caption: 'EverLoop.',
+      width: 900,
+      height: 748,
+      contain: true,
+    },
     featured: true,
   },
   {
@@ -101,6 +115,17 @@ export const workEntries: WorkEntry[] = [
     featured: false,
   },
 ];
+
+/*
+ * A featured card is mostly its media. One without any is not a featured card,
+ * and the failure is invisible — it just renders a bit shorter. Fail the build
+ * instead.
+ */
+for (const entry of workEntries) {
+  if (entry.featured && !entry.visual && !entry.diagram) {
+    throw new Error(`navigation.ts: featured entry ${entry.href} has no visual or diagram`);
+  }
+}
 
 /** '02' — positional, so it cannot contradict the order above. */
 export function workNumber(href: string): string | null {
