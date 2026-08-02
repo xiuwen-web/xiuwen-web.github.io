@@ -169,6 +169,16 @@ export const ecosystem: Ecosystem = {
       ],
       visuals: [
         {
+          /*
+           * Deliberate exception to the no-name-lists rule in types/content.ts,
+           * decided 2026-08-02 before the repository was made public.
+           *
+           * The roster is the point of the screenshot — the submission states
+           * are what the caption is about — so cropping it would leave nothing
+           * worth showing. The names are seeded on a test centre. Reviewed and
+           * kept knowingly; not an oversight, and not a precedent for images
+           * where the roster is incidental.
+           */
           src: '/images/everloop-teacher-report-editor.webp',
           alt: 'The teacher’s report editor: a class roster down the left showing each student’s submission state, and a two-step wizard on the right with conduct criteria scored one to five.',
           caption:
