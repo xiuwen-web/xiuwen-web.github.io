@@ -97,6 +97,20 @@ export const workEntries: WorkEntry[] = [
       'Requirements, process maps and the operations handbook for a consumer-products ERP.',
     status: erp.status,
     chips: erp.chips,
+    /*
+     * The dashboard with every figure masked. The source shows revenue,
+     * average order value, order counts and a monthly sales trend for a
+     * business that is not AGrader and not Xiu Wen's — internal financial data,
+     * which the register excludes. What is published is the shell: the module
+     * structure, and that this is a real Odoo instance.
+     */
+    visual: {
+      src: '/images/erp-odoo.webp',
+      alt: 'An Odoo dashboard for the ERP, showing the Sales, Finance and Logistics module navigation. All figures are masked.',
+      caption: 'The ERP, figures masked.',
+      width: 1300,
+      height: 777,
+    },
     featured: false,
   },
   {
