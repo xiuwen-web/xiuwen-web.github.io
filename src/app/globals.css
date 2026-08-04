@@ -251,6 +251,135 @@
 }
 
 /* ------------------------------------------------------------------
+   System map
+
+   Root, connectors and branches are one grid. The root spans every column
+   and centres itself in that span, so it is centred on the branch group
+   rather than on the container — the earlier version centred the root
+   independently while the branches sat in a three-column grid, and with two
+   branches that left the root hanging over the right-hand card.
+
+   Nothing is placed by a hand-tuned offset. The connectors reference the
+   same column track and the same gap the cards are laid out in, so they stay
+   aligned at any width and at any branch count.
+------------------------------------------------------------------- */
+
+.sysmap {
+  --sysmap-cols: 1;
+  --sysmap-gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(var(--sysmap-cols), minmax(0, 1fr));
+}
+
+/* The root, and the upstream node above it: full width, centred in it. */
+.sysmap-node {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+/* Stacked: a single line from the root into the column of cards. The bracket
+   is suppressed rather than shrunk — branch ticks would be pointing sideways
+   at nothing. */
+.sysmap-rails {
+  position: relative;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--sysmap-cols), minmax(0, 1fr));
+  gap: var(--sysmap-gap);
+  height: 1.5rem;
+}
+
+/* Stem: down from the centre of the root. */
+.sysmap-rails::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  background: var(--rule);
+}
+
+.sysmap-rails > span {
+  display: none;
+  position: relative;
+}
+
+/* Crossbar, at the point the stem ends. It runs the width of its own column
+   and half the gap either side, so consecutive cells join across the gaps. */
+.sysmap-rails > span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(var(--sysmap-gap) / -2);
+  right: calc(var(--sysmap-gap) / -2);
+  height: 1px;
+  background: var(--rule);
+}
+
+/* The bracket ends at the centre of the outer cards, not at the edge of the
+   grid. */
+.sysmap-rails > span:first-child::before {
+  left: 50%;
+}
+
+.sysmap-rails > span:last-child::before {
+  right: 50%;
+}
+
+/* Branch: down from the crossbar to the centre-top of each card. Every branch
+   is the same half of the same row, so they cannot come out unequal. */
+.sysmap-rails > span::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--rule);
+}
+
+.sysmap-branches {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(var(--sysmap-cols), minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--sysmap-gap);
+}
+
+/* Spread. Each branch count gets its own breakpoint, because a bracket is
+   only honest when every card it points at is in the one row it spans. */
+@media (min-width: 40rem) {
+  .sysmap[data-cols='2'] {
+    --sysmap-cols: 2;
+  }
+  .sysmap[data-cols='2'] .sysmap-rails {
+    height: 3rem;
+  }
+  .sysmap[data-cols='2'] .sysmap-rails::before {
+    height: 50%;
+  }
+  .sysmap[data-cols='2'] .sysmap-rails > span {
+    display: block;
+  }
+}
+
+@media (min-width: 64rem) {
+  .sysmap[data-cols='3'] {
+    --sysmap-cols: 3;
+  }
+  .sysmap[data-cols='3'] .sysmap-rails {
+    height: 3rem;
+  }
+  .sysmap[data-cols='3'] .sysmap-rails::before {
+    height: 50%;
+  }
+  .sysmap[data-cols='3'] .sysmap-rails > span {
+    display: block;
+  }
+}
+
+/* ------------------------------------------------------------------
    Base
 ------------------------------------------------------------------- */
 

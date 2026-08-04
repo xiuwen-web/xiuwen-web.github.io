@@ -157,18 +157,29 @@ export function SystemMap({
    */
   upstream?: { title: string; edge: string };
 }) {
+  /*
+   * The root, the connectors and the branches share one grid, so the root is
+   * centred on the branch group rather than on the container. Centring it
+   * independently is what put it over the right-hand card: the branches were
+   * in a three-column grid and there were only two of them.
+   *
+   * Three columns is the widest the cards stay readable at, and the map is
+   * only ever drawn as a single row of branches.
+   */
+  const columns = Math.min(branches.length, 3);
+
   return (
-    <div>
+    <div className="sysmap" data-cols={columns}>
       {upstream && (
         <>
           <p
-            className="mx-auto w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
+            className="sysmap-node w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
             style={{ borderColor: 'var(--rule)', background: 'var(--surface)' }}
           >
             {upstream.title}
           </p>
           <p
-            className="flex flex-col items-center gap-1 py-2 text-[length:var(--text-label)]"
+            className="sysmap-node flex flex-col items-center gap-1 py-2 text-[length:var(--text-label)]"
             style={{ color: 'var(--text-muted)' }}
           >
             <span aria-hidden="true" className="h-3 w-px" style={{ background: 'var(--rule)' }} />
@@ -179,19 +190,23 @@ export function SystemMap({
       )}
 
       <p
-        className="mx-auto w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
+        className="sysmap-node w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
         style={{ borderColor: 'var(--accent)', background: 'var(--accent-soft)' }}
       >
         {root}
       </p>
 
-      {/* Decorative stem. The list below carries the relationship for anyone
-          who cannot see it. */}
-      <div className="flex justify-center" aria-hidden="true">
-        <span className="h-6 w-px" style={{ background: 'var(--rule)' }} />
+      {/* Decorative. One cell per branch, so the stem, the crossbar and the
+          branches are drawn off the same column track the cards use — see the
+          system map block in globals.css. The list below carries the
+          relationship for anyone who cannot see it. */}
+      <div className="sysmap-rails" aria-hidden="true">
+        {branches.map((branch) => (
+          <span key={branch.title} />
+        ))}
       </div>
 
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="sysmap-branches">
         {branches.map((branch) => (
           <li
             key={branch.title}
