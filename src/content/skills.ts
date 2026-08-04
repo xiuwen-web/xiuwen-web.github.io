@@ -30,6 +30,23 @@ export const skillGroups: SkillGroup[] = [
       'Cross-system integration',
     ],
   },
+  /*
+   * Added 2026-08-04. These are the techniques behind the Masters in applied
+   * research, listed as capability rather than left implied by a qualification
+   * — a hiring manager can check "thematic coding" against the data-integrity
+   * story on the EverLoop page, which is the one that shows it being used.
+   */
+  {
+    heading: 'Research methods',
+    items: [
+      'Interview design',
+      'Mixed-methods study design',
+      'Thematic and qualitative coding',
+      'Survey design',
+      'Statistical analysis (SPSS)',
+      'Qualitative analysis (MAXQDA)',
+    ],
+  },
   {
     heading: 'Quality & release',
     items: [
@@ -76,6 +93,16 @@ export const skillGroups: SkillGroup[] = [
  */
 export const journeySubtitle =
   'From helping set up a franchise outlet to shaping the systems behind a 20-centre business.';
+
+/**
+ * The Masters sits outside both phases because it genuinely spans them: it
+ * started in 2021, during the operations-only years, and finished in 2026,
+ * after both platforms had shipped. Slotting it into either group would put a
+ * five-year commitment on one line of a chronology and lose the only thing
+ * about it a hiring manager cares about — that it ran through all of it.
+ */
+export const journeyAlongside =
+  'Throughout — a Master of Applied Research in Social Sciences, 2021 to 2026, taken alongside the day job. The thesis was a mixed-methods study of career aspirations among young workers.';
 
 /**
  * Closes the timeline. Deliberately the only reflective line in it — the

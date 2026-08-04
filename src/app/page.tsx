@@ -21,7 +21,13 @@ import {
   traceSubject,
   traceTitle,
 } from '@/content/process';
-import { journey, journeyClosing, journeySubtitle, skillGroups } from '@/content/skills';
+import {
+  journey,
+  journeyAlongside,
+  journeyClosing,
+  journeySubtitle,
+  skillGroups,
+} from '@/content/skills';
 import { appLinks, snapshot, snapshotClosing } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
@@ -562,9 +568,18 @@ function Journey() {
           </section>
         ))}
 
+        {/* Spans both phases, so it sits across them rather than inside
+            either — the overlap is the whole point of including it. */}
         <p
           className="border-t pt-6 text-[length:var(--text-small)] text-pretty"
-          style={{ borderColor: 'var(--rule)', color: 'var(--text-muted)' }}
+          style={{ borderColor: 'var(--rule)' }}
+        >
+          {journeyAlongside}
+        </p>
+
+        <p
+          className="text-[length:var(--text-small)] text-pretty"
+          style={{ color: 'var(--text-muted)' }}
         >
           {journeyClosing}
         </p>

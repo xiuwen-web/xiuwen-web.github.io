@@ -57,6 +57,21 @@ export const profile: Profile = {
     'Roughly 40% of my time goes to centre operations — teachers, parents, and the things that go wrong on a Tuesday morning. Another 40% goes to project and product delivery: requirements, coordinating developers, testing, rollouts. The remaining 20% is technology coordination, testing and documentation. That balance shifts when a release is going out or something breaks.',
     'I did not set out to do this. My director started assigning technology projects to me and arranged for me to learn from someone experienced in the area. I took it from there — requirements gathering, then developer coordination, then testing and delivery — until the role had become an operations and technology one.',
     'The part I would not give up is the operations half. It is why the requirements I write tend to hold up: I am specifying systems for a job I do myself.',
+    /*
+     * The education paragraph, framed as method rather than as a credential.
+     * "Master of Applied Research in Social Sciences" listed under an Education
+     * heading invites a reader to ask what it has to do with software;
+     * described as interviews, coding and analysis it is plainly the same work
+     * as requirements gathering, which is the point.
+     *
+     * Careful with the tenses: the psychology degree finished in January 2020,
+     * before the full-time operations role. The Masters ran 2021 to 2026,
+     * alongside it — so neither is "before I did this professionally".
+     *
+     * No GPA. It is on the résumé for anyone who opens it; on a public page it
+     * reads as a student's CV rather than a practitioner's.
+     */
+    'The method has a background. I read psychology with business as an undergraduate, and took a Masters in applied research alongside the day job — mixed methods, interviews, thematic coding, statistical analysis. That is the same work as turning a vague complaint into something a developer can build from, and it is why my instinct with a recurring problem is to go looking for the pattern rather than fix the instance in front of me.',
     /* The one reflective paragraph on the page. It goes last in About because
        it is the conclusion the three paragraphs above it earn — placed first
        it would be a claim, placed here it is a summary. */
