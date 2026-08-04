@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { BeforeAfterData, FlowStep, SystemBranch } from '@/types/content';
+import type { BeforeAfterData, FlowStep, HandoffStep, SystemBranch } from '@/types/content';
 import { Container } from '@/components/layout/Section';
 
 /**
@@ -138,6 +138,67 @@ function FlowNode({ step, dense }: { step: FlowStep; dense: boolean }) {
         </span>
       )}
     </li>
+  );
+}
+
+/* ------------------------------------------------------- Handoff chain --- */
+
+/**
+ * The developer-collaboration sequence. Same grid and connectors as every
+ * other flow on the site, with two additions that carry the point:
+ *
+ *  - each node states who holds the work, as a word rather than a colour, and
+ *    the ones that are hers take the accent ground the acceptance gate used to
+ *  - each node also states what she is doing, including on the two steps she
+ *    hands over — which is the difference between this and a lifecycle chart
+ *
+ * A reader scanning only the owner chips sees the shape immediately: hers,
+ * hers, hers, theirs, theirs, hers, hers. The claim is the pattern, so it does
+ * not have to be asserted in prose.
+ */
+export function HandoffChain({ steps }: { steps: HandoffStep[] }) {
+  return (
+    <ol className="flow">
+      {steps.map((step, i) => {
+        const mine = step.owner === 'Mine';
+        return (
+          <li
+            key={step.stage}
+            className="flex min-w-0 flex-col rounded-[var(--radius)] border px-3.5 py-3"
+            style={{
+              borderColor: mine ? 'var(--accent)' : 'var(--rule)',
+              background: mine ? 'var(--accent-soft)' : 'var(--surface)',
+            }}
+          >
+            <span className="flex items-baseline gap-2">
+              <span
+                className="font-mono text-[0.6875rem] tabular-nums"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span
+                className="font-mono text-[0.6875rem] tracking-[0.08em] uppercase"
+                style={{ color: mine ? 'var(--accent-ink)' : 'var(--text-muted)' }}
+              >
+                {step.owner}
+              </span>
+            </span>
+
+            <span className="mt-1.5 text-[length:var(--text-small)] leading-snug font-medium text-pretty">
+              {step.stage}
+            </span>
+
+            <span
+              className="mt-1.5 text-[length:var(--text-label)] leading-snug text-pretty"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {step.mine}
+            </span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 

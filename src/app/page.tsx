@@ -1,17 +1,17 @@
 import { Container, Section } from '@/components/layout/Section';
 import { Shell } from '@/components/layout/Shell';
 import { FeaturedCard, WorkRow } from '@/components/ui/FeaturedCard';
-import { FlowChart } from '@/components/ui/Diagram';
+import { HandoffChain } from '@/components/ui/Diagram';
 import { TraceChain } from '@/components/ui/TraceChain';
 import { workEntries, workNumber } from '@/content/navigation';
 import { profile, socialLinks } from '@/content/profile';
 import {
   measureBody,
   measureHeading,
+  handoff,
+  handoffCaption,
   method,
   methodIntro,
-  pipeline,
-  pipelineCaption,
   processIntro,
   specimen,
   specimenIntro,
@@ -257,10 +257,23 @@ function Work() {
 function Process() {
   return (
     <Section id="process" eyebrow="Process" title="How I work" intro={processIntro} width="content">
-      <FlowChart steps={pipeline} dense columns={3} />
+      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">
+        How I work with developers
+      </h3>
+      <p
+        className="mt-2 max-w-[60ch] text-[length:var(--text-small)]"
+        style={{ color: 'var(--text-muted)' }}
+      >
+        Seven steps from a problem in a centre to the change running back in it. Each says who
+        holds the work, and what I am doing at that point.
+      </p>
 
-      <p className="mt-6 max-w-[45rem] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
-        {pipelineCaption}
+      <div className="mt-5">
+        <HandoffChain steps={handoff} />
+      </div>
+
+      <p className="mt-6 max-w-[60ch] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
+        {handoffCaption}
       </p>
 
       {/*

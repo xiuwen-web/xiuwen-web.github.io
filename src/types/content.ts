@@ -291,6 +291,20 @@ export interface FlowStep {
   status?: 'legacy' | 'pilot' | 'shipped' | 'in-progress' | 'mine' | 'gate';
 }
 
+/**
+ * One step in the developer-collaboration sequence.
+ *
+ * `owner` is who holds the work; `mine` is what she is doing at that moment,
+ * and it is required on every step including the two she does not own. That is
+ * the whole point of the diagram — a lifecycle where the middle reads
+ * "developers build it" says nothing a hundred other portfolios do not.
+ */
+export interface HandoffStep {
+  stage: string;
+  owner: 'Mine' | 'Developers' | 'QA';
+  mine: string;
+}
+
 export interface SystemBranch {
   title: string;
   note?: string;

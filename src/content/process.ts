@@ -1,33 +1,62 @@
-import type { FlowStep, MethodRule, Specimen, TraceStep } from '@/types/content';
+import type { HandoffStep, MethodRule, Specimen, TraceStep } from '@/types/content';
 
 /**
- * The delivery pipeline (F16, F21). Recreated as a diagram — never a
- * screenshot of the actual board (PRD §22, mock-ups only).
+ * How the work moves between me and the developers (F16, F21). Recreated as a
+ * diagram — never a screenshot of the actual board (PRD §22, mock-ups only).
  *
- * Cut from the board's thirteen columns to six on 2026-08-04. Thirteen nodes
- * is an inventory of column names; the reader needs the shape and where I sit
- * in it, and the caption keeps the thirteen on the record without spending a
- * diagram on them.
+ * Replaced the six-stage Define / Build / QA / Acceptance / Deploy / Verify
+ * flow on 2026-08-04. That version was accurate and said nothing: it is the
+ * lifecycle every software portfolio draws, and a reader learned only that the
+ * work has stages.
  *
- * Exactly one stage is emphasised. One emphasis, so it lands.
+ * This one covers the same ground and answers what the other one ducked — what
+ * is she doing while the developers build? Every step carries her role,
+ * including the two she does not own, and five of the seven are hers. That is
+ * the differentiator stated as a shape rather than claimed in a sentence.
  */
-export const pipeline: FlowStep[] = [
-  { title: 'Define', note: 'requirement and acceptance criteria' },
-  { title: 'Build', note: 'three developers' },
-  { title: 'QA', note: 'a dedicated tester since February 2026' },
-  { title: 'Acceptance', note: 'business-validation gate before release', status: 'mine' },
-  { title: 'Deploy', note: 'store review where it applies' },
-  { title: 'Verify', note: 'checked in production', status: 'shipped' },
+export const handoff: HandoffStep[] = [
+  {
+    stage: 'Operational issue',
+    owner: 'Mine',
+    mine: 'I hit it running a centre, or a centre reports it to me.',
+  },
+  {
+    stage: 'Requirement clarification',
+    owner: 'Mine',
+    mine: 'I go back to what was observed and write that down — not the solution someone arrived with.',
+  },
+  {
+    stage: 'Workflow and edge cases',
+    owner: 'Mine',
+    mine: 'I specify the negative cases: what must not happen, and to whom.',
+  },
+  {
+    stage: 'Developer handoff',
+    owner: 'Developers',
+    mine: 'I hand over acceptance criteria and options, then answer clarifications while they decide how to build it.',
+  },
+  {
+    stage: 'QA and UAT',
+    owner: 'QA',
+    mine: 'QA runs the testing. I supply the cases that only break in a real centre.',
+  },
+  {
+    stage: 'Operational acceptance',
+    owner: 'Mine',
+    mine: 'I check the build against the criteria I wrote, and decide whether it is ready to release.',
+  },
+  {
+    stage: 'Production feedback',
+    owner: 'Mine',
+    mine: 'I watch it run in the centre I manage. What it gets wrong becomes the next requirement.',
+  },
 ];
 
 export const processIntro =
-  'Every change goes through the same path, from an idea or a reported problem to something running in production. I sit at the point where it gets accepted.';
+  'Every change goes the same way, from something going wrong in a centre to something running in production. I am at both ends of it.';
 
-/* "decide whether it goes out" overstated it — that reads as sole authority
-   over the deploy. The gate is business acceptance, and deployment follows
-   it (FINAL_REFINEMENT_BRIEF §1, §14.15). */
-export const pipelineCaption =
-  'Six stages here; on our board it is thirteen columns, and the acceptance one is named after me. It sits after QA testing and before deployment — I check what QA has finished testing against the acceptance criteria, and decide whether it is ready to release.';
+export const handoffCaption =
+  'Two of the seven belong to someone else, and I am still in both: the developers decide how to build it, QA decides whether it works, and I decide whether it does the job it was asked to do. On our board this runs to thirteen columns, and the acceptance one is named after me.';
 
 /**
  * F79/F81 — how a requirement actually gets written.
