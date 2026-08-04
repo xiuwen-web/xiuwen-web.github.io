@@ -26,7 +26,7 @@ export function Metric({ fact }: { fact: SnapshotFact }) {
 
 export function MetricRow({ facts }: { facts: SnapshotFact[] }) {
   return (
-    <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+    <dl className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
       {facts.map((fact) => (
         <Metric key={fact.label} fact={fact} />
       ))}

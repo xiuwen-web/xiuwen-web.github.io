@@ -34,7 +34,7 @@ export const ecosystem: Ecosystem = {
   overview: [
     'Students used to be on Thinkific. My director decided to build in-house instead, and that decision is how I was brought into technology work in the first place.',
     'It went live on 11 March 2025. For the first year it was three web developers and me, and nobody else.',
-    'EverLoop is not one project. It is a set of connected surfaces — admin, teacher web and mobile, student web and mobile, communications — that all have to agree with each other. Most of my work on it has been deciding what belongs on which surface, who is allowed to change what, and when a student can see it.',
+    'EverLoop is not one project. It is five connected surfaces — admin, teacher web and mobile, student and parent web and mobile — that all have to agree with each other, with communications running across them. Most of my work on it has been deciding what belongs on which surface, who is allowed to change what, and when a student can see it.',
   ],
 
   areas: [
@@ -152,6 +152,44 @@ export const ecosystem: Ecosystem = {
         'It also taught me something about designing anything that pays out. The first version could be earned in a way we had not intended, including from a shared centre account, so a review step now sits between finishing a quiz and the currency being issued. Anything that awards value needs the payout gate designed at the same time as the reward, not after someone finds the gap.',
       ],
     },
+    /*
+     * Added 2026-08-04 (refinement doc §7). Placed here rather than as its own
+     * case study, at Xiu Wen's instruction — it is a workflow inside EverLoop,
+     * not a project beside it.
+     *
+     * It sits directly after "Quizzes and e-Bucks" because it is the second
+     * gate on the same currency. The first is the review step above, which
+     * exists because the reward could be gamed. This one exists because
+     * rewarding completion was the wrong target. Two different problems, so
+     * both are named rather than merged into one paragraph about e-Bucks.
+     *
+     * The refinement document offered a verification line crediting "the
+     * developer and QA", marked "add only if accurate". Confirmed 2026-08-04:
+     * there was no dedicated QA before February 2026, so she did the testing
+     * herself. The line is included in that form — same fact, correct
+     * attribution, and consistent with "who tested it" under Product delivery.
+     */
+    {
+      heading: 'Topical quizzes and remedial learning',
+      body: [
+        'Topical quizzes are the practice students do on their own, mostly as multiple-choice questions. I helped define what happens after they submit: the system works out which questions they got wrong and assigns the explanation videos for those specific questions.',
+        'The reward is what makes that stick. e-Bucks are held until the assigned videos have actually been watched, and skipping and fast-forwarding are disabled — so the currency is not paid for finishing the quiz, it is paid for going back over the thing you got wrong. A quiz that only reports a score tells a student what they do not know and then leaves them there.',
+        'My contribution was the student workflow, the conditions the reward is released under, the viewing restrictions that make those conditions mean anything, and validating the end-to-end behaviour before release. There was no dedicated QA at the time, so that verification was mine: I checked that a wrong answer assigned the video that explained it, and that no e-Bucks appeared before the required viewing was finished.',
+      ],
+      diagram: 'topical-quiz',
+      rules: [
+        { term: 'Quiz format', definition: 'Mostly multiple-choice questions' },
+        {
+          term: 'Trigger',
+          definition: 'Incorrect answers assign the explanation videos for those questions',
+        },
+        { term: 'Video control', definition: 'No skipping and no fast-forwarding' },
+        {
+          term: 'Reward condition',
+          definition: 'e-Bucks are released only once the required videos are completed',
+        },
+      ],
+    },
       ],
     },
 
@@ -235,7 +273,7 @@ export const ecosystem: Ecosystem = {
       navLabel: 'Outcomes',
       heading: 'Outcomes',
       body: [
-        'Live since 11 March 2025, replacing Thinkific, and still shipping. Six surfaces run on it — admin, teacher web and mobile, student web and mobile, and communications — and four of those also ship as apps on the App Store and Google Play.',
+        'Live since 11 March 2025, replacing Thinkific, and still shipping. Five surfaces run on it — admin, teacher web and mobile, student and parent web and mobile — with communications across them. The two mobile surfaces also ship as apps, which is four app-store listings between them.',
         'Two manual processes are gone rather than improved. Course release no longer runs through a shared request sheet, and diagnostic reports are no longer written by hand. A dedicated QA joined in February 2026, the first on either system.',
         'There are no adoption or usage figures here, for the reason given in About: the platform shipped without instrumentation, so any number would be reconstructed rather than recorded.',
       ],

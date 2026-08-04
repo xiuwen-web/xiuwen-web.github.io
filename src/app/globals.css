@@ -227,6 +227,23 @@
   .flow > li:last-child::after {
     content: none;
   }
+
+  /* Three across, for a six-step flow. On the four-column default those break
+     4 + 2, which puts the row wrap between two stages that belong together and
+     leaves the second row half empty. Must follow the block above — it undoes
+     the 4n suppression and applies its own. */
+  .flow-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .flow-3 > li:nth-child(4n)::after {
+    content: '';
+  }
+  .flow-3 > li:nth-child(3n)::after {
+    content: none;
+  }
+  .flow-3 > li:last-child::after {
+    content: none;
+  }
 }
 
 :root {

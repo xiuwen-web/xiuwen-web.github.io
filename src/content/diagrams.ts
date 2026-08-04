@@ -98,6 +98,26 @@ export const contentDeliveryFlow: FlowStep[] = [
 ];
 
 /**
+ * Topical quizzes and remedial learning (refinement doc §7, 2026-08-04).
+ *
+ * The whole point of the sequence is that the reward is attached to the step
+ * after the mistake, not to finishing the quiz — so the two nodes that carry a
+ * colour are the restriction and the payout, and nothing between them is
+ * emphasised. The plan document also asked for a five-stage compact version of
+ * the same sequence; one diagram per question, so it is not also drawn twice.
+ */
+export const topicalQuizFlow: FlowStep[] = [
+  { title: 'Student starts a topical quiz', note: 'mostly multiple-choice' },
+  { title: 'Quiz submitted' },
+  { title: 'The system identifies the incorrect answers' },
+  { title: 'Explanation videos assigned for those questions' },
+  { title: 'Student watches the assigned videos' },
+  { title: 'No skipping, no fast-forwarding', status: 'gate' },
+  { title: 'Required viewing completed' },
+  { title: 'e-Bucks released', status: 'shipped' },
+];
+
+/**
  * Changed from the plan. It proposed "System validates entries"; nothing in the
  * record evidences validation. What is evidenced is the AI draft and the
  * teacher approval gate, which is the more important step anyway.

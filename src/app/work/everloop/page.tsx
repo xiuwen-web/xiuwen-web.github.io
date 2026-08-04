@@ -11,11 +11,12 @@ import {
   contentDeliveryFlow,
   everloopMap,
   reportFlow,
+  topicalQuizFlow,
   writewiseResponsibility,
 } from '@/content/diagrams';
 import { ecosystem } from '@/content/ecosystem';
 import { workNumber } from '@/content/navigation';
-import { STATUS_META, type Visual } from '@/types/content';
+import { STATUS_META, type EcosystemPart, type Visual } from '@/types/content';
 
 export const metadata: Metadata = {
   title: `${ecosystem.title} — Case study`,
@@ -126,7 +127,7 @@ export default function EverLoopPage() {
                   <Diagram
                     heading="Who uses what"
                     intro="One platform, three groups, and the parts each of them touches."
-                    caption="Every row here is the same underlying record seen from a different side. That is what makes a change to one surface a change to four."
+                    caption="Every row here is the same underlying record seen from a different side. That is why one feature is five pieces of work — one per surface — rather than one."
                   >
                     <SystemMap root="EverLoop" branches={everloopMap} />
                   </Diagram>
@@ -204,6 +205,23 @@ export default function EverLoopPage() {
                       </p>
                     )}
                   </Container>
+
+                  {part.diagram === 'topical-quiz' && (
+                    <Diagram
+                      heading="Quiz to video to e-Bucks"
+                      intro="What happens between getting a question wrong and being paid for it."
+                      caption="The reward is deliberately two steps past the quiz. Disabling skip and fast-forward is what stops the last three nodes collapsing into one — without it the gate is a button, not a condition."
+                    >
+                      <FlowChart steps={topicalQuizFlow} dense />
+                    </Diagram>
+                  )}
+
+                  {part.rules && (
+                    <Container width="content" className="mt-8">
+                      <RulesPanel rules={part.rules} />
+                    </Container>
+                  )}
+
                   {part.visuals?.map((visual) => <Figure key={visual.src} visual={visual} />)}
                 </div>
               ))}
@@ -212,6 +230,36 @@ export default function EverLoopPage() {
         </div>
       </article>
     </Shell>
+  );
+}
+
+/**
+ * The rules a feature runs on, as a term list rather than a paragraph.
+ *
+ * A definition list, not a table: these are four independent conditions, not
+ * rows sharing columns, and a table of two columns is a term list that scrolls
+ * sideways on a phone.
+ */
+function RulesPanel({ rules }: { rules: NonNullable<EcosystemPart['rules']> }) {
+  return (
+    <dl
+      className="grid gap-x-8 gap-y-5 rounded-[var(--radius)] p-5 sm:grid-cols-2 sm:p-6"
+      style={{ background: 'var(--surface-sunk)' }}
+    >
+      {rules.map((rule) => (
+        <div key={rule.term}>
+          <dt
+            className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {rule.term}
+          </dt>
+          <dd className="mt-1.5 text-[length:var(--text-small)] leading-snug text-pretty">
+            {rule.definition}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 

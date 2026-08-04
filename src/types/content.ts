@@ -105,6 +105,12 @@ export interface CaseStudy {
   decisions: Decision[];
   produced: string;
   outcome: string[];
+  /**
+   * The outcome as scannable figures, above the prose (refinement doc §5).
+   * Only where the result is genuinely countable — a study whose outcome is
+   * "it is live and in daily use" gets no figures rather than invented ones.
+   */
+  outcomeFacts?: SnapshotFact[];
   outcomeLinks?: ExternalLink[];
   visual?: Visual;
   /** For systems that can never be screenshotted — drawn instead. */
@@ -144,6 +150,18 @@ export interface EcosystemPart {
   body: string[];
   visuals?: Visual[];
   link?: { href: string; label: string };
+  /**
+   * A diagram belonging to this part rather than to the area above it. Area
+   * diagrams render before the parts, which is the wrong place for one that
+   * illustrates the third part down.
+   */
+  diagram?: 'topical-quiz';
+  /**
+   * The rules a feature runs on, as a term list. For behaviour that is a set
+   * of conditions rather than a narrative — prose turns four rules into one
+   * paragraph nobody can check a build against.
+   */
+  rules?: { term: string; definition: string }[];
 }
 
 export interface EcosystemArea {
@@ -241,7 +259,12 @@ export interface FlowStep {
   title: string;
   /** One short qualifier. Long sentences do not belong inside a node. */
   note?: string;
-  status?: 'legacy' | 'pilot' | 'shipped' | 'in-progress' | 'mine';
+  /**
+   * Mostly delivery state. Two values name a role in the flow instead:
+   * 'mine' is the acceptance gate, and 'gate' is a rule the flow cannot pass
+   * until it is satisfied. Both still print a word — see Diagram.tsx.
+   */
+  status?: 'legacy' | 'pilot' | 'shipped' | 'in-progress' | 'mine' | 'gate';
 }
 
 export interface SystemBranch {

@@ -19,8 +19,13 @@ export const profile: Profile = {
   /** Rail identity block. Xiu Wen's own line, supplied 2026-08-02. */
   tagline: 'Turning operational complexity into working digital products.',
 
+  /*
+   * Reworded 2026-08-04. The previous line opened "I'm the Operations Manager
+   * at AGrader Learning Centre", which reads as chain-wide; About says plainly
+   * that the operations half is one centre. Same facts, no implied scope.
+   */
   heroSupport:
-    'I’m the Operations Manager at AGrader Learning Centre, a chain of 20 tuition centres in Singapore. I write the requirements for our internal systems, coordinate three developers and a QA, and I’m the last approval before a release goes out.',
+    'I manage centre operations at AGrader Learning Centre, a chain of 20 tuition centres in Singapore. I translate operational needs into software requirements, coordinate delivery across three developers and a QA, and provide the final business validation before a release goes live.',
 
   // F5, F19, F20
   about: [

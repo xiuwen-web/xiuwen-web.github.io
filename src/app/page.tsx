@@ -26,6 +26,7 @@ import { appLinks, snapshot } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
 import { Button } from '@/components/ui/Button';
+import { Disclosure } from '@/components/ui/Disclosure';
 import { MetricRow } from '@/components/ui/Metric';
 
 /**
@@ -35,6 +36,19 @@ import { MetricRow } from '@/components/ui/Metric';
  */
 const hasResume = existsSync(`public${profile.resumePath}`);
 
+/**
+ * Six sections, fixed by the refinement document (§1):
+ *
+ *   Hero → Proof metrics → Selected work → How I work → About → Contact
+ *
+ * Skills, Journey and the delivery log used to be three more top-level
+ * sections. None of them was linked from anywhere — not the rail, not the
+ * mobile nav, not another page — so each was a section heading, a rule and
+ * three sets of vertical padding spent on content a reader arrived at only by
+ * scrolling past it. They are all still here, inside the section each belongs
+ * to: the log under the work it is evidence for, skills and journey under
+ * About, which is the section that is about who I am.
+ */
 export default function Home() {
   return (
     <Shell active="overview">
@@ -43,9 +57,6 @@ export default function Home() {
       <Work />
       <Process />
       <About />
-      <Skills />
-      <Journey />
-      <Log />
       <Contact />
     </Shell>
   );
@@ -176,16 +187,32 @@ function Work() {
           <WorkRow key={entry.href} entry={entry} number={workNumber(entry.href)} />
         ))}
       </ul>
-    </Section>
-  );
-}
 
-/* ----------------------------------------------------------- Work log --- */
-
-function Log() {
-  return (
-    <Section id="log" eyebrow="Log" title={workLogHeading} intro={workLogIntro}>
-      <WorkLog groups={workLog} />
+      {/*
+        The log, behind the five cards it sits behind in reality. It folds:
+        the refinement names "detailed delivery logs" as a thing to move into
+        an expandable section. The intro stays visible because it carries the
+        figures — 25 months, sprints 3 to 14 — and the twelve entries are the
+        part nobody reads straight through.
+      */}
+      <div id="log" className="mt-14 scroll-mt-24">
+        <h3 className="font-display text-[length:var(--text-h3)] font-semibold">
+          {workLogHeading}
+        </h3>
+        <p
+          className="mt-2 max-w-[45rem] text-[length:var(--text-small)]"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {workLogIntro}
+        </p>
+        <Disclosure
+          className="mt-5"
+          summary="See the log"
+          hint="Twelve entries across five systems."
+        >
+          <WorkLog groups={workLog} />
+        </Disclosure>
+      </div>
     </Section>
   );
 }
@@ -195,7 +222,7 @@ function Log() {
 function Process() {
   return (
     <Section id="process" eyebrow="Process" title="How I work" intro={processIntro} width="content">
-      <FlowChart steps={pipeline} dense />
+      <FlowChart steps={pipeline} dense columns={3} />
 
       <p className="mt-6 max-w-[45rem] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
         {pipelineCaption}
@@ -226,8 +253,18 @@ function Process() {
         </ol>
       </div>
 
-      {/* A recreated requirement — shows the method rather than asserting it */}
-      <div className="mt-16">
+      {/*
+        A recreated requirement, and the chain that follows one to a live
+        screen. Both are evidence rather than argument, and both are long —
+        the refinement asks for the homepage to be shorter than the case-study
+        pages, so they fold. Nothing was cut; a reader who wants the proof
+        opens it, and one who does not reaches About four screens sooner.
+      */}
+      <Disclosure
+        className="mt-14"
+        summary="See a requirement I wrote"
+        hint="One recreated in full — current behaviour, proposed behaviour, a worked example, business rules and acceptance criteria."
+      >
         <p className="max-w-[45rem] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
           {specimenIntro}
         </p>
@@ -272,11 +309,15 @@ function Process() {
             {specimen.footnote}
           </p>
         </article>
-      </div>
+      </Disclosure>
 
       {/* The chain. The specimen above shows what a requirement looks like;
           this follows one of them to a screen that is on this site. */}
-      <div className="mt-16">
+      <Disclosure
+        className="mt-4"
+        summary="Follow one requirement to a live screen"
+        hint="The diagnostic report at four checkable points: the versioned brief, the prototypes, five board items, and two screens published on this site."
+      >
         <h3 className="font-display text-[length:var(--text-h3)] font-semibold">{traceTitle}</h3>
         <p
           className="mt-2 max-w-[45rem] text-[length:var(--text-small)]"
@@ -294,7 +335,7 @@ function Process() {
         </p>
 
         <TraceChain steps={trace} />
-      </div>
+      </Disclosure>
     </Section>
   );
 }
@@ -365,6 +406,9 @@ function About() {
           ))}
         </div>
       </div>
+
+      <Skills />
+      <Journey />
     </Section>
   );
 }
@@ -373,21 +417,22 @@ function About() {
 
 function Skills() {
   return (
-    <Section id="skills" eyebrow="Skills" title="Skills and tools">
-      <div className="grid gap-8 sm:grid-cols-2">
+    <div id="skills" className="mt-14 scroll-mt-24">
+      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">Skills and tools</h3>
+      <div className="mt-6 grid gap-8 sm:grid-cols-2">
         {skillGroups.map((group) => (
           <div key={group.heading}>
-            <h3
+            <h4
               className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
               style={{ color: 'var(--text-muted)' }}
             >
               {group.heading}
-            </h3>
+            </h4>
             <p className="mt-3 text-[length:var(--text-small)] leading-relaxed">{group.items.join(' · ')}</p>
           </div>
         ))}
       </div>
-    </Section>
+    </div>
   );
 }
 
@@ -395,8 +440,9 @@ function Skills() {
 
 function Journey() {
   return (
-    <Section id="journey" eyebrow="Journey" title="How I got here">
-      <ol className="relative space-y-7 pl-6">
+    <div id="journey" className="mt-14 scroll-mt-24">
+      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">How I got here</h3>
+      <ol className="relative mt-6 space-y-7 pl-6">
         <span
           aria-hidden="true"
           className="absolute top-2 bottom-2 left-[3px] w-px"
@@ -422,7 +468,7 @@ function Journey() {
           </li>
         ))}
       </ol>
-    </Section>
+    </div>
   );
 }
 

@@ -1,32 +1,30 @@
 import type { FlowStep, MethodRule, Specimen, TraceStep } from '@/types/content';
 
 /**
- * The real delivery pipeline (F16, F21). Recreated as a diagram — never a
+ * The delivery pipeline (F16, F21). Recreated as a diagram — never a
  * screenshot of the actual board (PRD §22, mock-ups only).
+ *
+ * Cut from the board's thirteen columns to six on 2026-08-04. Thirteen nodes
+ * is an inventory of column names; the reader needs the shape and where I sit
+ * in it, and the caption keeps the thirteen on the record without spending a
+ * diagram on them.
  *
  * Exactly one stage is emphasised. One emphasis, so it lands.
  */
 export const pipeline: FlowStep[] = [
-  { title: 'Backlog' },
-  { title: 'Ready to start' },
-  { title: 'In progress' },
-  { title: 'Ready for QA' },
-  { title: 'QA testing' },
-  { title: 'Revision' },
-  { title: 'Ready for final check' },
-  { title: 'Acceptance review', status: 'mine' },
-  { title: 'Final testing' },
-  { title: 'Pending deploy' },
-  { title: 'Store review' },
-  { title: 'Deployed' },
-  { title: 'Done', status: 'shipped' },
+  { title: 'Define', note: 'requirement and acceptance criteria' },
+  { title: 'Build', note: 'three developers' },
+  { title: 'QA', note: 'a dedicated tester since February 2026' },
+  { title: 'Acceptance', note: 'final business validation', status: 'mine' },
+  { title: 'Deploy', note: 'store review where it applies' },
+  { title: 'Verify', note: 'checked in production', status: 'shipped' },
 ];
 
 export const processIntro =
   'Every change goes through the same path, from an idea or a reported problem to something running in production. I sit at the point where it gets accepted.';
 
 export const pipelineCaption =
-  'On our actual board, that stage is named after me. It sits after QA testing and before deployment — I check what QA has finished testing, and decide whether it goes out.';
+  'Six stages here; on our board it is thirteen columns, and the acceptance one is named after me. It sits after QA testing and before deployment — I check what QA has finished testing, and decide whether it goes out.';
 
 /**
  * F79/F81 — how a requirement actually gets written.

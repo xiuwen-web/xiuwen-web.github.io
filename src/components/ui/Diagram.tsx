@@ -26,6 +26,13 @@ const STATUS_STYLE: Record<
   shipped: { label: 'shipped', colour: 'var(--badge-launched)', ground: 'var(--surface)' },
   'in-progress': { label: 'in progress', colour: 'var(--badge-progress)', ground: 'var(--surface)' },
   mine: { label: 'my gate', colour: 'var(--accent-ink)', ground: 'var(--accent-soft)' },
+  /*
+   * Not a delivery state: a condition the flow stops at. Amber, because it is
+   * the step where something is deliberately withheld — and it prints the word
+   * "gate" like every other coloured node, so the meaning does not depend on
+   * being able to tell amber from teal.
+   */
+  gate: { label: 'gate', colour: 'var(--badge-progress)', ground: 'var(--surface)' },
 };
 
 /* --------------------------------------------------------------- Frame --- */
@@ -80,9 +87,18 @@ export function Diagram({
 
 /* ----------------------------------------------------------- Flowchart --- */
 
-export function FlowChart({ steps, dense = false }: { steps: FlowStep[]; dense?: boolean }) {
+export function FlowChart({
+  steps,
+  dense = false,
+  columns = 4,
+}: {
+  steps: FlowStep[];
+  dense?: boolean;
+  /** Desktop columns. Three is for six-step flows, which 4 would break 4 + 2. */
+  columns?: 3 | 4;
+}) {
   return (
-    <ol className="flow">
+    <ol className={columns === 3 ? 'flow flow-3' : 'flow'}>
       {steps.map((step) => (
         <FlowNode key={step.title + (step.note ?? '')} step={step} dense={dense} />
       ))}

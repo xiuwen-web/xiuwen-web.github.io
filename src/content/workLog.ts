@@ -18,8 +18,13 @@ import type { WorkLogGroup } from '@/types/content';
 
 export const workLogHeading = 'Selected delivery log';
 
+/*
+ * The months and sprint-growth figures were two of the six homepage metrics
+ * until 2026-08-04. They are evidence about this log rather than about the
+ * business, so they moved to sit with the entries they summarise (F70, F17).
+ */
 export const workLogIntro =
-  'Five projects above, in depth. Behind them sit around fifty briefs, test cycles, guides and rollouts. Twelve are listed here — a sample rather than the archive.';
+  'Five projects above, in depth. Behind them sit around fifty briefs, test cycles, guides and rollouts across 25 months of unbroken delivery, over sprints 3 to 14, each with a stated objective. Twelve are listed here — a sample rather than the archive.';
 
 export const workLog: WorkLogGroup[] = [
   {

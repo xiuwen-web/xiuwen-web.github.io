@@ -1,19 +1,30 @@
 import type { ExternalLink, SnapshotFact } from '@/types/content';
 
 /**
- * Six verifiable facts. No percentages, no impact claims.
+ * Four verifiable facts. No percentages, no impact claims.
  * Each figure carries a qualifier so nothing is ambiguous.
- * Facts: F28, F22, M13, F12, F17/F70, F31.
- * Months figure raised 24 → 25 on 2026-08-02: the GitHub record shows unbroken
- * delivery 14 Jun 2024 → 31 Jul 2026, so 24 understated it (F70).
+ * Facts: F28, F22, M13, F16/F21.
+ *
+ * Cut from six to four on 2026-08-04, with the wording fixed by the refinement
+ * document. Two changes matter:
+ *
+ *  - "4 apps live" is gone. There are two apps, published twice each; a
+ *    recruiter counting App Store entries and a recruiter counting products
+ *    were reading the same figure and getting different answers. The unit is
+ *    the listing, and it says so.
+ *  - The months and sprint-growth figures moved to the delivery log intro,
+ *    where the entries they summarise actually are. They were evidence about
+ *    the log, sitting four sections above it.
  */
 export const snapshot: SnapshotFact[] = [
-  { figure: '20', label: 'centres', qualifier: '11 company-owned, 9 franchise' },
-  { figure: '4', label: 'apps live', qualifier: 'iOS and Android' },
-  { figure: '5', label: 'product surfaces', qualifier: 'web and mobile, three user types' },
-  { figure: '3', label: 'developers', qualifier: 'plus one QA' },
-  { figure: '25', label: 'months', qualifier: 'of documented delivery' },
-  { figure: '3 → 14', label: 'sprints', qualifier: 'each with a stated objective' },
+  { figure: '20', label: 'centres supported', qualifier: '11 company-owned, 9 franchise' },
+  { figure: '4', label: 'app-store listings', qualifier: 'two apps across iOS and Android' },
+  { figure: '3', label: 'major product systems', qualifier: 'CAdmin, EverLoop and the ERP' },
+  {
+    figure: '1',
+    label: 'final business-validation gate',
+    qualifier: 'mine, before a release goes live',
+  },
 ];
 
 /**

@@ -6,6 +6,7 @@ import { BrowserFrame } from './BrowserFrame';
 import { Button } from './Button';
 import { RolloutDiagram } from './RolloutDiagram';
 import { BeforeAfter, Diagram, FlowChart, SystemMap } from './Diagram';
+import { MetricRow } from './Metric';
 import {
   cadminBeforeAfter,
   cadminMigrationFlow,
@@ -202,6 +203,16 @@ export function CaseStudyDetail({
         <Container>
           <section id="outcome" className="scroll-mt-24">
             <Label as="h2">Outcomes</Label>
+
+            {/* Figures first, then the sentence that qualifies them. A reader
+                scanning for the result should not have to read a paragraph to
+                find it. */}
+            {study.outcomeFacts && (
+              <div className="mt-5 mb-7">
+                <MetricRow facts={study.outcomeFacts} />
+              </div>
+            )}
+
             <div className="mt-3 space-y-3">
               {study.outcome.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>

@@ -201,8 +201,27 @@ export const caseStudies: CaseStudy[] = [
     ],
     produced:
       "The enhance-versus-rebuild evaluation, requirements per module, workflow validation, test coverage, rollout instructions, training materials, and the collected feedback from centre managers after their first two weeks on V2.",
+    /* "All outlets now run on V2" opened this until the figures went in above,
+       where the first qualifier now says the same thing. */
     outcome: [
-      "All outlets now run on V2. Phase 4 is in progress — the HR module, relief teaching, and the rest of a twelve-module plan I scoped.",
+      "Phase 4 is in progress — the HR module, relief teaching, and the rest of the twelve-module plan I scoped.",
+    ],
+    /*
+     * Added 2026-08-04 per refinement doc §5. The document's draft said "3
+     * rollout phases"; confirmed with Xiu Wen the same day that there are four,
+     * with features under phase 4 still in progress — so the figure is 4 and
+     * the qualifier says which of them are live.
+     *
+     * The document's fourth line, "No planned operational shutdown", is not
+     * here. "No acceptable downtime" is recorded as a constraint on the
+     * project, which is not the same as a measured claim that none occurred,
+     * and the site does not state outcomes it cannot evidence (F26).
+     */
+    outcomeFacts: [
+      { figure: "20", label: "centres migrated", qualifier: "every outlet now runs V2" },
+      { figure: "4", label: "rollout phases", qualifier: "three live, phase four in progress" },
+      { figure: "1", label: "pilot outlet", qualifier: "HR and payroll, before any expansion" },
+      { figure: "12", label: "modules scoped", qualifier: "the plan phase four is working through" },
     ],
     diagram: "rollout",
     lessons:
