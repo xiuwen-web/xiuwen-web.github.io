@@ -21,7 +21,7 @@ import {
   traceTitle,
 } from '@/content/process';
 import { journey, journeySubtitle, skillGroups } from '@/content/skills';
-import { appLinks, snapshot } from '@/content/snapshot';
+import { appLinks, snapshot, snapshotClosing } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
 import { Button, DocumentIcon } from '@/components/ui/Button';
@@ -175,6 +175,15 @@ function Snapshot() {
       />
       <Container width="wide" className="relative py-10 sm:py-12">
         <MetricRow facts={snapshot} />
+
+        {/* The sentence the four figures add up to. Rules off the strip so it
+            reads as the conclusion rather than as a fifth, broken statistic. */}
+        <p
+          className="mt-8 border-t pt-6 text-[length:var(--text-small)] text-pretty"
+          style={{ borderColor: 'var(--rule)', color: 'var(--text-muted)' }}
+        >
+          {snapshotClosing}
+        </p>
       </Container>
     </section>
   );

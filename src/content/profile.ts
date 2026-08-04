@@ -11,11 +11,13 @@ export const profile: Profile = {
   employer: 'AGrader Learning Centre',
   location: 'Singapore',
 
-  // F5, F28, F12, F21
-  heroHeadline: [
-    'I run tuition centre operations.',
-    'I also specify the software that runs them.',
-  ],
+  /*
+   * F5, F28, F12, F21. One line as of 2026-08-04, replacing the two-line
+   * "I run tuition centre operations. / I also specify the software that runs
+   * them." The old pair described two jobs; this names the one thing both
+   * halves are for, which is the claim the case studies actually evidence.
+   */
+  heroHeadline: ['I turn operational problems into systems that work.'],
   /** Rail identity block. Xiu Wen's own line, supplied 2026-08-02. */
   tagline: 'Turning operational complexity into working digital products.',
 
@@ -32,8 +34,14 @@ export const profile: Profile = {
    *
    * Kept in the present tense, like every other sentence on the site.
    */
+  /*
+   * Four verbs in the order the work happens: run it, specify it, coordinate
+   * it, accept it. "Frontline" carries the scope the old line spent a clause
+   * on, and the twenty centres now sit in the credibility strip directly
+   * below, where a figure belongs.
+   */
   heroSupport:
-    'I work at AGrader Learning Centre, a chain of 20 tuition centres in Singapore, running operations at one of the outlets. I translate operational needs into software requirements, coordinate delivery across developers and QA, and provide the final business validation before releases go live.',
+    'I manage frontline operations, define software requirements, coordinate delivery and validate releases across internal platforms used by multiple centres.',
 
   // F5, F19, F20
   about: [
