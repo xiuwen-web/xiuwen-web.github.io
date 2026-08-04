@@ -55,6 +55,10 @@ export const ecosystem: Ecosystem = {
       'So I built the case with records rather than an opinion — the affected students, their class history, the withdrawal and transfer dates, and exactly where the wrong data surfaced — and set out what it was costing operationally. That reframed a list of complaints as one recurring data-integrity issue, and it got prioritised as one. Duplicate detection and prevention logic shipped; corrections still happen, but they are corrections rather than a queue.',
       'It turned out not to be confined to student lists. The same question kept surfacing everywhere the business had grown past a single centre — which outlet does this record belong to, and who should therefore be able to see it. A teacher working across three outlets receiving one combined timesheet. Announcements reaching families at the wrong branch. Staff able to see records from centres they do not work at. Different symptoms, one unresolved question, and it has been the most persistent design theme across every system we run.',
       'Naming the pattern is what changed how I write requirements. Anything multi-site now gets the ownership question answered explicitly up front — which outlet owns this record, who sees it, what happens when someone belongs to more than one — rather than discovered later through a complaint.',
+      /* The reflection this one earns. It is the argument the whole section
+         makes, and it belongs at the end of it rather than in a principles
+         list where it would be a slogan. */
+      'What it taught me is that repeated mistakes are usually signals. Often the problem is not the person entering the data, but the system asking them to work around it.',
           ],
         },
       ],

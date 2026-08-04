@@ -55,6 +55,14 @@ export const handoff: HandoffStep[] = [
 export const processIntro =
   'Every change goes the same way, from something going wrong in a centre to something running in production. I am at both ends of it.';
 
+/**
+ * The sentence the seven steps are for. It closes the section rather than
+ * opening it: stated up front it is a slogan, stated after the reader has seen
+ * where she sits in the chain it is a conclusion.
+ */
+export const processPrinciple =
+  'Technology should not make people adapt to broken workflows. It should make good work easier to do.';
+
 export const handoffCaption =
   'Two of the seven belong to someone else, and I am still in both: the developers decide how to build it, QA decides whether it works, and I decide whether it does the job it was asked to do. On our board this runs to thirteen columns, and the acceptance one is named after me.';
 

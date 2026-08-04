@@ -146,6 +146,13 @@ export interface CaseStudy {
    * it is the study where getting it out of the door was the work.
    */
   launch?: { body: string[]; visuals?: Visual[] };
+  /**
+   * The reflection the project left behind, as opposed to `lessons`, which is
+   * what would be done differently. One looks back at what the work meant, the
+   * other forward at what would change — a study that ends only on the second
+   * reads as a list of corrections.
+   */
+  learned?: string;
   /** Forward-facing, per F46. Required. */
   lessons: string;
 }
@@ -324,6 +331,18 @@ export interface MethodRule {
 }
 
 /**
+ * A stated belief about the work, as distinct from MethodRule, which is a
+ * technique. "Understand before building" is a principle; "specify what should
+ * not happen" is how that principle gets carried out. They are deliberately in
+ * different sections, because a reader who meets two lists of rules in a row
+ * stops reading either.
+ */
+export interface Principle {
+  heading: string;
+  body?: string;
+}
+
+/**
  * A recreated requirement (F13 — mock-ups only, never the real document).
  * Structure and reasoning are faithful; identifying specifics are removed.
  */
@@ -402,6 +421,8 @@ export interface Profile {
   tagline: string;
   heroHeadline: string[];
   heroSupport: string;
+  /** The quiet line under the headline — why the work is shaped this way. */
+  heroSubline: string;
   about: string[];
   timeSplit: { label: string; value: number }[];
   /** Opens the Contact section — a statement of direction, not a greeting. */

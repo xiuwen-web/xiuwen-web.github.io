@@ -77,6 +77,14 @@ export const skillGroups: SkillGroup[] = [
 export const journeySubtitle =
   'From helping set up a franchise outlet to shaping the systems behind a 20-centre business.';
 
+/**
+ * Closes the timeline. Deliberately the only reflective line in it — the
+ * entries themselves stay factual, and the meaning is drawn once, at the end,
+ * where the dates have already made the case.
+ */
+export const journeyClosing =
+  'I did not begin in product or technology. I began close to the work itself, and learned that the people who understand a problem most deeply are often the ones best placed to shape the solution.';
+
 export const journey: JourneyPhase[] = [
   {
     label: 'Into operations',

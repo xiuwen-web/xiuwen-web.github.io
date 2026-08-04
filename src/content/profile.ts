@@ -1,4 +1,4 @@
-import type { Profile } from '@/types/content';
+import type { Principle, Profile } from '@/types/content';
 
 /**
  * All copy here is approved in PORTFOLIO_CONTENT.md and traces to a numbered
@@ -43,12 +43,24 @@ export const profile: Profile = {
   heroSupport:
     'I manage frontline operations, define software requirements, coordinate delivery and validate releases across internal platforms used by multiple centres.',
 
+  /*
+   * One quiet line under the headline. It sits between the claim and the
+   * credentials because it is the reason the rest of the page is shaped the
+   * way it is — and it is set smaller than both, so it reads as an aside
+   * rather than as a second headline competing with the first.
+   */
+  heroSubline: 'Good systems begin by paying attention to where people struggle.',
+
   // F5, F19, F20
   about: [
     'I manage operations at one of AGrader’s tuition centres, and I work on the systems the whole chain runs on. Those two halves are about even.',
     'Roughly 40% of my time goes to centre operations — teachers, parents, and the things that go wrong on a Tuesday morning. Another 40% goes to project and product delivery: requirements, coordinating developers, testing, rollouts. The remaining 20% is technology coordination, testing and documentation. That balance shifts when a release is going out or something breaks.',
     'I did not set out to do this. My director started assigning technology projects to me and arranged for me to learn from someone experienced in the area. I took it from there — requirements gathering, then developer coordination, then testing and delivery — until the role had become an operations and technology one.',
     'The part I would not give up is the operations half. It is why the requirements I write tend to hold up: I am specifying systems for a job I do myself.',
+    /* The one reflective paragraph on the page. It goes last in About because
+       it is the conclusion the three paragraphs above it earn — placed first
+       it would be a claim, placed here it is a summary. */
+    'What draws me is the space between disorder and clarity — the point where a recurring frustration becomes a better process, and a better process becomes a system people trust.',
   ],
 
   timeSplit: [
@@ -77,6 +89,32 @@ export const profile: Profile = {
   photoPath: '/images/xiu-wen-profile.webp',
   photoAlt: 'Xiu Wen, Operations and Product Delivery',
 };
+
+/**
+ * Principles I work by.
+ *
+ * Kept apart from the six method rules in the Process section, which are
+ * techniques for writing a requirement. These are the beliefs underneath them,
+ * and two lists of rules in the same section would cancel each other out.
+ *
+ * The last one carries no body on purpose. It is the conclusion the other
+ * three arrive at, and explaining it would weaken it.
+ */
+export const principles: Principle[] = [
+  {
+    heading: 'Understand before building',
+    body: 'A clear problem is worth more than a fast solution. Most of the rework I have seen was decided before anyone opened an editor.',
+  },
+  {
+    heading: 'Design for reality',
+    body: 'Workflows should reflect how people actually behave, not how a process diagram assumes they behave. The gap between those two is where systems get abandoned.',
+  },
+  {
+    heading: 'Details are operational',
+    body: 'A small edge case becomes a large problem once a system scales. At twenty centres, the case that happens rarely happens somewhere every week.',
+  },
+  { heading: 'Technology is only useful when people can trust it' },
+];
 
 /** Rendered only when a URL exists — see outstanding assets. */
 export const socialLinks: { label: string; href: string }[] = [

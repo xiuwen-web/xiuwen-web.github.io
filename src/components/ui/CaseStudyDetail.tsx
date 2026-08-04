@@ -46,6 +46,7 @@ export function caseStudyToc(study: CaseStudy) {
   items.push({ id: 'outcome', label: 'Outcomes' });
   if (study.analytics) items.push({ id: 'adoption', label: 'Post-launch adoption' });
   if (study.measurement) items.push({ id: 'measurement', label: 'Measurement' });
+  if (study.learned) items.push({ id: 'learned', label: 'What I learned' });
   items.push({ id: 'lessons', label: 'What I’d do differently' });
   return items;
 }
@@ -269,6 +270,22 @@ export function CaseStudyDetail({
                   </p>
                 ))}
               </div>
+            </section>
+          </Container>
+        )}
+
+        {/* Two closers, in this order on purpose: what the project meant, then
+            what would change. Reversed, the study ends on a correction. */}
+        {study.learned && (
+          <Container>
+            <section id="learned" className="scroll-mt-24">
+              <Label as="h2">What I learned</Label>
+              <p
+                className="mt-3 border-l-2 pl-4 text-[length:var(--text-body)] text-pretty"
+                style={{ borderColor: 'var(--accent)' }}
+              >
+                {study.learned}
+              </p>
             </section>
           </Container>
         )}

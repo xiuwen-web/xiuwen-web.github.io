@@ -128,6 +128,8 @@ export const caseStudies: CaseStudy[] = [
         "What does not exist is anything about use. There is no instrumentation inside either app, so I can say how many people installed the teacher app and nothing about whether a teacher opens it between classes — the thing the whole prioritisation argument rested on. Acquisition is the metric you are given; engagement is the one you have to decide to collect, before release, because it cannot be recovered afterwards.",
       ],
     },
+    learned:
+      "Good product decisions are mostly about restraint — knowing what belongs on the screen, and what belongs somewhere else. Every request I turned down was reasonable on its own.",
     lessons:
       "Usage tracking goes in before release, not after it. The stores told me the apps were downloaded; nothing told me which features people actually open, so what to build next rested on what users said rather than what they did. That is the first thing I set up next time.",
   },
@@ -239,6 +241,8 @@ export const caseStudies: CaseStudy[] = [
       { figure: "12", label: "modules scoped", qualifier: "the plan phase four is working through" },
     ],
     diagram: "rollout",
+    learned:
+      "Migration is not simply moving software. It is carrying people, habits and trust from one system into another — and the trust is the part that has to be re-earned at every phase.",
     lessons:
       "The pilot goes earlier. It found things no amount of testing had, and every week it ran before wider rollout was a week of problems another centre never had to see.",
   },

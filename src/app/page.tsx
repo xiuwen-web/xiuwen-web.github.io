@@ -4,7 +4,7 @@ import { FeaturedCard, WorkRow } from '@/components/ui/FeaturedCard';
 import { HandoffChain } from '@/components/ui/Diagram';
 import { TraceChain } from '@/components/ui/TraceChain';
 import { workEntries, workNumber } from '@/content/navigation';
-import { profile, socialLinks } from '@/content/profile';
+import { principles, profile, socialLinks } from '@/content/profile';
 import {
   measureBody,
   measureHeading,
@@ -13,6 +13,7 @@ import {
   method,
   methodIntro,
   processIntro,
+  processPrinciple,
   specimen,
   specimenIntro,
   trace,
@@ -20,7 +21,7 @@ import {
   traceSubject,
   traceTitle,
 } from '@/content/process';
-import { journey, journeySubtitle, skillGroups } from '@/content/skills';
+import { journey, journeyClosing, journeySubtitle, skillGroups } from '@/content/skills';
 import { appLinks, snapshot, snapshotClosing } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
@@ -51,6 +52,7 @@ export default function Home() {
       <Work />
       <Process />
       <About />
+      <Principles />
       <Contact />
     </Shell>
   );
@@ -93,7 +95,16 @@ function Hero() {
           ))}
         </h1>
 
-        <p className="mt-6 max-w-[35rem] text-pretty" style={{ color: 'var(--text-muted)' }}>
+        {/* Smaller than the headline and lighter than the paragraph under it,
+            so it reads as an aside rather than as a second headline. */}
+        <p
+          className="mt-5 max-w-[34rem] text-[length:var(--text-body)] text-pretty italic"
+          style={{ color: 'var(--accent-ink)' }}
+        >
+          {profile.heroSubline}
+        </p>
+
+        <p className="mt-5 max-w-[35rem] text-pretty" style={{ color: 'var(--text-muted)' }}>
           {profile.heroSupport}
         </p>
 
@@ -274,6 +285,14 @@ function Process() {
 
       <p className="mt-6 max-w-[60ch] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
         {handoffCaption}
+      </p>
+
+      {/* The point of the seven steps, stated once, after them. */}
+      <p
+        className="mt-8 max-w-[45rem] border-l-2 pl-4 text-[length:var(--text-body)] text-pretty"
+        style={{ borderColor: 'var(--accent)' }}
+      >
+        {processPrinciple}
       </p>
 
       {/*
@@ -542,8 +561,63 @@ function Journey() {
             </ol>
           </section>
         ))}
+
+        <p
+          className="border-t pt-6 text-[length:var(--text-small)] text-pretty"
+          style={{ borderColor: 'var(--rule)', color: 'var(--text-muted)' }}
+        >
+          {journeyClosing}
+        </p>
       </div>
     </Disclosure>
+  );
+}
+
+/* ---------------------------------------------------------- Principles --- */
+
+/**
+ * Placed between About and Contact, and deliberately not next to the six
+ * method rules in Process. Those are techniques for writing a requirement;
+ * these are the beliefs underneath them, and a reader who meets two lists of
+ * rules in a row reads neither.
+ *
+ * The fourth has no body. It is what the other three arrive at, so it is set
+ * as a closing line rather than as a fourth item with something to explain.
+ */
+function Principles() {
+  const items = principles.filter((p) => p.body);
+  const conclusion = principles.find((p) => !p.body);
+
+  return (
+    <Section id="principles" eyebrow="Principles" title="Principles I work by" width="content">
+      <ol className="grid gap-x-12 gap-y-8 sm:grid-cols-2">
+        {items.map((rule, i) => (
+          <li key={rule.heading}>
+            <h3 className="text-[length:var(--text-body)] font-medium">
+              <span aria-hidden="true" style={{ color: 'var(--text-muted)' }}>
+                {String(i + 1).padStart(2, '0')}.{' '}
+              </span>
+              {rule.heading}
+            </h3>
+            <p
+              className="mt-2 text-[length:var(--text-small)] leading-relaxed text-pretty"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {rule.body}
+            </p>
+          </li>
+        ))}
+      </ol>
+
+      {conclusion && (
+        <p
+          className="mt-10 border-t pt-6 font-display text-[length:var(--text-h3)] text-pretty"
+          style={{ borderColor: 'var(--rule)' }}
+        >
+          {conclusion.heading}.
+        </p>
+      )}
+    </Section>
   );
 }
 

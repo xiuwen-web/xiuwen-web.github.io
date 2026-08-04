@@ -30,25 +30,53 @@ const plexMono = IBM_Plex_Mono({
  * site and never was, so every canonical tag was naming a stranger's page.
  */
 const SITE_URL = 'https://xiuwen-web.github.io';
-/* "across 20 tuition centres" read as her operating remit. The 20 is the
-   reach of the systems, not of the job (FINAL_REFINEMENT_BRIEF §14.15). */
+/*
+ * Title and description carry the search-result positioning, so they name the
+ * role a recruiter searches for rather than the internal job title. Both are
+ * within the lengths Google renders — roughly 60 and 160 characters — so
+ * neither gets truncated mid-phrase.
+ */
+const TITLE = `${profile.name} — Project Manager, Product Operations and Business Systems`;
+
 const DESCRIPTION =
-  'Operations manager who specifies and ships internal software. Requirements, developer coordination and release acceptance for the systems a 20-centre tuition chain runs on.';
+  'Project manager bridging frontline operations and software delivery across internal platforms, mobile apps and multi-site workflows.';
+
+/*
+ * PNG, not the WebP everything else on the site uses. LinkedIn's crawler does
+ * not reliably render WebP, and a share card that silently fails is worse than
+ * none — so the one asset whose entire job is being fetched by someone else's
+ * crawler is in the format every crawler reads.
+ *
+ * Width and height are declared because LinkedIn and Slack size the preview
+ * from them rather than waiting to measure the file.
+ */
+const OG_IMAGE = {
+  url: '/images/og-card.png',
+  width: 1200,
+  height: 630,
+  alt: 'Xiu Wen — Project Manager, Product Operations and Business Systems. I turn operational problems into systems that work.',
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `${profile.name} — Operations & Product Delivery | ${profile.employer}`,
+  title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/' },
   openGraph: {
-    title: `${profile.name} — Operations & Product Delivery`,
+    title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
     siteName: `${profile.name} — Portfolio`,
     locale: 'en_SG',
-    type: 'website',
+    type: 'profile',
+    images: [OG_IMAGE],
   },
-  twitter: { card: 'summary_large_image', title: `${profile.name}`, description: DESCRIPTION },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE.url],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -367,7 +395,10 @@ const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: profile.name,
-  jobTitle: 'Operations Manager',
+  /* Matches the <title>. Two different job titles in the same document is the
+     kind of thing a structured-data check flags and a reader notices. */
+  jobTitle: 'Project Manager, Product Operations and Business Systems',
+  image: `${SITE_URL}/images/og-card.png`,
   worksFor: { '@type': 'Organization', name: profile.employer },
   address: { '@type': 'PostalAddress', addressCountry: 'SG' },
   email: `mailto:${profile.email}`,
