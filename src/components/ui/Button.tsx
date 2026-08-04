@@ -75,8 +75,12 @@ export function Button({
 }
 
 /**
- * Document-with-arrow. Sized to the button's 14px text rather than to a fixed
- * pixel value, so it tracks the label if the type scale ever moves.
+ * A document. It carried a download arrow while the label said "Download";
+ * the label now says "View" and the link opens a tab, so the arrow went with
+ * it rather than promising a save that never happens.
+ *
+ * Sized to the button's 14px text rather than to a fixed pixel value, so it
+ * tracks the label if the type scale ever moves.
  */
 export function DocumentIcon() {
   return (
@@ -92,7 +96,7 @@ export function DocumentIcon() {
     >
       <path d="M9 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V6z" />
       <path d="M9 1.75V6h4.25" />
-      <path d="M8 8.25v3.5M6.5 10.25 8 11.75l1.5-1.5" />
+      <path d="M5.5 8.75h5M5.5 11.25h3" />
     </svg>
   );
 }

@@ -112,7 +112,7 @@ export function MobileNav({ active }: { active?: string }) {
               {hasResume && (
                 <li>
                   <RailLink href={profile.resumePath} external>
-                    Résumé (PDF)
+                    Resume (PDF)
                   </RailLink>
                 </li>
               )}

@@ -23,8 +23,15 @@ import { profile } from './profile';
  */
 export const hasResume = existsSync(`public${profile.resumePath}`);
 
-/** One label, so the hero, Contact and the drawer cannot drift apart. */
-export const RESUME_LABEL = 'Download résumé';
+/**
+ * One label, so the hero and Contact cannot drift apart.
+ *
+ * "View", not "Download": the link opens the PDF in a tab rather than saving
+ * it, and a button that says download and then does not is a small lie the
+ * reader notices. Unaccented "Resume" is Xiu Wen's own spelling, applied to
+ * every résumé string on the site so the two forms do not sit side by side.
+ */
+export const RESUME_LABEL = 'View Resume';
 
-/** Names the owner and the format, for a link that leaves the site. */
-export const RESUME_ARIA = 'Open Xiu Wen’s résumé PDF in a new tab';
+/** Names the owner, the format and the new tab, which the label cannot. */
+export const RESUME_ARIA = 'View Xiu Wen’s resume, PDF, opens in a new tab';
