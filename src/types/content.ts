@@ -390,6 +390,8 @@ export interface Profile {
   heroSupport: string;
   about: string[];
   timeSplit: { label: string; value: number }[];
+  /** Opens the Contact section — a statement of direction, not a greeting. */
+  contactLede: string;
   email: string;
   resumePath: string;
   photoPath: string;

@@ -49,6 +49,15 @@ export const profile: Profile = {
     { label: 'Technology coordination', value: 20 },
   ],
 
+  /*
+   * The last thing anyone reads, so it says what the page has been building
+   * towards rather than "let's connect". A pleasantry at the conversion point
+   * asks the reader to work out what to do with the site they just read; a
+   * statement of direction answers it.
+   */
+  contactLede:
+    'I am interested in roles where operations, product delivery and technology meet.',
+
   // F37 — personal address. The work address never appears on this site.
   email: 'xwchng@yahoo.com',
   /*

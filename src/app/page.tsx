@@ -527,50 +527,87 @@ function Journey() {
 
 /* ------------------------------------------------------------- Contact --- */
 
+/**
+ * The last section anyone reads, so it states a direction rather than offering
+ * a pleasantry, then puts the four things a recruiter actually needs in one
+ * scannable list: how to write, where to check, what to read, and where I am.
+ *
+ * Location earns its row. It is the first filter on most searches and the one
+ * fact a reader cannot infer from anything above it — and it is the only entry
+ * here that is not a link, which is why the labels carry the structure rather
+ * than the links doing it.
+ */
 function Contact() {
+  const linkedin = socialLinks.find((l) => l.label === 'LinkedIn');
+
   return (
     <Section id="contact" eyebrow="Contact" title="Contact">
-      <p style={{ color: 'var(--text-muted)' }}>
-        The quickest way to reach me is email. Happy to talk about operations, delivery, or
-        anything on this page.
-      </p>
+      <p className="max-w-[45rem] text-pretty">{profile.contactLede}</p>
 
-      <a
-        href={`mailto:${profile.email}`}
-        className="mt-6 inline-block font-display text-[1.25rem] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70 sm:text-[1.5rem]"
-        style={{ color: 'var(--accent-ink)' }}
-      >
-        {profile.email}
-      </a>
-
-      <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-        {/* Second and last placement. The brief asks for the résumé here and in
-            the mobile drawer, and nowhere else — a link repeated on every
-            section stops reading as an offer and starts reading as a plea. */}
-        {hasResume && (
-          <Button
-            href={profile.resumePath}
-            variant="secondary"
-            external
-            ariaLabel={RESUME_ARIA}
-          >
-            <DocumentIcon />
-            {RESUME_LABEL}
-          </Button>
-        )}
-        {socialLinks.map((link) => (
+      <dl className="mt-8 space-y-5">
+        <ContactRow label="Email">
           <a
-            key={link.href}
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[length:var(--text-small)] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
-            style={{ color: 'var(--text-muted)' }}
+            href={`mailto:${profile.email}`}
+            className="font-display text-[1.125rem] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70 sm:text-[1.25rem]"
+            style={{ color: 'var(--accent-ink)' }}
           >
-            {link.label}
+            {profile.email}
           </a>
-        ))}
-      </div>
+        </ContactRow>
+
+        {linkedin && (
+          <ContactRow label="LinkedIn">
+            <a
+              href={linkedin.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+              style={{ color: 'var(--accent-ink)' }}
+            >
+              linkedin.com/in/chng-x-090171205
+            </a>
+          </ContactRow>
+        )}
+
+        {/* Second and last placement. The résumé belongs here and in the mobile
+            drawer, and nowhere else — a link repeated on every section stops
+            reading as an offer and starts reading as a plea. */}
+        {hasResume && (
+          <ContactRow label="Resume">
+            <Button
+              href={profile.resumePath}
+              variant="secondary"
+              external
+              ariaLabel={RESUME_ARIA}
+            >
+              <DocumentIcon />
+              {RESUME_LABEL}
+            </Button>
+          </ContactRow>
+        )}
+
+        <ContactRow label="Location">{profile.location}</ContactRow>
+      </dl>
     </Section>
+  );
+}
+
+/**
+ * Label left, value right, on one line once there is room for it; stacked on a
+ * phone. The label column is fixed so the four values line up — a ragged left
+ * edge is what makes a list like this read as links scattered on a page rather
+ * than as a record.
+ */
+function ContactRow({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="sm:flex sm:items-baseline sm:gap-6">
+      <dt
+        className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase sm:w-24 sm:shrink-0"
+        style={{ color: 'var(--text-muted)' }}
+      >
+        {label}
+      </dt>
+      <dd className="mt-1 min-w-0 sm:mt-0">{children}</dd>
+    </div>
   );
 }
