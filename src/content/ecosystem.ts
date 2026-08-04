@@ -281,7 +281,11 @@ export const ecosystem: Ecosystem = {
            brief asks to cut (§7). */
         'Live since 11 March 2025, replacing Thinkific, and still shipping. All five surfaces run on it, and the two mobile ones also ship as apps — four app-store listings between them.',
         'Two manual processes are gone rather than improved. Course release no longer runs through a shared request sheet, and diagnostic reports are no longer written by hand. A dedicated QA joined in February 2026, the first on either system.',
-        'No adoption or usage figures, for the reason given in About: this shipped without instrumentation.',
+        /* "No adoption figures" stopped being true when the store analytics
+           went onto the mobile launch page. Acquisition exists for the two
+           apps because the stores report it; in-product usage does not, for
+           any surface. */
+        'No in-product usage figures, for the reason given in About: this shipped without instrumentation.',
       ],
     },
 

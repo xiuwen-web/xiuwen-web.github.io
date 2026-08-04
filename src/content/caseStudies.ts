@@ -1,5 +1,6 @@
 import type { CaseStudy, SupportingCard } from '@/types/content';
 import { appLinks } from "./snapshot";
+import { mobileAnalytics } from "./analytics";
 
 /**
  * Approved copy from PORTFOLIO_CONTENT.md.
@@ -70,6 +71,7 @@ export const caseStudies: CaseStudy[] = [
       "Four listings, live and public. The student app launched first, in December 2025; the teacher app followed on Android in February 2026 and on iOS in March. Both were updated again in July 2026 — the student app now on version 1.4.0, the teacher app on 1.3.0 — so both have kept shipping since launch.",
     ],
     outcomeLinks: appLinks,
+    analytics: mobileAnalytics,
     /*
      * Store galleries, captured from the public listings on 2026-08-02. These
      * are AGrader's own published marketing assets, which is the one image
@@ -107,14 +109,27 @@ export const caseStudies: CaseStudy[] = [
       width: 1440,
       height: 900,
     },
+    /*
+     * Rewritten 2026-08-04, when the store analytics went in above. This block
+     * used to open "There is no adoption or usage figure for these apps,
+     * because none was ever collected" — which the section above now plainly
+     * contradicts.
+     *
+     * The distinction it was reaching for is real and is now stated: the
+     * stores report acquisition for free, and nobody had to decide anything to
+     * get it. What was never collected is in-product instrumentation. So the
+     * gap is narrower than the old wording claimed, and in the more awkward
+     * place — the numbers that exist are the ones that say least about whether
+     * the thing is any good.
+     */
     measurement: {
       body: [
-        "There is no adoption or usage figure for these apps, because none was ever collected. Instrumentation did not go in before release, so there is nothing recorded to report here.",
-        "What to instrument is a release decision, not a later one. It costs very little at the time and cannot be recovered afterwards, which is the whole argument for making it early.",
+        "The figures above came free with the platforms. Apple and Google report acquisition whether or not anyone planned for it, which is why they exist for a release that shipped with no measurement plan at all.",
+        "What does not exist is anything about use. There is no instrumentation inside either app, so I can say how many people installed the teacher app and nothing about whether a teacher opens it between classes — the thing the whole prioritisation argument rested on. Acquisition is the metric you are given; engagement is the one you have to decide to collect, before release, because it cannot be recovered afterwards.",
       ],
     },
     lessons:
-      "Usage tracking goes in before release, not after it. We shipped without a way to see which features people actually open, which means what to build next rests on what users say rather than what they do. That is the first thing I set up next time.",
+      "Usage tracking goes in before release, not after it. The stores told me the apps were downloaded; nothing told me which features people actually open, so what to build next rested on what users said rather than what they did. That is the first thing I set up next time.",
   },
 
   {

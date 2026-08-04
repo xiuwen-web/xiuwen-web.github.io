@@ -7,6 +7,7 @@ import { Button } from './Button';
 import { RolloutDiagram } from './RolloutDiagram';
 import { BeforeAfter, Diagram, FlowChart, SystemMap } from './Diagram';
 import { MetricRow } from './Metric';
+import { AnalyticsEvidenceSection } from './AnalyticsEvidenceSection';
 import {
   cadminBeforeAfter,
   cadminMigrationFlow,
@@ -43,6 +44,7 @@ export function caseStudyToc(study: CaseStudy) {
   if (study.launch) items.push({ id: 'launch', label: 'Launch execution' });
   items.push({ id: 'produced', label: 'Deliverables' });
   items.push({ id: 'outcome', label: 'Outcomes' });
+  if (study.analytics) items.push({ id: 'adoption', label: 'Post-launch adoption' });
   if (study.measurement) items.push({ id: 'measurement', label: 'Measurement' });
   items.push({ id: 'lessons', label: 'What I’d do differently' });
   return items;
@@ -246,6 +248,11 @@ export function CaseStudyDetail({
             )}
           </section>
         </Container>
+
+        {/* Directly after Outcomes, per the brief: the figures are the outcome
+            corroborated, and they must be read before the Measurement block
+            qualifies what they do and do not cover. */}
+        {study.analytics && <AnalyticsEvidenceSection items={study.analytics} />}
 
         {study.measurement && (
           <Container>

@@ -85,6 +85,28 @@ export interface Measurement {
   body: string[];
 }
 
+/**
+ * One store-analytics figure, with the screenshot it was read from.
+ *
+ * Apple and Google do not measure the same thing, and the four figures here
+ * are three different units — downloads, installed audience, product-page
+ * views. They are therefore never summed, never averaged and never presented
+ * as one adoption total; `metric` is rendered next to every value so the unit
+ * travels with the number.
+ */
+export interface AnalyticsEvidence {
+  /** Groups the cards, and is a real heading rather than a colour. */
+  product: string;
+  platform: 'iOS' | 'Android';
+  /** Exactly as the console reports it — "2.03K" is not rewritten to "2,030". */
+  value: string;
+  metric: string;
+  period: string;
+  source: 'App Store Connect' | 'Google Play Console';
+  /** Cropped so no account name is present. See scripts note in the commit. */
+  image: Visual;
+}
+
 export interface CaseStudy {
   id: string;
   /** URL segment: /work/[slug]. Stable — treat as a published address. */
@@ -112,6 +134,8 @@ export interface CaseStudy {
    */
   outcomeFacts?: SnapshotFact[];
   outcomeLinks?: ExternalLink[];
+  /** Store analytics, shown as its own Post-launch adoption section. */
+  analytics?: AnalyticsEvidence[];
   visual?: Visual;
   /** For systems that can never be screenshotted — drawn instead. */
   diagram?: 'rollout';
