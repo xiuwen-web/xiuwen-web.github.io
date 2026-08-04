@@ -24,7 +24,12 @@ const plexMono = IBM_Plex_Mono({
   weight: ['400', '500'],
 });
 
-const SITE_URL = 'https://wen-portfolio.vercel.app';
+/*
+ * Every canonical, Open Graph and JSON-LD URL on the site is built from this.
+ * It pointed at wen-portfolio.vercel.app until 2026-08-04 — which is not this
+ * site and never was, so every canonical tag was naming a stranger's page.
+ */
+const SITE_URL = 'https://xiuwen-web.github.io';
 /* "across 20 tuition centres" read as her operating remit. The 20 is the
    reach of the systems, not of the job (FINAL_REFINEMENT_BRIEF §14.15). */
 const DESCRIPTION =
