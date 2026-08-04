@@ -49,7 +49,7 @@ export const profile: Profile = {
    * way it is — and it is set smaller than both, so it reads as an aside
    * rather than as a second headline competing with the first.
    */
-  heroSubline: 'Good systems begin by paying attention to where people struggle.',
+  heroSubline: 'The best systems are built close to the people who use them.',
 
   // F5, F19, F20
   about: [
@@ -72,10 +72,13 @@ export const profile: Profile = {
      * reads as a student's CV rather than a practitioner's.
      */
     'The method has a background. I read psychology with business as an undergraduate, and took a Masters in applied research alongside the day job — mixed methods, interviews, thematic coding, statistical analysis. That is the same work as turning a vague complaint into something a developer can build from, and it is why my instinct with a recurring problem is to go looking for the pattern rather than fix the instance in front of me.',
-    /* The one reflective paragraph on the page. It goes last in About because
-       it is the conclusion the three paragraphs above it earn — placed first
-       it would be a claim, placed here it is a summary. */
-    'What draws me is the space between disorder and clarity — the point where a recurring frustration becomes a better process, and a better process becomes a system people trust.',
+    /*
+     * The one reflective line in About, and the last thing in it. It replaced
+     * "the space between disorder and clarity", which said the same thing
+     * more abstractly — two reflective paragraphs in one section is the
+     * literary drift this page is meant to avoid.
+     */
+    'I believe recurring problems deserve more than temporary fixes. They deserve a system that makes the work clearer the next time around.',
   ],
 
   timeSplit: [

@@ -138,7 +138,13 @@ export const journey: JourneyPhase[] = [
         year: '2024',
         /* "Still running" matters: the operations half never stopped, which is
            the whole argument About makes for why the requirements hold up. */
-        body: 'Still running centre operations. My director begins assigning technology projects, and arranges mentoring.',
+        /*
+         * Aloysius is named at Xiu Wen's instruction, 2026-08-05 — the one
+         * exception to the no-names rule (PRD §22), which exists to protect
+         * students, parents and colleagues from exposure. This is a credit
+         * rather than an exposure, and it is a first name only.
+         */
+        body: 'Still running centre operations. My director begins assigning technology projects, and arranges for Aloysius to mentor me in requirements, delivery and system thinking.',
         milestone: true,
       },
       {

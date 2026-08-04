@@ -115,8 +115,14 @@ export const workEntries: WorkEntry[] = [
   },
   {
     href: '/work/other/',
-    navLabel: 'Other Work',
-    title: 'Other Work',
+    /*
+     * Renamed from "Other Work" 2026-08-05. That name defined the entry by
+     * exclusion and read as leftovers; what is actually in it is a product
+     * built and then deliberately cut back. The URL stays /work/other/ — a
+     * published address is not renamed for a label change.
+     */
+    navLabel: 'Product Experiments',
+    title: 'Product Experiments',
     /*
      * "Everything that belongs under neither CAdmin, EverLoop nor the ERP"
      * defined the entry by what it was not, which made 05 read as the drawer

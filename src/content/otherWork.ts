@@ -1,7 +1,7 @@
 import type { SupportingCard } from '@/types/content';
 
 /**
- * Other Work — entry 04.
+ * Product Experiments — entry 05 (renamed from "Other Work", 2026-08-05).
  *
  * Not a dumping ground (SIDEBAR_FLOW_REVISION §04). What lands here is work
  * that belongs under neither CAdmin nor EverLoop — which, now that the ERP and
