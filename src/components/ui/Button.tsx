@@ -37,12 +37,15 @@ export function Button({
   variant = 'secondary',
   external = false,
   download = false,
+  ariaLabel,
   children,
 }: {
   href: string;
   variant?: Variant;
   external?: boolean;
   download?: boolean;
+  /** For a label that needs to say more than the visible text, e.g. a file type. */
+  ariaLabel?: string;
   children: ReactNode;
 }) {
   const v = VARIANT[variant];
@@ -51,7 +54,7 @@ export function Button({
   // instant. A download or an external target must stay a plain anchor.
   if (href.startsWith('/') && !download && !external) {
     return (
-      <Link prefetch={false} href={href} className={v.className} style={v.style}>
+      <Link prefetch={false} href={href} className={v.className} style={v.style} aria-label={ariaLabel}>
         {children}
       </Link>
     );
@@ -62,10 +65,34 @@ export function Button({
       href={href}
       className={v.className}
       style={v.style}
+      aria-label={ariaLabel}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...(download ? { download: '' } : {})}
     >
       {children}
     </a>
+  );
+}
+
+/**
+ * Document-with-arrow. Sized to the button's 14px text rather than to a fixed
+ * pixel value, so it tracks the label if the type scale ever moves.
+ */
+export function DocumentIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-[1.05em] shrink-0"
+    >
+      <path d="M9 1.75H4.25a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5h7.5a1.5 1.5 0 0 0 1.5-1.5V6z" />
+      <path d="M9 1.75V6h4.25" />
+      <path d="M8 8.25v3.5M6.5 10.25 8 11.75l1.5-1.5" />
+    </svg>
   );
 }

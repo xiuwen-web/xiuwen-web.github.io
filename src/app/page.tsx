@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs';
 import { Container, Section } from '@/components/layout/Section';
 import { Shell } from '@/components/layout/Shell';
 import { FeaturedCard, WorkRow } from '@/components/ui/FeaturedCard';
@@ -25,16 +24,11 @@ import { journey, skillGroups } from '@/content/skills';
 import { appLinks, snapshot } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
-import { Button } from '@/components/ui/Button';
+import { Button, DocumentIcon } from '@/components/ui/Button';
 import { Disclosure } from '@/components/ui/Disclosure';
+import { Portrait } from '@/components/ui/Portrait';
+import { hasResume, RESUME_ARIA, RESUME_LABEL } from '@/content/resume';
 import { MetricRow } from '@/components/ui/Metric';
-
-/**
- * The résumé PDF does not exist yet, and a download button that 404s is worse
- * than no button. Checked at build time — a static export runs this once, and
- * the button appears on its own the moment the file is dropped into public/.
- */
-const hasResume = existsSync(`public${profile.resumePath}`);
 
 /**
  * Six sections, fixed by the refinement document (§1):
@@ -70,9 +64,30 @@ function Hero() {
       {/* The one place a wider measure earns itself: at 640px the headline
           breaks after "I run tuition", mid-phrase. */}
       <Container width="content">
+        {/*
+          Identity block: portrait, name, positioning — then the headline.
+          The portrait and the two lines beside it sit on one row so the whole
+          block is ~104px tall and reads as a masthead rather than as a profile
+          card. Anything taller starts competing with the headline under it.
+        */}
+        <div className="mb-8 flex items-center gap-4 sm:gap-5">
+          <Portrait />
+          <div className="min-w-0">
+            <p className="font-display text-[1.0625rem] leading-tight font-semibold sm:text-[1.25rem]">
+              {profile.name}
+            </p>
+            <p
+              className="mt-1 text-[length:var(--text-small)] leading-snug"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {profile.role}
+            </p>
+          </div>
+        </div>
+
         <h1 className="font-display text-[2rem] leading-[1.12] font-semibold text-balance sm:text-[length:var(--text-display)] lg:text-[3.25rem]">
-          {profile.heroHeadline.map((line, i) => (
-            <span key={line} className={i === 1 ? 'block' : 'block'}>
+          {profile.heroHeadline.map((line) => (
+            <span key={line} className="block">
               {line}
             </span>
           ))}
@@ -82,13 +97,24 @@ function Hero() {
           {profile.heroSupport}
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <Button href="#work" variant="primary">
-            See the work
+            View selected work
           </Button>
+          {/*
+            New tab rather than the download attribute: a PDF that opens is a
+            PDF a recruiter reads now, and download behaviour across browsers
+            and mobile is inconsistent enough that it is not worth forcing.
+          */}
           {hasResume && (
-            <Button href={profile.resumePath} variant="secondary" download>
-              Download résumé
+            <Button
+              href={profile.resumePath}
+              variant="secondary"
+              external
+              ariaLabel={RESUME_ARIA}
+            >
+              <DocumentIcon />
+              {RESUME_LABEL}
             </Button>
           )}
         </div>
@@ -503,15 +529,19 @@ function Contact() {
       </a>
 
       <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        {/* Second and last placement. The brief asks for the résumé here and in
+            the mobile drawer, and nowhere else — a link repeated on every
+            section stops reading as an offer and starts reading as a plea. */}
         {hasResume && (
-          <a
+          <Button
             href={profile.resumePath}
-            download
-            className="inline-flex h-11 items-center rounded-md border px-5 text-[length:var(--text-small)] font-medium"
-            style={{ borderColor: 'var(--rule)' }}
+            variant="secondary"
+            external
+            ariaLabel={RESUME_ARIA}
           >
-            Download résumé (PDF)
-          </a>
+            <DocumentIcon />
+            {RESUME_LABEL}
+          </Button>
         )}
         {socialLinks.map((link) => (
           <a

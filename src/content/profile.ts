@@ -51,9 +51,14 @@ export const profile: Profile = {
 
   // F37 — personal address. The work address never appears on this site.
   email: 'xwchng@yahoo.com',
-  resumePath: '/resume/xiu-wen-cv.pdf',
-  photoPath: '/images/xiu-wen.jpg',
-  photoAlt: 'Xiu Wen',
+  /*
+   * Nothing is served from here yet — see content/resume.ts. The path is the
+   * published name rather than whatever the source file happened to be called,
+   * because the filename is part of what gets exposed.
+   */
+  resumePath: '/documents/Xiu-Wen-Resume.pdf',
+  photoPath: '/images/xiu-wen-profile.webp',
+  photoAlt: 'Xiu Wen, Operations and Product Delivery',
 };
 
 /** Rendered only when a URL exists — see outstanding assets. */

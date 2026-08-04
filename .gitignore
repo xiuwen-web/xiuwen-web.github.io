@@ -104,3 +104,9 @@ PORTFOLIO_*.md
 /*.jpg
 /*.jpeg
 /*.webp
+
+# Same rule, same reason, for documents. A résumé dropped at the root carries a
+# home address, a date of birth and a mobile number until someone has taken
+# them out; the published copy belongs at public/documents/ and nowhere else.
+/*.pdf
+/*.docx

@@ -1,6 +1,7 @@
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { ACTIVE_KEY_TO_HREF, PRIMARY_NAV, workEntries, workNumber } from '@/content/navigation';
 import { profile, socialLinks } from '@/content/profile';
+import { hasResume } from '@/content/resume';
 import { Identity, RailHeading, RailLink } from './Sidebar';
 
 /**
@@ -105,6 +106,16 @@ export function MobileNav({ active }: { active?: string }) {
                   Email
                 </RailLink>
               </li>
+              {/* The drawer is the only navigation a phone reader has, so the
+                  résumé belongs in it. The desktop rail does not get one — the
+                  hero button is in view there. */}
+              {hasResume && (
+                <li>
+                  <RailLink href={profile.resumePath} external>
+                    Résumé (PDF)
+                  </RailLink>
+                </li>
+              )}
             </ul>
           </div>
 
