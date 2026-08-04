@@ -129,7 +129,11 @@ export default function EverLoopPage() {
                     intro="One platform, three groups, and the parts each of them touches."
                     caption="Every row here is the same underlying record seen from a different side. That is why one feature is five pieces of work — one per surface — rather than one."
                   >
-                    <SystemMap root="EverLoop" branches={everloopMap} />
+                    <SystemMap
+                      root="EverLoop"
+                      upstream={{ title: 'CAdmin', edge: 'operational data' }}
+                      branches={everloopMap}
+                    />
                   </Diagram>
 
                   <Container width="content" className="mt-8">
@@ -142,7 +146,7 @@ export default function EverLoopPage() {
                 <Diagram
                   heading="How a course reaches a student"
                   intro="Set up once, released by rule."
-                  caption="Nobody grants access. The tags decide who, and the class start date in CAdmin decides when — which is why a parent logging in early correctly sees an empty list."
+                  caption="Nobody grants access. The tags decide who, and the class start date in CAdmin decides when."
                 >
                   <FlowChart steps={contentDeliveryFlow} dense />
                 </Diagram>
@@ -153,7 +157,7 @@ export default function EverLoopPage() {
                   <Diagram
                     heading="How a report reaches a parent"
                     intro="Five interfaces, one approval gate."
-                    caption="The gate is the third step. The AI drafts and the teacher approves, so what a parent opens is a teacher's professional judgement rather than a model's output."
+                    caption="The gate is the third step. Nothing reaches a parent that a teacher has not signed off."
                   >
                     <FlowChart steps={reportFlow} dense />
                   </Diagram>
@@ -212,7 +216,7 @@ export default function EverLoopPage() {
                       intro="What happens between getting a question wrong and being paid for it."
                       caption="The reward is deliberately two steps past the quiz. Disabling skip and fast-forward is what stops the last three nodes collapsing into one — without it the gate is a button, not a condition."
                     >
-                      <FlowChart steps={topicalQuizFlow} dense />
+                      <FlowChart steps={topicalQuizFlow} dense columns={3} />
                     </Diagram>
                   )}
 

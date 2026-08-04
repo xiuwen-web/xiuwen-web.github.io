@@ -117,8 +117,14 @@ export const workEntries: WorkEntry[] = [
     href: '/work/other/',
     navLabel: 'Other Work',
     title: 'Other Work',
+    /*
+     * "Everything that belongs under neither CAdmin, EverLoop nor the ERP"
+     * defined the entry by what it was not, which made 05 read as the drawer
+     * the other four did not fit in. It is a deliberate selection, so it now
+     * says what is in it (FINAL_REFINEMENT_BRIEF §11).
+     */
     description:
-      'A personal assistant I built and then cut a feature from. Everything that belongs under neither CAdmin, EverLoop nor the ERP.',
+      'Selected experiments and smaller systems work — product prototypes, internal workflow improvements, and decisions where I deliberately reduced scope.',
     /*
      * Cropped to the row band rather than letterboxed. The source is a square
      * illustration, and contained in a 3.8:1 plate it rendered 112px wide — a

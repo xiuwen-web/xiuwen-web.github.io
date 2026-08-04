@@ -25,8 +25,10 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const SITE_URL = 'https://wen-portfolio.vercel.app';
+/* "across 20 tuition centres" read as her operating remit. The 20 is the
+   reach of the systems, not of the job (FINAL_REFINEMENT_BRIEF §14.15). */
 const DESCRIPTION =
-  'Operations manager who specifies and ships internal software. Requirements, developer coordination and release acceptance across 20 tuition centres.';
+  'Operations manager who specifies and ships internal software. Requirements, developer coordination and release acceptance for the systems a 20-centre tuition chain runs on.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

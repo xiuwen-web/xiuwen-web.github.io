@@ -44,7 +44,7 @@ export const ecosystem: Ecosystem = {
       heading: 'Platform and users',
       body: [
         'Student data is keyed in CAdmin, our centre management system. EverLoop reads it. The line I put at the top of the guide our admins work from is “CAdmin is the engine, EverLoop is the display” — because the practical instruction that follows is the whole point: fix the data in CAdmin and EverLoop updates itself. Never correct the same record in two places.',
-        'That rule is what makes the rest of this page possible. Access, release timing and withdrawal all fall out of one set of records rather than being maintained separately per surface.',
+        'Access, release timing and withdrawal all fall out of that one set of records rather than being maintained per surface.',
       ],
       parts: [
         {
@@ -178,15 +178,15 @@ export const ecosystem: Ecosystem = {
       ],
       diagram: 'topical-quiz',
       rules: [
-        { term: 'Quiz format', definition: 'Mostly multiple-choice questions' },
+        { term: 'Quiz format', definition: 'Mainly multiple-choice practice' },
         {
           term: 'Trigger',
-          definition: 'Incorrect answers assign the explanation videos for those questions',
+          definition: 'Incorrect answers assign the relevant explanation videos',
         },
-        { term: 'Video control', definition: 'No skipping and no fast-forwarding' },
+        { term: 'Video control', definition: 'Skipping and fast-forwarding are disabled' },
         {
           term: 'Reward condition',
-          definition: 'e-Bucks are released only once the required videos are completed',
+          definition: 'e-Bucks are released only after the required videos are completed',
         },
       ],
     },
@@ -227,8 +227,11 @@ export const ecosystem: Ecosystem = {
         {
           src: '/images/everloop-progress-report.webp',
           alt: 'The same report as a parent sees it: the child and class at the top, conduct scored out of five, and a teacher’s remarks section in continuous prose.',
+          /* The AI-drafts-teacher-approves point is made in the paragraph
+             above, in the flow diagram and in its caption. Four times was
+             three too many (§7). */
           caption:
-            'The parent’s side. The AI drafted those remarks and the teacher approved them, and nothing here says so — by this point it is their professional judgement.',
+            'The parent’s side. The same report, with the conduct scores and the remarks the teacher signed off.',
           width: 1440,
           height: 900,
         },
@@ -273,9 +276,12 @@ export const ecosystem: Ecosystem = {
       navLabel: 'Outcomes',
       heading: 'Outcomes',
       body: [
-        'Live since 11 March 2025, replacing Thinkific, and still shipping. Five surfaces run on it — admin, teacher web and mobile, student and parent web and mobile — with communications across them. The two mobile surfaces also ship as apps, which is four app-store listings between them.',
+        /* The five surfaces are enumerated in the overview and drawn in the
+           map above. Naming them a third time here was the repetition the
+           brief asks to cut (§7). */
+        'Live since 11 March 2025, replacing Thinkific, and still shipping. All five surfaces run on it, and the two mobile ones also ship as apps — four app-store listings between them.',
         'Two manual processes are gone rather than improved. Course release no longer runs through a shared request sheet, and diagnostic reports are no longer written by hand. A dedicated QA joined in February 2026, the first on either system.',
-        'There are no adoption or usage figures here, for the reason given in About: the platform shipped without instrumentation, so any number would be reconstructed rather than recorded.',
+        'No adoption or usage figures, for the reason given in About: this shipped without instrumentation.',
       ],
     },
 

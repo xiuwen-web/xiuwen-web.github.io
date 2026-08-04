@@ -174,7 +174,7 @@ function Work() {
       eyebrow="Work"
       title="Selected Work"
       width="content"
-      intro="Five bodies of work. Two of them — a live-system migration and the EverLoop platform — carry most of what I do. Each page says what I decided and why, which matters more than the feature list, and anything still in progress says so."
+      intro="Five bodies of work. CAdmin Migration and the EverLoop Ecosystem carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
     >
       <div className="grid gap-6 sm:grid-cols-2">
         {featured.map((entry) => (
@@ -228,8 +228,19 @@ function Process() {
         {pipelineCaption}
       </p>
 
-      {/* The method, not a list of artefact nouns (F79) */}
-      <div className="mt-14">
+      {/*
+        Three disclosures, in the order a sceptical reader would want them:
+        how I write a requirement, one I wrote, and one followed to a live
+        screen. All three are evidence rather than argument, and all three are
+        long — the brief asks for a compact "How I Work", so they fold.
+        Nothing was cut; a reader who wants the proof opens it, and one who
+        does not reaches About several screens sooner.
+      */}
+      <Disclosure
+        className="mt-12"
+        summary="The six things I do every time"
+        hint="How a requirement gets written before anyone builds from it."
+      >
         <p className="max-w-[45rem] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
           {methodIntro}
         </p>
@@ -251,17 +262,10 @@ function Process() {
             </li>
           ))}
         </ol>
-      </div>
+      </Disclosure>
 
-      {/*
-        A recreated requirement, and the chain that follows one to a live
-        screen. Both are evidence rather than argument, and both are long —
-        the refinement asks for the homepage to be shorter than the case-study
-        pages, so they fold. Nothing was cut; a reader who wants the proof
-        opens it, and one who does not reaches About four screens sooner.
-      */}
       <Disclosure
-        className="mt-14"
+        className="mt-4"
         summary="See a requirement I wrote"
         hint="One recreated in full — current behaviour, proposed behaviour, a worked example, business rules and acceptance criteria."
       >
@@ -438,11 +442,19 @@ function Skills() {
 
 /* ------------------------------------------------------------- Journey --- */
 
+/**
+ * Folded as well as moved (brief §2). The route into this work is a fair
+ * question and the timeline answers it, but it is the third paragraph of
+ * About told again as dates — the reader who wants it will open it.
+ */
 function Journey() {
   return (
-    <div id="journey" className="mt-14 scroll-mt-24">
-      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">How I got here</h3>
-      <ol className="relative mt-6 space-y-7 pl-6">
+    <Disclosure
+      className="mt-8"
+      summary="How I got here"
+      hint="Centre operations to product delivery, 2024 to now."
+    >
+      <ol id="journey" className="relative scroll-mt-24 space-y-7 pl-6">
         <span
           aria-hidden="true"
           className="absolute top-2 bottom-2 left-[3px] w-px"
@@ -468,7 +480,7 @@ function Journey() {
           </li>
         ))}
       </ol>
-    </div>
+    </Disclosure>
   );
 }
 

@@ -20,12 +20,20 @@ export const profile: Profile = {
   tagline: 'Turning operational complexity into working digital products.',
 
   /*
-   * Reworded 2026-08-04. The previous line opened "I'm the Operations Manager
-   * at AGrader Learning Centre", which reads as chain-wide; About says plainly
-   * that the operations half is one centre. Same facts, no implied scope.
+   * Reworded 2026-08-04 to Xiu Wen's own text, tidied. Three claims are
+   * deliberately bounded (FINAL_REFINEMENT_BRIEF §1, §14.15):
+   *
+   *  - "running operations at one of the outlets" — she does not oversee all
+   *    twenty. The chain is the scale of the systems, not of her remit.
+   *  - "coordinate delivery across developers and QA" — no head count and no
+   *    possessive. Coordinating delivery is not a reporting line.
+   *  - "provide the final business validation" — she is the business sign-off,
+   *    which is not the same as solely authorising a production deploy.
+   *
+   * Kept in the present tense, like every other sentence on the site.
    */
   heroSupport:
-    'I manage centre operations at AGrader Learning Centre, a chain of 20 tuition centres in Singapore. I translate operational needs into software requirements, coordinate delivery across three developers and a QA, and provide the final business validation before a release goes live.',
+    'I work at AGrader Learning Centre, a chain of 20 tuition centres in Singapore, running operations at one of the outlets. I translate operational needs into software requirements, coordinate delivery across developers and QA, and provide the final business validation before releases go live.',
 
   // F5, F19, F20
   about: [

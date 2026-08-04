@@ -15,7 +15,7 @@ export const pipeline: FlowStep[] = [
   { title: 'Define', note: 'requirement and acceptance criteria' },
   { title: 'Build', note: 'three developers' },
   { title: 'QA', note: 'a dedicated tester since February 2026' },
-  { title: 'Acceptance', note: 'final business validation', status: 'mine' },
+  { title: 'Acceptance', note: 'business-validation gate before release', status: 'mine' },
   { title: 'Deploy', note: 'store review where it applies' },
   { title: 'Verify', note: 'checked in production', status: 'shipped' },
 ];
@@ -23,8 +23,11 @@ export const pipeline: FlowStep[] = [
 export const processIntro =
   'Every change goes through the same path, from an idea or a reported problem to something running in production. I sit at the point where it gets accepted.';
 
+/* "decide whether it goes out" overstated it — that reads as sole authority
+   over the deploy. The gate is business acceptance, and deployment follows
+   it (FINAL_REFINEMENT_BRIEF §1, §14.15). */
 export const pipelineCaption =
-  'Six stages here; on our board it is thirteen columns, and the acceptance one is named after me. It sits after QA testing and before deployment — I check what QA has finished testing, and decide whether it goes out.';
+  'Six stages here; on our board it is thirteen columns, and the acceptance one is named after me. It sits after QA testing and before deployment — I check what QA has finished testing against the acceptance criteria, and decide whether it is ready to release.';
 
 /**
  * F79/F81 — how a requirement actually gets written.
@@ -188,10 +191,15 @@ export const trace: TraceStep[] = [
  * Stated as a professional observation — not an apology, and not a
  * complaint about the employer.
  */
+/**
+ * Cut from three paragraphs to two on 2026-08-04 (FINAL_REFINEMENT_BRIEF §2,
+ * §12). The principle is unchanged and the specifics survive — the eight
+ * defined measures are the evidence that this is a standard rather than an
+ * excuse, and dropping them would leave only the admission.
+ */
 export const measureHeading = 'What I’d measure';
 
 export const measureBody: string[] = [
-  'There are no results figures on this page. Not because I don’t think in measures — the last project brief I wrote defined eight of them, including how fast a webhook has to deliver, what share of parents should open a report within 48 hours, and what percentage of teachers edit the AI draft before sending it. That last one is the honest proxy for whether they trust it.',
-  'What I don’t have is measured outcomes for the systems that shipped before I started writing targets into briefs. We didn’t instrument them, so any number I put here would be reconstructed rather than recorded, and I would rather leave the space empty than fill it with something I can’t stand behind.',
-  'That gap is the first thing I would close.',
+  'Some of the older systems were never instrumented, so I do not present reconstructed figures as fact. Where reliable metrics are not available I show the operational outcome, the delivery evidence, and what I would measure next.',
+  'It is a gap rather than a position. The last project brief I wrote defined eight measures, including how fast a webhook has to deliver, what share of parents open a report within 48 hours, and what percentage of teachers edit the AI draft before sending it — that last one being the honest proxy for whether they trust it. Closing the same gap on what already shipped is the first thing I would do.',
 ];

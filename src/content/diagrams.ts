@@ -103,18 +103,19 @@ export const contentDeliveryFlow: FlowStep[] = [
  * The whole point of the sequence is that the reward is attached to the step
  * after the mistake, not to finishing the quiz — so the two nodes that carry a
  * colour are the restriction and the payout, and nothing between them is
- * emphasised. The plan document also asked for a five-stage compact version of
- * the same sequence; one diagram per question, so it is not also drawn twice.
+ * emphasised.
+ *
+ * Six nodes, not the eight it opened with: "quiz submitted" and "student
+ * watches the videos" are implied by the steps either side of them, and six
+ * lays out three-and-three rather than four-and-two.
  */
 export const topicalQuizFlow: FlowStep[] = [
-  { title: 'Student starts a topical quiz', note: 'mostly multiple-choice' },
-  { title: 'Quiz submitted' },
-  { title: 'The system identifies the incorrect answers' },
-  { title: 'Explanation videos assigned for those questions' },
-  { title: 'Student watches the assigned videos' },
-  { title: 'No skipping, no fast-forwarding', status: 'gate' },
-  { title: 'Required viewing completed' },
-  { title: 'e-Bucks released', status: 'shipped' },
+  { title: 'Complete topical quiz', note: 'mainly multiple-choice' },
+  { title: 'Identify incorrect answers' },
+  { title: 'Assign relevant explanation videos' },
+  { title: 'Skipping and fast-forwarding disabled', status: 'gate' },
+  { title: 'Complete required viewing' },
+  { title: 'Release e-Bucks', status: 'shipped' },
 ];
 
 /**

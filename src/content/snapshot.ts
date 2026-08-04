@@ -19,12 +19,18 @@ import type { ExternalLink, SnapshotFact } from '@/types/content';
 export const snapshot: SnapshotFact[] = [
   { figure: '20', label: 'centres supported', qualifier: '11 company-owned, 9 franchise' },
   { figure: '4', label: 'app-store listings', qualifier: 'two apps across iOS and Android' },
-  { figure: '3', label: 'major product systems', qualifier: 'CAdmin, EverLoop and the ERP' },
   {
-    figure: '1',
-    label: 'final business-validation gate',
-    qualifier: 'mine, before a release goes live',
+    figure: '5',
+    label: 'product surfaces',
+    qualifier: 'admin, teacher web and mobile, student web and mobile',
   },
+  /*
+   * "Final" is not in this label. It is accurate in the hero, where there is
+   * room to say what the gate is; as a four-word metric it reads as sole
+   * authority over the deploy, which is more than the record supports
+   * (FINAL_REFINEMENT_BRIEF §14.15).
+   */
+  { figure: '1', label: 'business-validation gate', qualifier: 'before a release goes live' },
 ];
 
 /**

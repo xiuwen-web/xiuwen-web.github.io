@@ -143,9 +143,41 @@ function FlowNode({ step, dense }: { step: FlowStep; dense: boolean }) {
 
 /* ---------------------------------------------------------- System map --- */
 
-export function SystemMap({ root, branches }: { root: string; branches: SystemBranch[] }) {
+export function SystemMap({
+  root,
+  branches,
+  upstream,
+}: {
+  root: string;
+  branches: SystemBranch[];
+  /**
+   * The system the root reads from, drawn above it. EverLoop displays what
+   * CAdmin holds, and a map that starts at EverLoop makes it look like the
+   * origin of the data rather than the display for it.
+   */
+  upstream?: { title: string; edge: string };
+}) {
   return (
     <div>
+      {upstream && (
+        <>
+          <p
+            className="mx-auto w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
+            style={{ borderColor: 'var(--rule)', background: 'var(--surface)' }}
+          >
+            {upstream.title}
+          </p>
+          <p
+            className="flex flex-col items-center gap-1 py-2 text-[length:var(--text-label)]"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            <span aria-hidden="true" className="h-3 w-px" style={{ background: 'var(--rule)' }} />
+            {upstream.edge}
+            <span aria-hidden="true" className="h-3 w-px" style={{ background: 'var(--rule)' }} />
+          </p>
+        </>
+      )}
+
       <p
         className="mx-auto w-fit rounded-[var(--radius)] border px-4 py-2 text-center text-[length:var(--text-small)] font-medium"
         style={{ borderColor: 'var(--accent)', background: 'var(--accent-soft)' }}
