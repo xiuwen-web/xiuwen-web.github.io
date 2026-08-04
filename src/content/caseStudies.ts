@@ -372,7 +372,7 @@ export const caseStudies: CaseStudy[] = [
 /**
  * Reading order, set by PORTFOLIO_SIDEBAR_FLOW_REVISION.md (2026-08-02).
  *
- * Only three full case studies remain. Data integrity and Nova were compressed
+ * Only four full case studies remain. Data integrity and Nova were compressed
  * into short entries on Other Work at Xiu Wen's instruction; WriteWise is still
  * a full page but is reached through the EverLoop ecosystem rather than from
  * the rail, because it is being integrated into EverLoop (F68).

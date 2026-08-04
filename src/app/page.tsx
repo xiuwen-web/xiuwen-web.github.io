@@ -146,12 +146,11 @@ function Snapshot() {
 /* ---------------------------------------------------------------- Work --- */
 
 /**
- * Four numbered entries, read from the IA in navigation.ts so the numbering
- * here can never drift from the rail's (SIDEBAR_FLOW_REVISION §Project
- * Numbering).
+ * The numbered entries, read from the IA in navigation.ts so the numbering here
+ * can never drift from the rail's (SIDEBAR_FLOW_REVISION §Project Numbering).
  *
- * 01 and 02 are the two largest bodies of work and carry media; 03 and 04 are
- * compact. All four are numbered, so the hierarchy reads the same in both
+ * 01 and 02 are the two largest bodies of work and get raised cards; the rest
+ * are compact. Every entry is numbered, so the hierarchy reads the same in both
  * places even though the cards differ in weight.
  */
 function Work() {
@@ -164,7 +163,7 @@ function Work() {
       eyebrow="Work"
       title="Selected Work"
       width="content"
-      intro="Four bodies of work. Two of them — a live-system migration and the EverLoop platform — carry most of what I do. Each page says what I decided and why, which matters more than the feature list, and anything still in progress says so."
+      intro="Five bodies of work. Two of them — a live-system migration and the EverLoop platform — carry most of what I do. Each page says what I decided and why, which matters more than the feature list, and anything still in progress says so."
     >
       <div className="grid gap-6 sm:grid-cols-2">
         {featured.map((entry) => (

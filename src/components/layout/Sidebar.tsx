@@ -250,7 +250,7 @@ export function RailHeading({ children }: { children: React.ReactNode }) {
  * Two sizes (SIDEBAR_REFINEMENT §Global Navigation Styling, §Sidebar Density).
  *
  *   roomy    44px tall, 16px left padding, 6px radius, 18px text. Global
- *            navigation and the four case studies.
+ *            navigation and the numbered case studies.
  *   compact  the in-page table of contents, and the global navigation once a
  *            case study is open — the refinement asks for local navigation to
  *            take priority there, and for the rail not to need scrolling.

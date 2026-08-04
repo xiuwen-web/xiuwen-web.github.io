@@ -119,12 +119,19 @@ export const workEntries: WorkEntry[] = [
     title: 'Other Work',
     description:
       'A personal assistant I built and then cut a feature from. Everything that belongs under neither CAdmin, EverLoop nor the ERP.',
+    /*
+     * Cropped to the row band rather than letterboxed. The source is a square
+     * illustration, and contained in a 3.8:1 plate it rendered 112px wide — a
+     * thumbnail, with its wordmark and its subject both too small to read. The
+     * asset is cut to 3.79:1 against a 3.78:1 plate, so object-cover crops
+     * essentially nothing and the face fills the band at full height.
+     */
     visual: {
-      src: '/images/nova-slack.webp',
-      alt: 'The Nova PA app profile in Slack, showing its icon and About tab.',
-      caption: 'Nova, installed in the team workspace.',
-      width: 1350,
-      height: 525,
+      src: '/images/nova-pa.webp',
+      alt: 'Nova PA: a friendly robot mascot wearing headphones, framed by mail, calendar and checklist icons.',
+      caption: 'Nova.',
+      width: 640,
+      height: 169,
     },
     featured: false,
   },
