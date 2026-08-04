@@ -20,7 +20,7 @@ import {
   traceSubject,
   traceTitle,
 } from '@/content/process';
-import { journey, skillGroups } from '@/content/skills';
+import { journey, journeySubtitle, skillGroups } from '@/content/skills';
 import { appLinks, snapshot } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
@@ -472,40 +472,55 @@ function Skills() {
  * Folded as well as moved (brief §2). The route into this work is a fair
  * question and the timeline answers it, but it is the third paragraph of
  * About told again as dates — the reader who wants it will open it.
+ *
+ * Two groups, each with its own connector run. The break between them is the
+ * point: full-time operations started in July 2020, the technology work in
+ * 2024, and a single unbroken line invites a reader to collapse the two.
  */
 function Journey() {
   return (
-    <Disclosure
-      className="mt-8"
-      summary="How I got here"
-      hint="Centre operations to product delivery, 2024 to now."
-    >
-      <ol id="journey" className="relative scroll-mt-24 space-y-7 pl-6">
-        <span
-          aria-hidden="true"
-          className="absolute top-2 bottom-2 left-[3px] w-px"
-          style={{ background: 'var(--rule)' }}
-        />
-        {journey.map((entry) => (
-          <li key={`${entry.year}-${entry.body.slice(0, 20)}`} className="relative">
-            <span
-              aria-hidden="true"
-              className="absolute top-[0.5rem] -left-6 h-[7px] w-[7px] rounded-full"
-              style={{
-                background: entry.milestone ? 'var(--accent)' : 'var(--bg)',
-                border: `1.5px solid ${entry.milestone ? 'var(--accent)' : 'var(--rule)'}`,
-              }}
-            />
-            <span
-              className="font-mono text-[length:var(--text-label)] tabular-nums"
-              style={{ color: 'var(--text-muted)' }}
+    <Disclosure className="mt-8" summary="How I got here" hint={journeySubtitle}>
+      <div id="journey" className="scroll-mt-24 space-y-9">
+        {journey.map((phase) => (
+          <section key={phase.label}>
+            <h4
+              className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+              style={{ color: 'var(--accent-ink)' }}
             >
-              {entry.year}
-            </span>
-            <p className={`mt-1 ${entry.milestone ? 'font-medium' : ''}`}>{entry.body}</p>
-          </li>
+              {phase.label}
+            </h4>
+
+            <ol className="relative mt-4 space-y-7 pl-6">
+              <span
+                aria-hidden="true"
+                className="absolute top-2 bottom-2 left-[3px] w-px"
+                style={{ background: 'var(--rule)' }}
+              />
+              {phase.entries.map((entry) => (
+                <li key={`${entry.year}-${entry.body.slice(0, 20)}`} className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-[0.5rem] -left-6 h-[7px] w-[7px] rounded-full"
+                    style={{
+                      background: entry.milestone ? 'var(--accent)' : 'var(--bg)',
+                      border: `1.5px solid ${entry.milestone ? 'var(--accent)' : 'var(--rule)'}`,
+                    }}
+                  />
+                  <span
+                    className="font-mono text-[length:var(--text-label)] tabular-nums"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {entry.year}
+                  </span>
+                  <p className={`mt-1 text-pretty ${entry.milestone ? 'font-medium' : ''}`}>
+                    {entry.body}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </section>
         ))}
-      </ol>
+      </div>
     </Disclosure>
   );
 }

@@ -361,8 +361,23 @@ export interface SkillGroup {
 export interface JourneyEntry {
   year: string;
   body: string;
-  /** Marks the launch milestone. */
+  /** A turning point — a career one or a launch. Filled marker, heavier text. */
   milestone?: boolean;
+}
+
+/**
+ * The timeline is grouped rather than continuous.
+ *
+ * The origin story (PORTFOLIO_CAREER_ORIGIN_STORY.md) has one accuracy
+ * requirement that wording alone keeps losing: full-time operations began in
+ * July 2020, and the technology work came four years later. Two labelled
+ * groups with a break between them make that structural — a reader skimming
+ * dates cannot merge the two into "joined and started building software".
+ */
+export interface JourneyPhase {
+  /** Short. It sits above the group as a mono label, not as a heading. */
+  label: string;
+  entries: JourneyEntry[];
 }
 
 export interface Profile {
