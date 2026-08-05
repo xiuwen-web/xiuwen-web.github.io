@@ -153,6 +153,12 @@ export const principles: Principle[] = [
 export const socialLinks: { label: string; href: string }[] = [
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/chng-x-090171205/',
+    /*
+     * Custom URL set by Xiu Wen on 2026-08-05, replacing the auto-generated
+     * /in/chng-x-090171205. LinkedIn does not redirect the old slug — it
+     * releases it — so anything still printing the old one is a dead link.
+     * The résumé PDF is the outstanding case.
+     */
+    href: 'https://www.linkedin.com/in/chng-xiu-wen/',
   },
 ];

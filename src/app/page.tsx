@@ -681,7 +681,10 @@ function Contact() {
               className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
               style={{ color: 'var(--accent-ink)' }}
             >
-              linkedin.com/in/chng-x-090171205
+              {/* Derived, not typed. This was a hardcoded string and went stale
+                  the moment the custom URL changed on 2026-08-05 — the label
+                  still advertised a slug LinkedIn had already released. */}
+              {linkedin.href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
             </a>
           </ContactRow>
         )}
