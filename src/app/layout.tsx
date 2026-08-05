@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { IBM_Plex_Mono, Inter, Sora } from 'next/font/google';
 import './globals.css';
 import { profile, socialLinks } from '@/content/profile';
+import { SITE_URL } from '@/content/site';
 
 // Self-hosted and subset by next/font — no CDN request, no layout shift.
 const inter = Inter({ variable: '--font-inter', subsets: ['latin'], display: 'swap' });
@@ -28,8 +29,9 @@ const plexMono = IBM_Plex_Mono({
  * Every canonical, Open Graph and JSON-LD URL on the site is built from this.
  * It pointed at wen-portfolio.vercel.app until 2026-08-04 — which is not this
  * site and never was, so every canonical tag was naming a stranger's page.
+ * It moved to content/site.ts on 2026-08-05 when robots.txt and the sitemap
+ * needed the same value.
  */
-const SITE_URL = 'https://xiuwen-web.github.io';
 /*
  * Title and description carry the search-result positioning, so they name the
  * role a recruiter searches for rather than the internal job title. Both are

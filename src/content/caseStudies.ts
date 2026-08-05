@@ -229,12 +229,20 @@ export const caseStudies: CaseStudy[] = [
      * with features under phase 4 still in progress — so the figure is 4 and
      * the qualifier says which of them are live.
      *
-     * The document's fourth line, "No planned operational shutdown", is not
-     * here. "No acceptable downtime" is recorded as a constraint on the
-     * project, which is not the same as a measured claim that none occurred,
-     * and the site does not state outcomes it cannot evidence (F26).
+     * The zero was held back until 2026-08-05, when Xiu Wen confirmed that no
+     * centre ever stopped working during the migration, and gave the mechanism:
+     * roughly two weeks with both systems running before switching to V2. Until
+     * then the site only had "No acceptable downtime" as a constraint — a rule
+     * going in, not a measured result — and an outcome the record could not
+     * evidence does not get stated (F26).
+     *
+     * It leads the row because it is the hardest of the five to achieve and the
+     * one a reader is actually asking about. Five items in a four-column grid
+     * leave one on the second row, so the order decides which fact dangles:
+     * "modules scoped" last, deliberately, rather than this one.
      */
     outcomeFacts: [
+      { figure: "0", label: "downtime", qualifier: "two weeks running both systems, then the switch" },
       { figure: "20", label: "centres migrated", qualifier: "every outlet now runs V2" },
       { figure: "4", label: "rollout phases", qualifier: "three live, phase four in progress" },
       { figure: "1", label: "pilot outlet", qualifier: "HR and payroll, before any expansion" },
