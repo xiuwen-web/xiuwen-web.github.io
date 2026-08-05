@@ -162,23 +162,40 @@ export const journey: JourneyPhase[] = [
         year: '2024–25',
         body: 'Sprint delivery across the learning platform: quizzes, rewards, communications, public access.',
       },
+      /*
+       * Months added 2026-08-05, on four entries and no others. Each is
+       * evidenced: the launch date recorded twice in ecosystem.ts, the testing
+       * month and the QA month already stated in these bodies, and the store
+       * release dates in snapshot.ts. The earlier entries keep bare years
+       * because no month is on record for them, and a timeline that guesses at
+       * precision is worse than one that varies in it.
+       *
+       * Where the month moved up into the label it comes out of the body, so
+       * the same fact is not stated twice on one line.
+       */
       {
-        year: '2025',
-        body: 'EverLoop goes live, 11 March. Three web developers and me.',
+        year: 'March 2025',
+        body: 'EverLoop goes live. Three web developers and me.',
         milestone: true,
       },
       {
-        year: '2025',
-        body: 'CAdmin V2 phased migration begins — testing in May, first launch in August.',
+        year: 'May 2025',
+        body: 'CAdmin V2 phased migration begins. First launch in August.',
       },
       {
-        year: '2025',
-        body: 'Two apps listed on the App Store, December.',
+        /*
+         * Was "Two apps listed on the App Store, December", which was wrong
+         * twice: only the iOS listing is on the App Store — the other is
+         * Google Play — and it is one product on two stores rather than two
+         * products. snapshot.ts has both dates, 13 and 10 December 2025.
+         */
+        year: 'December 2025',
+        body: 'The student app goes live on both stores, iOS and Android.',
         milestone: true,
       },
       {
-        year: '2026',
-        body: 'A QA joins in February, the first on either system. Current scope — five product surfaces, three developers, release acceptance.',
+        year: 'February 2026',
+        body: 'The first QA on either system joins. Current scope — five product surfaces, three developers, release acceptance.',
       },
     ],
   },
