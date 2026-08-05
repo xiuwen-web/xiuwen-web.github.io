@@ -34,11 +34,15 @@ const plexMono = IBM_Plex_Mono({
  */
 /*
  * Title and description carry the search-result positioning, so they name the
- * role a recruiter searches for rather than the internal job title. Both are
- * within the lengths Google renders — roughly 60 and 160 characters — so
- * neither gets truncated mid-phrase.
+ * role a recruiter searches for rather than the internal job title.
+ *
+ * The full name went in on 2026-08-05. It costs five characters against the
+ * ~60 Google renders, so "and Business Systems" now falls past the fold in a
+ * search result — worth it, because a recruiter handed "Chng Xiu Wen" and
+ * told to look her up previously had no way to arrive here at all. A title
+ * that ranks for the wrong name is worse than one that truncates.
  */
-const TITLE = `${profile.name} — Project Manager, Product Operations and Business Systems`;
+const TITLE = `${profile.fullName} — Project Manager, Product Operations and Business Systems`;
 
 const DESCRIPTION =
   'Project manager bridging frontline operations and software delivery across internal platforms, mobile apps and multi-site workflows.';
@@ -396,7 +400,12 @@ const RAIL_SCRIPT = `
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: profile.name,
+  name: profile.fullName,
+  /* Both forms, so a search for either resolves to the same person. This is
+     the field that connects the site to the LinkedIn profile in sameAs. */
+  alternateName: profile.name,
+  familyName: 'Chng',
+  givenName: 'Xiu Wen',
   /* Matches the <title>. Two different job titles in the same document is the
      kind of thing a structured-data check flags and a reader notices. */
   jobTitle: 'Project Manager, Product Operations and Business Systems',

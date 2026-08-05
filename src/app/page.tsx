@@ -81,8 +81,14 @@ function Hero() {
         <div className="mb-8 flex items-center gap-4 sm:gap-5">
           <Portrait />
           <div className="min-w-0">
+            {/* The full name, here and nowhere else on screen. This is the
+                introduction — the one moment a reader is working out who they
+                are looking at, and the only place on the page they can match
+                what they see against the résumé and the LinkedIn profile. The
+                rail and the footer keep the short form; repeating a full name
+                in the chrome makes it letterhead. */}
             <p className="font-display text-[1.0625rem] leading-tight font-semibold sm:text-[1.25rem]">
-              {profile.name}
+              {profile.fullName}
             </p>
             <p
               className="mt-1 text-[length:var(--text-small)] leading-snug"

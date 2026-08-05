@@ -7,6 +7,21 @@ import type { Principle, Profile } from '@/types/content';
  */
 export const profile: Profile = {
   name: 'Xiu Wen',
+  /*
+   * Added 2026-08-05. Until then the surname appeared nowhere on the site —
+   * only inside the email address and the LinkedIn slug — so a recruiter given
+   * "Chng Xiu Wen" could not search their way here, and a reader who arrived
+   * could not match the page against the résumé or the LinkedIn profile.
+   *
+   * Spelling taken from the résumé PDF, which prints CHNG XIU WEN. Singapore
+   * convention, surname first.
+   *
+   * `name` stays the short form. It is the display identity in the rail and the
+   * footer, where a full name would read as a letterhead rather than a person.
+   * The full form is used where identity has to be unambiguous: the page title,
+   * the structured data, and the introduction beside the portrait.
+   */
+  fullName: 'Chng Xiu Wen',
   role: 'Operations & Product Delivery',
   employer: 'AGrader Learning Centre',
   location: 'Singapore',

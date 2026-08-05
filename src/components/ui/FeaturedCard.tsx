@@ -24,7 +24,12 @@ export function FeaturedCard({
       {entry.visual ? (
         <Image
           src={entry.visual.src}
-          alt=""
+          /* Was hardcoded alt="" until 2026-08-05, which quietly discarded the
+             description written for every entry in navigation.ts. The images
+             are not decorative — the CAdmin sign-in screen and the App Store
+             listing are evidence, and a screen reader was getting five blank
+             frames where a sighted reader gets proof. */
+          alt={entry.visual.alt}
           width={entry.visual.width}
           height={entry.visual.height}
           className={`h-44 w-full border-b sm:h-52 ${
@@ -113,7 +118,8 @@ export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | 
       {entry.visual ? (
         <Image
           src={entry.visual.src}
-          alt=""
+          /* As in FeaturedCard above — the written alt was being thrown away. */
+          alt={entry.visual.alt}
           width={entry.visual.width}
           height={entry.visual.height}
           className={`h-28 w-full border-b ${

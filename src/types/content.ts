@@ -414,7 +414,11 @@ export interface JourneyPhase {
 }
 
 export interface Profile {
+  /** Short display form — rail, footer, anywhere the name is chrome. */
   name: string;
+  /** Full legal form, as printed on the résumé. Used where identity has to be
+      searchable and verifiable: page title, structured data, the hero. */
+  fullName: string;
   role: string;
   employer: string;
   location: string;
