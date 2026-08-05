@@ -101,8 +101,15 @@ export const journeySubtitle =
  * five-year commitment on one line of a chronology and lose the only thing
  * about it a hiring manager cares about — that it ran through all of it.
  */
+/*
+ * "2021 to 2026" until 2026-08-05, which disagreed with the LinkedIn profile's
+ * January 2021 – December 2025. Both were describing something true: the
+ * programme finished in December 2025 and the degree was conferred in 2026.
+ * Picking either one on its own leaves a date a reader can check and find
+ * wrong, so it now says both.
+ */
 export const journeyAlongside =
-  'Throughout — a Master of Applied Research in Social Sciences, 2021 to 2026, taken alongside the day job. The thesis was a mixed-methods study of career aspirations among young workers.';
+  'Throughout — a Master of Applied Research in Social Sciences, 2021 to 2025, conferred in 2026, taken alongside the day job. The thesis was a mixed-methods study of career aspirations among young workers.';
 
 /**
  * Closes the timeline. Deliberately the only reflective line in it — the

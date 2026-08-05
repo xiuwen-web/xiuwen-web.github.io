@@ -120,6 +120,25 @@ function Hero() {
           {profile.heroSupport}
         </p>
 
+        {/*
+          The employment fact, directly under the claim it belongs to. It sits
+          here rather than in the masthead because the masthead is an
+          introduction and this is a record — and because a third line up there
+          pushed the block past the height at which it stops reading as a
+          masthead and starts competing with the headline.
+
+          Mono and small, like the other factual runs on this page. It is meant
+          to be scanned and verified, not read.
+        */}
+        <p
+          className="mt-4 font-mono text-[length:var(--text-label)] tracking-tight"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {profile.currentRole.title}, {profile.currentRole.employer}
+          <span aria-hidden="true"> · </span>
+          {profile.currentRole.since} – present
+        </p>
+
         <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <Button href="#work" variant="primary">
             View selected work

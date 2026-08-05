@@ -419,7 +419,10 @@ export interface Profile {
   /** Full legal form, as printed on the résumé. Used where identity has to be
       searchable and verifiable: page title, structured data, the hero. */
   fullName: string;
+  /** Positioning — what the work is. */
   role: string;
+  /** The employment record — what the job is called, and since when. */
+  currentRole: { title: string; employer: string; since: string };
   employer: string;
   location: string;
   tagline: string;

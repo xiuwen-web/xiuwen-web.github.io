@@ -23,6 +23,25 @@ export const profile: Profile = {
    */
   fullName: 'Chng Xiu Wen',
   role: 'Operations & Product Delivery',
+
+  /*
+   * The employment fact, stated plainly — added 2026-08-05.
+   *
+   * The site described capability everywhere and never once said what the job
+   * is called or how long it has been held, which made "what is your actual
+   * title?" the first question on any screening call. `role` above is
+   * positioning; this is the record. Both are true and they are not the same
+   * kind of statement, so they are kept apart rather than merged into one
+   * hyphenated line that is neither.
+   *
+   * Modest title, substantial work: the case studies are right there to argue
+   * the level. Hiding it would only move the conversation, not win it.
+   */
+  currentRole: {
+    title: 'Tuition Centre Manager',
+    employer: 'AGrader Learning Centre',
+    since: 'July 2020',
+  },
   employer: 'AGrader Learning Centre',
   location: 'Singapore',
 
@@ -112,7 +131,13 @@ export const profile: Profile = {
     'I am interested in roles where operations, product delivery and technology meet.',
 
   // F37 — personal address. The work address never appears on this site.
-  email: 'xwchng@yahoo.com',
+  /*
+   * Switched from a Yahoo address on 2026-08-05. Nothing was wrong with it
+   * mechanically — but on a page whose whole argument is that she keeps
+   * systems current, a Yahoo address is the one detail that quietly says
+   * otherwise, and this one was already on her LinkedIn anyway.
+   */
+  email: 'chng.xiuwen01@gmail.com',
   /*
    * Nothing is served from here yet — see content/resume.ts. The path is the
    * published name rather than whatever the source file happened to be called,
