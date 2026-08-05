@@ -260,14 +260,32 @@ export const caseStudies: CaseStudy[] = [
     slug: "writewise",
     navLabel: "WriteWise",
     title: "WriteWise — designing an AI marking product that knows its limits",
+    /*
+     * "Built it with Claude" added 2026-08-05 at Xiu Wen's instruction.
+     *
+     * It makes the claim stronger rather than weaker. "I wrote the product
+     * definition and built it — application, database, tests, deployment"
+     * from someone whose job title is Tuition Centre Manager invites a quiet
+     * "did she though?", and an unanswered doubt costs more than the
+     * disclosure does. Naming the tool answers it in three words, and being
+     * able to reach a deployed, testable prototype without waiting on a
+     * developer is the capability, not a caveat to it.
+     */
     summary:
-      "A composition marking and feedback platform for teachers and students. I wrote the product definition and built it. Working and deployed; not yet live to students.",
+      "A composition marking and feedback platform for teachers and students. I wrote the product definition and built it with Claude. Working and deployed; not yet live to students.",
     status: "prototype",
     chips: [
       "product definition",
       "AI product design",
       "OCR",
-      "built it myself",
+      /*
+       * Was "built it myself". Still true — no developer was hired for it —
+       * but sitting a few lines above "Claude wrote the code" it reads as a
+       * claim the page then walks back. "built and deployed" says the part
+       * that is not in dispute and leaves the division of labour to the
+       * sentence written to explain it.
+       */
+      "built and deployed",
     ],
     context: [
       "Marking compositions is slow, and the useful part is not the score. It is the specific feedback on this child’s piece of writing — which is exactly the part that gets thinnest when a teacher has a stack of thirty to get through.",
@@ -280,11 +298,17 @@ export const caseStudies: CaseStudy[] = [
     role: [
       "Wrote the product definition, workflows and rubric structure",
       "Designed the role model — admin authors, teacher marks, student receives",
-      "Built it: application, database, tests, deployment",
+      "Built it with Claude: application, database, tests, deployment",
       "Wrote the end-to-end test suite covering each workflow",
     ],
+    /*
+     * The division of labour, stated rather than left to be inferred. A reader
+     * who has to guess how much of this was hers will guess low; a reader told
+     * exactly where the line falls can judge the part that matters, which is
+     * the product thinking the rest of this page is made of.
+     */
     involved:
-      "Me, working from the marking rubrics our teachers already use. Built alongside the day job.",
+      "Me, working from the marking rubrics our teachers already use. Claude wrote the code; the product definition, the workflows, the role model and the data decisions are mine. Built alongside the day job.",
     constraints: [
       "Children’s written work, so nothing can be released to a student without a teacher approving it",
       "Handwriting transcription is never perfectly accurate",
@@ -327,7 +351,14 @@ export const caseStudies: CaseStudy[] = [
       "A product requirements document, workflow specifications, a composition bank architecture, the marking rubric structure, a design system, an end-to-end test suite covering every workflow, and the deployed application itself.",
     outcome: [
       "Working and deployed, with teacher, student and admin roles, the full two-draft marking cycle, and reports that show parents the reasoning behind each band rather than only the score.",
-      "It is not yet live to students. I built and hosted the prototype myself — Railway for the deployment, GitHub for the code — and our web developer is now taking it from that repository and integrating it into EverLoop.",
+      /*
+       * The handoff mechanism, named. "A developer is taking it forward" is
+       * the kind of sentence anyone can write; a repository the developer has
+       * push access to is a thing that either exists or does not. It is also
+       * the part that makes this a prototype rather than a side project —
+       * it was built to be given away.
+       */
+      "It is not yet live to students. I built and hosted the prototype myself — Railway for the deployment, GitHub for the code — and tested it through as a prototype so it could be handed over whole. Our web developer is a collaborator on that repository and is integrating it into EverLoop.",
     ],
     visual: {
       src: "/images/writewise-engine-preview.webp",

@@ -48,29 +48,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
   const study = getCaseStudy(slug);
   if (!study) notFound();
 
-  // WriteWise is reached through the ecosystem, so its way back is the
-  // ecosystem rather than the work index — otherwise the rail gives no hint
-  // that it sits inside EverLoop at all.
-  const nested = study.slug === 'writewise';
-
+  /*
+   * WriteWise used to send readers back to the ecosystem rather than the work
+   * index, because the ecosystem page was the only way in and the rail would
+   * otherwise have given no hint that it sits inside EverLoop.
+   *
+   * It has its own homepage card and rail entry as of 2026-08-05, so most
+   * arrivals now come from the index and a back link to a different case study
+   * is disorienting rather than orienting. The EverLoop relationship is stated
+   * in the case study text, which is where it belongs.
+   *
+   * The same change makes workNumber return 04 instead of null, so the eyebrow
+   * now carries an index like every other case study.
+   */
   return (
-    <Shell
-      active={study.slug}
-      toc={caseStudyToc(study)}
-      tocTitle={study.navLabel}
-      backHref={nested ? '/work/everloop/#writewise' : '/#work'}
-      backLabel={nested ? 'EverLoop Ecosystem' : 'All work'}
-    >
-      <CaseStudyDetail
-        study={study}
-        // WriteWise is reached through the ecosystem, so it is not one of the
-        // four numbered entries. Its own href is not in the IA array, which is
-        // exactly why workNumber returns null and the eyebrow drops the index
-        // rather than inventing one.
-        index={workNumber(`/work/${study.slug}/`)}
-        backHref={nested ? '/work/everloop/#writewise' : '/#work'}
-        backLabel={nested ? 'EverLoop Ecosystem' : 'All work'}
-      />
+    <Shell active={study.slug} toc={caseStudyToc(study)} tocTitle={study.navLabel}>
+      <CaseStudyDetail study={study} index={workNumber(`/work/${study.slug}/`)} />
     </Shell>
   );
 }
