@@ -251,7 +251,7 @@ function Work() {
       eyebrow="Work"
       title="Selected Work"
       width="content"
-      intro="Five bodies of work. CAdmin Migration and the EverLoop Ecosystem carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
+      intro="Six bodies of work. CAdmin Migration and the EverLoop Ecosystem carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
     >
       <div className="grid gap-6 sm:grid-cols-2">
         {featured.map((entry) => (

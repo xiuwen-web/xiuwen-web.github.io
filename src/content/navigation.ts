@@ -20,8 +20,9 @@ export const PRIMARY_NAV = [
 const cadmin = getCaseStudy('cadmin-migration');
 const mobile = getCaseStudy('mobile-launch');
 const erp = getCaseStudy('erp');
+const writewise = getCaseStudy('writewise');
 
-if (!cadmin || !mobile || !erp) {
+if (!cadmin || !mobile || !erp || !writewise) {
   throw new Error('navigation.ts: a case study named in the IA is missing');
 }
 
@@ -86,6 +87,49 @@ export const workEntries: WorkEntry[] = [
       caption: 'The student app on the App Store.',
       width: 1108,
       height: 549,
+    },
+    featured: false,
+  },
+  /*
+   * Promoted to the homepage 2026-08-05. It had lived only inside the EverLoop
+   * page, reachable by opening one case study and finding a link within it —
+   * so the one project Xiu Wen specified, built, deployed and handed over was
+   * the one nothing on the homepage pointed at.
+   *
+   * It sits fourth because the first four are all AGrader systems and the ERP
+   * is external work. The numbering is positional, so ERP and Product
+   * Experiments shift down on their own; neither URL changes.
+   */
+  {
+    href: '/work/writewise/',
+    navLabel: writewise.navLabel,
+    title: writewise.title,
+    /*
+     * The arc, not the subject. Every other card can say what the system does;
+     * this one has to say what she did to it, because "specified it, built it,
+     * deployed it, handed it to a developer" is the whole reason it earns a
+     * place next to work that shipped to twenty centres.
+     */
+    description:
+      'An AI marking prototype I specified, built and deployed myself — now being taken into EverLoop by one of our developers.',
+    status: writewise.status,
+    chips: writewise.chips,
+    /*
+     * Not the case study's visual. That is the full admin screen at 1280x900,
+     * and cropped to a 112px band it lands on the empty textarea at the top —
+     * the card rendered as a blank rectangle beside three with real artwork.
+     *
+     * This is the same screenshot cut to the panel the caption is about, at an
+     * aspect that matches the band so object-cover crops nothing. Text in a
+     * card image is a compromise, but an unreadable blank is worse, and this
+     * one at least shows the thing the case study argues about.
+     */
+    visual: {
+      src: '/images/writewise-card.webp',
+      alt: 'The WriteWise composition editor, showing a panel headed “Preview: what the engine receives” above the exact prompt text sent with a child’s writing.',
+      caption: 'WriteWise — what the engine is given, shown rather than assumed.',
+      width: 593,
+      height: 200,
     },
     featured: false,
   },
@@ -174,7 +218,12 @@ export function workNumber(href: string): string | null {
 export const ACTIVE_KEY_TO_HREF: Record<string, string> = {
   'cadmin-migration': '/work/cadmin-migration/',
   everloop: '/work/everloop/',
-  writewise: '/work/everloop/',
+  /*
+   * Was '/work/everloop/' — correct while WriteWise could only be reached from
+   * inside the ecosystem page. It has its own rail entry now, so the rail
+   * should highlight itself rather than its former parent.
+   */
+  writewise: '/work/writewise/',
   'mobile-launch': '/work/mobile-launch/',
   erp: '/work/erp/',
   other: '/work/other/',
