@@ -234,9 +234,26 @@ export const trace: TraceStep[] = [
  * defined measures are the evidence that this is a standard rather than an
  * excuse, and dropping them would leave only the admission.
  */
-export const measureHeading = 'What I’d measure';
+/*
+ * Renamed from "What I’d measure" on 2026-08-08
+ * (PORTFOLIO_ABOUT_PAGE_REVISION.md §7).
+ *
+ * The old heading framed the section as an absence, and the body followed it
+ * there — "it is a gap rather than a position" conceded the point before
+ * making it. The facts underneath were always the stronger version: she does
+ * not invent numbers for systems that were never instrumented, and she defines
+ * measures up front on everything new. That is a standard, not an apology.
+ */
+export const measureHeading = 'Measurement & product evidence';
 
 export const measureBody: string[] = [
-  'Some of the older systems were never instrumented, so I do not present reconstructed figures as fact. Where reliable metrics are not available I show the operational outcome, the delivery evidence, and what I would measure next.',
-  'It is a gap rather than a position. The last project brief I wrote defined eight measures, including how fast a webhook has to deliver, what share of parents open a report within 48 hours, and what percentage of teachers edit the AI draft before sending it — that last one being the honest proxy for whether they trust it. Closing the same gap on what already shipped is the first thing I would do.',
+  'Some legacy systems were never instrumented, so I do not reconstruct historical figures and present them as fact. Where reliable telemetry is unavailable, I show the operational outcome, the delivery evidence, and the metric I would instrument next.',
+  /*
+   * The same three measures the previous version named, from the same brief.
+   * The count is dropped: "eight measures" invited a reader to ask which
+   * eight, and the three that are named are the ones that show the range.
+   */
+  'On newer work I define success earlier — from webhook delivery latency and report acknowledgement rates to the percentage of teachers who edit an AI-generated draft before sending it. The goal is to connect delivery with evidence of whether the product is actually working.',
 ];
+
+

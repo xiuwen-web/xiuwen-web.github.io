@@ -27,6 +27,8 @@ import {
   journeyClosing,
   journeySubtitle,
   skillGroups,
+  technicalExposure,
+  toolGroups,
 } from '@/content/skills';
 import { appLinks, snapshot, snapshotClosing } from '@/content/snapshot';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
@@ -474,16 +476,39 @@ function Process() {
 function About() {
   return (
     <Section id="about" eyebrow="About" title="About">
-      <div className="space-y-4">
-        {profile.about.map((para) => (
-          <p key={para.slice(0, 40)}>{para}</p>
-        ))}
-      </div>
+      {/*
+        Restructured 2026-08-08 (PORTFOLIO_ABOUT_PAGE_REVISION.md).
 
-      {/* Time allocation — a factual quantity, not a self-rated skill bar */}
+        The order is the argument: what the job is, then what it actually
+        consists of, then how it came about, then why the operations half is
+        the differentiator rather than the part to look past. Six paragraphs
+        used to stand between the reader and the 40/40/20 bar, which is the one
+        element that answers "what do you do" without being read.
+
+        Everything here was already on the page. Nothing outside About moved.
+      */}
+      <p className="font-display text-[1.375rem] leading-snug font-semibold text-balance sm:text-[1.5rem]">
+        {profile.aboutLede}
+      </p>
+
+      <p className="mt-5 text-pretty" style={{ color: 'var(--text-muted)' }}>
+        {profile.aboutSupport}
+      </p>
+
+      {/*
+        Time allocation — a factual quantity, not a self-rated skill bar.
+        Lifted from below the narrative to directly under the opening, because
+        it is the fastest answer on the page to what the role is.
+      */}
       <div className="mt-10">
+        <h3
+          className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          What my role actually looks like
+        </h3>
         <div
-          className="flex h-2 w-full overflow-hidden rounded-full"
+          className="mt-4 flex h-2 w-full overflow-hidden rounded-full"
           style={{ background: 'var(--surface)' }}
           aria-hidden="true"
         >
@@ -498,10 +523,19 @@ function About() {
             />
           ))}
         </div>
-        <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
+        {/*
+          Stacks on a phone rather than wrapping mid-item. Three labels on one
+          flex-wrap row broke as "40% Project &" / "product delivery", which
+          reads as four entries rather than three.
+        */}
+        <ul className="mt-3 flex flex-col gap-y-1 sm:flex-row sm:flex-wrap sm:gap-x-6">
           {profile.timeSplit.map((part) => (
-            <li key={part.label} className="text-[length:var(--text-label)]" style={{ color: 'var(--text-muted)' }}>
-              <span className="font-medium" style={{ color: 'var(--text)' }}>
+            <li
+              key={part.label}
+              className="text-[length:var(--text-label)]"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <span className="font-medium tabular-nums" style={{ color: 'var(--text)' }}>
                 {part.value}%
               </span>{' '}
               {part.label}
@@ -511,11 +545,35 @@ function About() {
       </div>
 
       {/*
-        "What I'd measure" stopped being its own homepage section (directive 2).
-        The project-specific half now lives inside the two case studies where a
-        figure is actually missing; this is the general admission, which had
-        nowhere else to go. It belongs in About because it is a statement about
-        how I work rather than about any one project.
+        The narrative, as named sections rather than as an unbroken run of
+        paragraphs. A reader who wants only the differentiator can find it by
+        its heading instead of reading to the fourth paragraph to discover it.
+
+        The timeline follows the section it belongs to rather than sitting at
+        the bottom of About: "How I got here" states the arc in three sentences
+        and the disclosure has the dates for anyone who wants them.
+      */}
+      {profile.aboutSections.map((section) => (
+        <div key={section.id} className="mt-12">
+          <h3 className="font-display text-[length:var(--text-h3)] font-semibold">
+            {section.heading}
+          </h3>
+          <div className="mt-3 space-y-4">
+            {section.body.map((para) => (
+              <p key={para.slice(0, 40)} className="text-pretty">
+                {para}
+              </p>
+            ))}
+          </div>
+          {section.id === 'how-i-got-here' && <Journey />}
+        </div>
+      ))}
+
+      {/*
+        Measurement. Kept in the sunk callout it already had — the brief asks
+        for it to stay inside the existing treatment and not to outweigh the
+        narrative — and placed after the narrative rather than inside it,
+        because it is a standard rather than a story.
       */}
       <div
         className="mt-12 rounded-[var(--radius)] p-5 sm:p-6"
@@ -536,8 +594,25 @@ function About() {
         </div>
       </div>
 
+      {/*
+        The close of the narrative. Given room and size rather than a box, a
+        rule or a quotation mark — the same treatment the Principles section
+        uses for its closing line, so the two read as the same kind of
+        statement in the same voice.
+      */}
+      <div className="mt-14 border-t pt-8" style={{ borderColor: 'var(--rule)' }}>
+        <p className="font-display text-[1.25rem] leading-snug text-balance sm:text-[1.375rem]">
+          {profile.closingPrinciple.line}
+        </p>
+        <p
+          className="mt-3 text-[length:var(--text-small)]"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {profile.closingPrinciple.support}
+        </p>
+      </div>
+
       <Skills />
-      <Journey />
     </Section>
   );
 }
@@ -547,7 +622,18 @@ function About() {
 function Skills() {
   return (
     <div id="skills" className="mt-14 scroll-mt-24">
-      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">Skills and tools</h3>
+      {/*
+        "Capabilities", not "Skills and tools". The tools moved out into their
+        own block below: a list that ran Monday.com beside TypeScript beside
+        Google Workspace asked the reader to guess how deep each one went, and
+        on this page that guess should never be necessary.
+
+        Two columns from `sm`, one below it. The section is at prose width, so
+        each column is roughly 280px and the dot-joined runs wrap two or three
+        times — short enough to scan, and the same treatment the groups
+        already had.
+      */}
+      <h3 className="font-display text-[length:var(--text-h3)] font-semibold">Capabilities</h3>
       <div className="mt-6 grid gap-8 sm:grid-cols-2">
         {skillGroups.map((group) => (
           <div key={group.heading}>
@@ -557,10 +643,48 @@ function Skills() {
             >
               {group.heading}
             </h4>
-            <p className="mt-3 text-[length:var(--text-small)] leading-relaxed">{group.items.join(' · ')}</p>
+            <p className="mt-3 text-[length:var(--text-small)] leading-relaxed">
+              {group.items.join(' · ')}
+            </p>
           </div>
         ))}
       </div>
+
+      {/* Tools, grouped by purpose and set quieter than the capabilities
+          above — what someone can do matters more than what they have had
+          an account for. */}
+      <h3 className="mt-12 font-display text-[length:var(--text-h3)] font-semibold">Tools</h3>
+      <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        {toolGroups.map((group) => (
+          <div key={group.heading}>
+            <h4
+              className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {group.heading}
+            </h4>
+            <p className="mt-2 text-[length:var(--text-small)] leading-relaxed">
+              {group.items.join(' · ')}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Stated apart from the tools, and qualified. See skills.ts for why. */}
+      <p
+        className="mt-8 border-t pt-5 text-[length:var(--text-small)]"
+        style={{ borderColor: 'var(--rule)', color: 'var(--text-muted)' }}
+      >
+        <span
+          className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {technicalExposure.label}
+        </span>
+        <span aria-hidden="true"> · </span>
+        {technicalExposure.items.join(' · ')}
+        <span className="mt-1 block">{technicalExposure.note}</span>
+      </p>
     </div>
   );
 }
@@ -577,8 +701,10 @@ function Skills() {
  * 2024, and a single unbroken line invites a reader to collapse the two.
  */
 function Journey() {
+  // Sits under the "How I got here" heading now, so it is labelled for what is
+  // inside it rather than repeating the heading directly above it.
   return (
-    <Disclosure className="mt-8" summary="See how I got here" hint={journeySubtitle}>
+    <Disclosure className="mt-6" summary="See the timeline" hint={journeySubtitle}>
       <div id="journey" className="scroll-mt-24 space-y-9">
         {journey.map((phase) => (
           <section key={phase.label}>

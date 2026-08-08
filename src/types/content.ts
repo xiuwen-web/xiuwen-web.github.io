@@ -434,7 +434,13 @@ export interface Profile {
   tagline: string;
   heroHeadline: string[];
   heroSupport: string;
-  about: string[];
+  /** The single positioning line the whole About section argues for. */
+  aboutLede: string;
+  aboutSupport: string;
+  /** Named narrative sections, in reading order. */
+  aboutSections: { id: string; heading: string; body: string[] }[];
+  /** Closes the narrative before the capability lists. */
+  closingPrinciple: { line: string; support: string };
   timeSplit: { label: string; value: number }[];
   /** Opens the Contact section — a statement of direction, not a greeting. */
   contactLede: string;

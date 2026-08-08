@@ -106,35 +106,79 @@ export const profile: Profile = {
   heroSupport:
     'I define the requirements, coordinate the developers and QA, and validate the releases.',
 
-  // F5, F19, F20
-  about: [
-    'I manage operations at one of AGrader’s tuition centres, and I work on the systems the whole chain runs on. Those two halves are about even.',
-    'Roughly 40% of my time goes to centre operations — teachers, parents, and the things that go wrong on a Tuesday morning. Another 40% goes to project and product delivery: requirements, coordinating developers, testing, rollouts. The remaining 20% is technology coordination, testing and documentation. That balance shifts when a release is going out or something breaks.',
-    'I did not set out to do this. My director started assigning technology projects to me and arranged for me to learn from someone experienced in the area. I took it from there — requirements gathering, then developer coordination, then testing and delivery — until the role had become an operations and technology one.',
-    'The part I would not give up is the operations half. It is why the requirements I write tend to hold up: I am specifying systems for a job I do myself.',
-    /*
-     * The education paragraph, framed as method rather than as a credential.
-     * "Master of Applied Research in Social Sciences" listed under an Education
-     * heading invites a reader to ask what it has to do with software;
-     * described as interviews, coding and analysis it is plainly the same work
-     * as requirements gathering, which is the point.
-     *
-     * Careful with the tenses: the psychology degree finished in January 2020,
-     * before the full-time operations role. The Masters ran 2021 to 2026,
-     * alongside it — so neither is "before I did this professionally".
-     *
-     * No GPA. It is on the résumé for anyone who opens it; on a public page it
-     * reads as a student's CV rather than a practitioner's.
-     */
-    'The method has a background. I read psychology with business as an undergraduate, and took a Masters in applied research alongside the day job — mixed methods, interviews, thematic coding, statistical analysis. That is the same work as turning a vague complaint into something a developer can build from, and it is why my instinct with a recurring problem is to go looking for the pattern rather than fix the instance in front of me.',
-    /*
-     * The one reflective line in About, and the last thing in it. It replaced
-     * "the space between disorder and clarity", which said the same thing
-     * more abstractly — two reflective paragraphs in one section is the
-     * literary drift this page is meant to avoid.
-     */
-    'I believe recurring problems deserve more than temporary fixes. They deserve a system that makes the work clearer the next time around.',
+  /*
+   * The About narrative, restructured 2026-08-08 from a six-paragraph
+   * biography into a positioning page (PORTFOLIO_ABOUT_PAGE_REVISION.md).
+   *
+   * The old shape front-loaded prose: a reader met six paragraphs before
+   * reaching the one thing that actually explains the job, which is the
+   * 40/40/20 split. The lede and the split now come first and the narrative
+   * follows as named sections a reader can enter at any point.
+   *
+   * F5, F19, F20 still hold — every fact here was already on the page.
+   */
+
+  /** The whole position in one line. Everything under it is evidence for it. */
+  aboutLede: 'I operate the business and help build the systems behind it.',
+
+  /*
+   * "Those two halves are about even" is gone. It was doing the 40/40/20
+   * bar's job in words, and doing it less precisely — "even" reads as a
+   * 50/50 split, which is not what the bar shows.
+   */
+  aboutSupport:
+    'I manage operations at one of AGrader’s tuition centres while working on the systems used across the wider organisation. My role sits between frontline operations, product delivery and technology coordination — which means I often experience the problem first, define what needs to change, and help carry the solution through to release.',
+
+  aboutSections: [
+    {
+      id: 'how-i-got-here',
+      heading: 'How I got here',
+      body: [
+        'I did not originally set out to work in product or technology. My director began assigning technology projects to me and arranged for me to learn from someone experienced in the area. I started with requirements gathering, then moved into developer coordination, testing, rollout and delivery. Over time the role became a combination of operations and technology.',
+      ],
+    },
+    {
+      /*
+       * The differentiator, and the reason the page is ordered the way it is.
+       * It sits before the research section because the research explains the
+       * method and this explains why the method has anything to work with.
+       */
+      id: 'why-operations',
+      heading: 'Why operations still matters',
+      body: [
+        'The part I would not give up is operations. It is why the requirements I write tend to hold up: I am specifying systems for a job I do myself.',
+        'Working close to teachers, parents, administrators and daily centre workflows gives me direct exposure to the friction behind a feature request. I am not only documenting what someone asks for — I am trying to understand why the problem exists, and whether the proposed solution will actually work in practice.',
+      ],
+    },
+    {
+      /*
+       * Rewritten from the old education paragraph, which listed the degree,
+       * the methods and the thesis and read as a CV entry. The qualification
+       * itself is on the timeline and the résumé; what belongs here is what it
+       * changed about how she works.
+       */
+      id: 'research',
+      heading: 'How research shaped my approach',
+      body: [
+        'My background in psychology and applied research shaped how I approach product problems: observe behaviour, gather evidence, look for patterns, and separate symptoms from root causes. The same discipline applies when turning an operational complaint into something a developer can build from.',
+        'Research taught me to be careful with assumptions. Operations taught me that even a technically correct solution can fail if it does not fit how people actually work.',
+      ],
+    },
   ],
+
+  /*
+   * The closing of the About narrative, and the last thing before the
+   * capability lists. Replaces "I believe recurring problems deserve more than
+   * temporary fixes. They deserve a system that makes the work clearer the
+   * next time around." — same idea, half the words.
+   *
+   * Set larger with more space around it, not as a quotation. It is a working
+   * principle, not a motto.
+   */
+  closingPrinciple: {
+    line: 'Recurring problems deserve systems, not repeated fixes.',
+    support: 'That principle sits behind most of the work I choose to do.',
+  },
 
   timeSplit: [
     { label: 'Centre operations', value: 40 },

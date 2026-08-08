@@ -1,81 +1,102 @@
 import type { JourneyPhase, SkillGroup } from '@/types/content';
 
-/** No ratings, bars or percentages anywhere — PRD §23. */
+/**
+ * Capabilities. No ratings, bars or percentages anywhere — PRD §23.
+ *
+ * Cut from five groups of eight to eleven items down to four groups on
+ * 2026-08-08 (PORTFOLIO_ABOUT_PAGE_REVISION.md §9). The old list read as a
+ * keyword dump: "user personas", "stakeholder mapping" and "pilot management"
+ * are all real, all evidenced in the case studies, and all indistinguishable
+ * from every other list of the same words. What is left is the shape of the
+ * job — define it, analyse it, ship it, and the research method underneath.
+ *
+ * The research group keeps SPSS and MAXQDA because a named instrument is what
+ * makes "statistical analysis" checkable rather than aspirational.
+ */
 export const skillGroups: SkillGroup[] = [
   {
     heading: 'Product & delivery',
     items: [
-      'Requirements gathering',
+      'Requirements',
       'User stories',
       'Acceptance criteria',
       'Scope definition',
-      'Sprint planning',
-      'Release coordination',
-      'Phased rollouts',
-      'Pilot management',
-      'Stakeholder communication',
+      'Release planning',
+      'Phased rollout',
       'Developer coordination',
+      'Stakeholder communication',
     ],
   },
   {
     heading: 'Business analysis',
     items: [
-      'Problem definition',
-      'Root cause analysis',
+      'Problem framing',
+      'Root-cause analysis',
       'Workflow mapping',
       'Process improvement',
-      'User personas',
-      'Stakeholder mapping',
-      'Data integrity analysis',
+      'Data integrity',
       'Cross-system integration',
-    ],
-  },
-  /*
-   * Added 2026-08-04. These are the techniques behind the Masters in applied
-   * research, listed as capability rather than left implied by a qualification
-   * — a hiring manager can check "thematic coding" against the data-integrity
-   * story on the EverLoop page, which is the one that shows it being used.
-   */
-  {
-    heading: 'Research methods',
-    items: [
-      'Interview design',
-      'Mixed-methods study design',
-      'Thematic and qualitative coding',
-      'Survey design',
-      'Statistical analysis (SPSS)',
-      'Qualitative analysis (MAXQDA)',
     ],
   },
   {
     heading: 'Quality & release',
     items: [
-      'Test planning',
-      'UAT coordination',
+      'UAT',
       'Defect reporting',
       'Release acceptance',
       'Production validation',
       'Permission and access testing',
-      'App store submission',
+      'App-store delivery',
     ],
   },
   {
-    heading: 'Tools & platforms',
+    heading: 'Research',
     items: [
-      'Monday.com',
-      'Notion',
-      'Figma',
-      'Slack',
-      'Google Workspace',
-      'Odoo',
-      'Claude API',
-      'TypeScript',
-      'Git',
-      'App Store Connect',
-      'Google Play Console',
+      'Mixed methods',
+      'Interviews',
+      'Thematic analysis',
+      'Survey design',
+      'Statistical analysis',
+      'SPSS',
+      'MAXQDA',
     ],
   },
 ];
+
+/**
+ * Tools, grouped by what they are for.
+ *
+ * Split out of the old "Tools & platforms" skill group, which ran eleven
+ * product names in one line — Monday.com next to TypeScript next to Google
+ * Workspace — and invited a reader to guess at the depth of each.
+ */
+export const toolGroups: SkillGroup[] = [
+  {
+    heading: 'Planning & collaboration',
+    items: ['Notion', 'Monday.com', 'Figma', 'Slack', 'Google Workspace'],
+  },
+  { heading: 'Delivery & release', items: ['Git', 'App Store Connect', 'Google Play Console'] },
+  { heading: 'Business systems', items: ['Odoo'] },
+  { heading: 'AI & prototyping', items: ['Claude API'] },
+];
+
+/**
+ * TypeScript, stated as exposure rather than as a capability.
+ *
+ * It was listed beside Figma and Slack as though it were another tool she
+ * works in. The WriteWise case study is explicit about where the line falls —
+ * "Claude wrote the code; the product definition, the workflows, the role
+ * model and the data decisions are mine" — so a plain TypeScript entry claims
+ * more than the page itself does, on the one page arguing that its claims can
+ * be checked. Named here, in the weakest available frame, because she did
+ * specify, build, deploy and hand over a working application and pretending
+ * otherwise would be its own distortion.
+ */
+export const technicalExposure = {
+  label: 'Technical exposure',
+  items: ['TypeScript'],
+  note: 'Prototyping only — I specify and validate software, I am not a developer.',
+};
 
 /**
  * F19, F31, F30, F15, F12, plus the origin story added 2026-08-04
