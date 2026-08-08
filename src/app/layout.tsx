@@ -138,6 +138,69 @@ const INLINE_SCRIPT = `
   });
 
   document.addEventListener('DOMContentLoaded', function () {
+    // The one authored moment of motion on the site: the handoff chain arrives
+    // a tile at a time, because the sequence is what the diagram is about.
+    //
+    // Every exit below leaves the markup exactly as it shipped — visible. The
+    // class that hides a tile is only ever added when we already know we can
+    // take it back off again.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    var groups = document.querySelectorAll('[data-reveal]');
+    if (!groups.length) return;
+
+    function children(el) {
+      return Array.prototype.slice.call(el.children);
+    }
+
+    /*
+     * Nothing is hidden until the observer has proved it delivers.
+     *
+     * The obvious order — hide everything on load, reveal on intersection —
+     * has a failure mode with no floor: anything that stops the callback
+     * arriving leaves the content permanently invisible. That is not
+     * hypothetical. A tab opened in the background has document.hidden set and
+     * Chrome withholds intersection callbacks entirely, which is exactly how
+     * someone middle-clicking a link would arrive.
+     *
+     * So the first callback for a group is what earns the right to hide it,
+     * and only when it reports the group off screen. A group already in view
+     * is simply left alone — there is nothing to animate for content the
+     * reader is already looking at.
+     */
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var kids = children(entry.target);
+
+          if (entry.isIntersecting) {
+            kids.forEach(function (child) {
+              child.classList.add('reveal-ready', 'is-visible');
+            });
+            // Fires once. A diagram that re-animates every time it scrolls
+            // back into view is a distraction, not an accent.
+            io.unobserve(entry.target);
+            return;
+          }
+
+          if (entry.target.dataset.revealArmed) return;
+          entry.target.dataset.revealArmed = '1';
+          kids.forEach(function (child) {
+            child.classList.add('reveal-ready');
+          });
+        });
+      },
+      // Enough of the chain on screen that it is being looked at, not passed.
+      { threshold: 0.2 }
+    );
+
+    groups.forEach(function (group) {
+      io.observe(group);
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
     // Mobile drawer. Closed in the markup, so a dead script leaves a page that
     // is still complete rather than one trapped behind a menu.
     var btn = document.getElementById('drawer-toggle');

@@ -31,6 +31,7 @@ import {
   toolGroups,
 } from '@/content/skills';
 import { appLinks, snapshot, snapshotClosing } from '@/content/snapshot';
+import { SITE_URL } from '@/content/site';
 import { workLog, workLogHeading, workLogIntro } from '@/content/workLog';
 import { WorkLog } from '@/components/ui/WorkLog';
 import { Button, DocumentIcon } from '@/components/ui/Button';
@@ -294,12 +295,39 @@ function Snapshot() {
 
         {/* The sentence the four figures add up to. Rules off the strip so it
             reads as the conclusion rather than as a fifth, broken statistic. */}
-        <p
-          className="mt-8 border-t pt-6 text-[length:var(--text-small)] text-pretty"
-          style={{ borderColor: 'var(--rule)', color: 'var(--text-muted)' }}
+        <div
+          className="mt-8 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+          style={{ borderColor: 'var(--rule)' }}
         >
-          {snapshotClosing}
-        </p>
+          <p
+            className="max-w-[45rem] text-[length:var(--text-small)] text-pretty"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {snapshotClosing}
+          </p>
+
+          {/*
+            Attribution, because this band is the part of the page most likely
+            to leave it.
+
+            People do not only forward links, they screenshot — and this strip
+            is the most screenshot-shaped thing here: four figures, one line,
+            self-contained. Cropped out of the page it was four orphan numbers
+            belonging to nobody. Now it says whose they are and where the rest
+            is, in the same mono the other factual runs use, quiet enough that
+            a reader on the page reads past it.
+
+            Same pair the share card ends on, for the same reason.
+          */}
+          <p
+            className="shrink-0 font-mono text-[length:var(--text-label)] tracking-tight"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {profile.fullName}
+            <span aria-hidden="true"> · </span>
+            {SITE_URL.replace(/^https?:\/\//, '')}
+          </p>
+        </div>
       </Container>
     </section>
   );

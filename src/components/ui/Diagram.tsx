@@ -158,7 +158,18 @@ function FlowNode({ step, dense }: { step: FlowStep; dense: boolean }) {
  */
 export function HandoffChain({ steps }: { steps: HandoffStep[] }) {
   return (
-    <ol className="flow">
+    /*
+     * data-reveal opts this one chain into the staggered entrance in
+     * layout.tsx. It is the only thing on the site that animates, and it
+     * animates because the sequence is the content: seven steps arriving in
+     * order shows the handoff that seven static tiles can only list.
+     *
+     * The mechanism is the one globals.css was already written for and nothing
+     * had ever used — the markup ships visible, and script is what hides it
+     * before revealing it, so a dead script leaves a complete page rather than
+     * an empty one. Reduced motion opts out before a single class is added.
+     */
+    <ol className="flow" data-reveal>
       {steps.map((step, i) => {
         const mine = step.owner === 'Mine';
         return (

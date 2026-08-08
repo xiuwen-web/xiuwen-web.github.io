@@ -482,6 +482,29 @@ section[id] {
     transform 300ms ease-out;
 }
 
+/* Stagger, for the one group that reveals. 60ms apart is enough to read as a
+   sequence and short enough that the last tile lands within half a second of
+   the first — a chain that takes a noticeable time to finish is a chain the
+   reader is waiting on. */
+.flow > li.reveal-ready.is-visible:nth-child(2) {
+  transition-delay: 60ms;
+}
+.flow > li.reveal-ready.is-visible:nth-child(3) {
+  transition-delay: 120ms;
+}
+.flow > li.reveal-ready.is-visible:nth-child(4) {
+  transition-delay: 180ms;
+}
+.flow > li.reveal-ready.is-visible:nth-child(5) {
+  transition-delay: 240ms;
+}
+.flow > li.reveal-ready.is-visible:nth-child(6) {
+  transition-delay: 300ms;
+}
+.flow > li.reveal-ready.is-visible:nth-child(7) {
+  transition-delay: 360ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -502,6 +525,13 @@ section[id] {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  /* The stagger is a delay on a transition that no longer happens; left in it
+     would hold each tile at its start state for up to 360ms after the class
+     lands. */
+  .flow > li.reveal-ready.is-visible {
+    transition-delay: 0ms;
   }
 }
 
