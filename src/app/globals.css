@@ -69,6 +69,22 @@
      blocks, which are real reading. This clears 4.5 on all three grounds. */
   --text-muted: #5c6970; /* 5.21 bg · 5.66 surface · 4.83 sunk */
   --rule: #dde4e3;
+  /*
+     The load-bearing sibling of --rule, added 2026-08-08.
+
+     --rule is a hairline: 1.19:1 on --bg, which is correct for a decorative
+     divider and exempt under WCAG 1.4.11. It is wrong wherever a border is the
+     only thing telling a reader that something is a control — the Disclosure
+     boxes are the case on this page, where the border is the entire visible
+     boundary of a summary you are meant to press.
+
+     Measured on all three grounds rather than assumed:
+       #7d8a8f  3.27 bg · 3.56 surface · 3.03 sunk
+
+     `var(--border)` was already being used in two places in page.tsx while no
+     such token existed, so those borders were resolving to an invalid value
+     and drawing nothing. This is that token, defined. */
+  --border: #7d8a8f;
 
   --navy: #162a3a;
   --slate: #253f50;
@@ -110,6 +126,8 @@
   --text: #e8edef;
   --text-muted: #94a3ab;
   --rule: #263a48;
+  /* #5b7789 — 3.66 bg · 3.12 surface · 3.87 sunk. */
+  --border: #5b7789;
 
   --navy: #0c161d;
   --slate: #a9c0d0;

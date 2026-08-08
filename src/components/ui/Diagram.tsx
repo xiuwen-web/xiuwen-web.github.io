@@ -367,3 +367,66 @@ function Panel({
     </section>
   );
 }
+
+/**
+ * The featured-card media for the EverLoop entry.
+ *
+ * That card used to render the EverLoop logo — an owl mascot in a yellow
+ * roundel, contained on a sunk panel. It is the product's real identity, so it
+ * was not wrong, but it sat on a card whose own intro sentence says this is one
+ * of the two bodies of work that "carry most of what I do", and a mascot shows
+ * a reader nothing about the work. Next to a screenshot of a login form on the
+ * card beside it, the pair were the two least product-specific images on the
+ * page, in the two most valuable slots.
+ *
+ * This draws the fact the case study opens with instead: EverLoop is not one
+ * product but five connected surfaces that all have to agree with each other,
+ * which is what makes deciding "what belongs on which surface, who is allowed
+ * to change what, and when a student can see it" the actual job.
+ *
+ * Deliberately the same shape as PhaseStrip — five rows, mono label left,
+ * qualifier right, on a sunk ground — so the two featured cards read as one
+ * system rather than as two unrelated pictures.
+ *
+ * Sourced from ecosystem.ts's overview ("five connected surfaces — admin,
+ * teacher web and mobile, student and parent web and mobile") and it agrees
+ * with the "5 user surfaces" figure in the credibility strip. Neither is
+ * allowed to drift without the other.
+ */
+const SURFACES: { surface: string; client: string }[] = [
+  { surface: 'Admin', client: 'web' },
+  { surface: 'Teacher', client: 'web' },
+  { surface: 'Teacher', client: 'mobile' },
+  { surface: 'Student & parent', client: 'web' },
+  { surface: 'Student & parent', client: 'mobile' },
+];
+
+export function SurfaceStrip() {
+  return (
+    <div
+      className="flex h-44 flex-col justify-center gap-2 border-b px-5 sm:h-52 sm:px-6"
+      style={{ background: 'var(--surface-sunk)', borderColor: 'var(--rule)' }}
+      aria-hidden="true"
+    >
+      {SURFACES.map((row, i) => (
+        <div key={`${row.surface}-${row.client}`} className="flex items-center gap-3">
+          <span
+            className="w-[1.5rem] shrink-0 font-mono text-[length:var(--text-label)] tabular-nums"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <span className="min-w-0 flex-1 truncate text-[length:var(--text-small)] font-medium">
+            {row.surface}
+          </span>
+          <span
+            className="shrink-0 font-mono text-[length:var(--text-label)]"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {row.client}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}

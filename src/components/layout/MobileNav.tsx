@@ -20,6 +20,8 @@ import { Identity, RailHeading, RailLink } from './Sidebar';
  */
 export function MobileNav({ active }: { active?: string }) {
   const activeHref = active ? ACTIVE_KEY_TO_HREF[active] : undefined;
+  /** The scroll-spy is wired to PRIMARY_NAV's hashes, which only exist here. */
+  const onHome = active === 'overview';
 
   return (
     <div className="lg:hidden">
@@ -27,9 +29,46 @@ export function MobileNav({ active }: { active?: string }) {
         className="sticky top-0 z-50 flex h-14 items-center justify-between gap-3 border-b px-4"
         style={{ background: 'var(--rail-bg)', borderColor: 'var(--rail-rule)' }}
       >
-        <Identity compact />
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <Identity compact showRole={!onHome} showMark={!onHome} />
 
-        <div className="flex items-center gap-1">
+          {/*
+            Where you are, on the only chrome a phone reader has. The rail is
+            display:none below 1024px, so the numbered index that orients a
+            desktop reader does not exist here — and this page runs to about
+            10,900px, which is a dozen viewports with no map at all.
+
+            Updated by the scroll-spy in layout.tsx, which is also what marks
+            the rail. Rendered with the first section's name rather than empty:
+            an empty element that gains a text node on the client is a
+            hydration mismatch that suppressHydrationWarning does not cover —
+            that flag reconciles differing text, not an element growing its
+            first child. Seeded with the true value at scroll 0, it is also
+            correct if the script never runs at all.
+
+            Homepage only, because that is the only page whose sections the
+            spy is wired to. Elsewhere the header keeps the identity alone.
+          */}
+          {onHome && (
+            <>
+              <span
+                aria-hidden="true"
+                className="h-3 w-px shrink-0"
+                style={{ background: 'var(--rail-rule)' }}
+              />
+              <span
+                data-toc-label
+                suppressHydrationWarning
+                className="min-w-0 truncate font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+                style={{ color: 'var(--rail-muted)' }}
+              >
+                {PRIMARY_NAV[0].label}
+              </span>
+            </>
+          )}
+        </div>
+
+        <div className="flex shrink-0 items-center gap-1">
           <ThemeToggle onRail />
           <button
             type="button"

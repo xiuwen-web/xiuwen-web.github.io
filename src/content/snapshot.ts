@@ -29,7 +29,10 @@ export const snapshot: SnapshotFact[] = [
    * February 2026 and is the first on either system; every case study says
    * three, and a team size is the kind of figure someone checks.
    */
-  { figure: '3 + 1', label: 'developers and QA', qualifier: 'the delivery team I coordinate' },
+  /* '3+1', not '3 + 1'. Set in 24px mono with default word spacing the spaced
+     form let the plus float, and the pair read as two separate numbers before
+     it resolved into one figure. */
+  { figure: '3+1', label: 'developers and QA', qualifier: 'the delivery team I coordinate' },
 ];
 
 /**

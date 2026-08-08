@@ -44,8 +44,12 @@ const plexMono = IBM_Plex_Mono({
  */
 const TITLE = `${profile.fullName} — Project Manager, Product Operations and Business Systems`;
 
+/* The search phrase lives here and in the <title>, which are page framing and
+   claim no title; schema.org jobTitle carries the title actually held. Singapore
+   added 2026-08-08 — it is the first filter on most local searches and the one
+   qualifier the description was missing. */
 const DESCRIPTION =
-  'Project manager bridging frontline operations and software delivery across internal platforms, mobile apps and multi-site workflows.';
+  'Singapore project manager bridging frontline operations and software delivery across internal platforms, mobile apps and multi-site workflows.';
 
 /*
  * PNG, not the WebP everything else on the site uses. LinkedIn's crawler does
@@ -60,7 +64,10 @@ const OG_IMAGE = {
   url: '/images/og-card.png',
   width: 1200,
   height: 630,
-  alt: 'Xiu Wen — Project Manager, Product Operations and Business Systems. I turn operational problems into systems that work.',
+  /* Describes the card as redrawn on 2026-08-08: the discipline rather than a
+     title she does not hold, the headline as it now reads, and the proof strip
+     with its qualifiers restored. Source: tools/og-card.html. */
+  alt: 'Chng Xiu Wen — Operations & Product Delivery. I run a tuition centre. I write the requirements for the platform twenty of them run on. Four app-store listings, two internal platforms, twenty centres supported. Tuition Centre Manager, AGrader Learning Centre, Singapore.',
 };
 
 export const metadata: Metadata = {
@@ -90,9 +97,10 @@ export const metadata: Metadata = {
  * The site's entire client-side behaviour, in vanilla JS.
  *
  * It must be inline and blocking, or the page paints in the wrong theme first.
- * Since that script has to exist anyway, the toggle handler lives here too —
- * which is why the site has no Client Components and ships no interactive
- * React.
+ * Since that script has to exist anyway, the toggle handler lives here too.
+ * The site is as close to zero Client Components as it gets: Portrait is the
+ * only one, and only because the photograph needs a fallback when it fails to
+ * load. Nothing else on the page ships interactive React.
  *
  * The deep-link opener that used to live here is gone. It existed to force a
  * <details> case study open from a #hash, and fought React hydration to do it.
@@ -207,6 +215,13 @@ const TOC_SCRIPT = `
       if (bar) bar.style.opacity = on ? '1' : '0';
     }
     current = id;
+
+    // The phone header's "you are here". The rail is hidden below 1024px, so
+    // without this a reader on the longest page on the site has no map at all.
+    // Rendered server-side with the first section's name, so this only ever
+    // replaces one string with another.
+    var label = document.querySelector('[data-toc-label]');
+    if (label && byId[id]) label.textContent = byId[id].textContent.trim();
   }
 
   // The last section whose top has passed the reading line. An
@@ -406,9 +421,26 @@ const JSON_LD = {
   alternateName: profile.name,
   familyName: 'Chng',
   givenName: 'Xiu Wen',
-  /* Matches the <title>. Two different job titles in the same document is the
-     kind of thing a structured-data check flags and a reader notices. */
-  jobTitle: 'Project Manager, Product Operations and Business Systems',
+  /*
+   * The title actually held, as of 2026-08-08.
+   *
+   * This field previously repeated the <title>'s search phrase — "Project
+   * Manager, Product Operations and Business Systems" — reasoning that two
+   * different job titles in one document is the kind of thing a structured-data
+   * check flags. True, and it made the metadata self-consistent while leaving
+   * it inconsistent with the visible page, which says Tuition Centre Manager.
+   *
+   * The distinction that resolves it: <title> and og:title are page framing,
+   * and "Name — Discipline" claims no title. schema.org jobTitle is a
+   * machine-readable assertion of the title held. The search phrase keeps
+   * every word it had, in the fields that are allowed to carry it; this one
+   * field states the fact. knowsAbout below already carries the discipline.
+   *
+   * It matters here more than it would elsewhere. This is a page whose whole
+   * argument is that its claims can be checked, and this was the one claim on
+   * it that could be checked and failed.
+   */
+  jobTitle: profile.currentRole.title,
   image: `${SITE_URL}/images/og-card.png`,
   worksFor: { '@type': 'Organization', name: profile.employer },
   address: { '@type': 'PostalAddress', addressCountry: 'SG' },
@@ -416,6 +448,10 @@ const JSON_LD = {
   url: SITE_URL,
   sameAs: socialLinks.map((l) => l.href),
   knowsAbout: [
+    /* Carries the discipline the <title> ranks for, in the field that is
+       about competence rather than about the title held. */
+    'Project management',
+    'Business systems',
     'Business analysis',
     'Product operations',
     'Requirements gathering',

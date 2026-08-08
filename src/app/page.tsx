@@ -68,7 +68,7 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section id="top" className="pt-16 pb-14 sm:pt-24 sm:pb-20">
+    <section id="top" className="pt-10 pb-14 sm:pt-24 sm:pb-20">
       {/* The one place a wider measure earns itself: at 640px the headline
           breaks after "I run tuition", mid-phrase. */}
       <Container width="content">
@@ -78,7 +78,7 @@ function Hero() {
           block is ~104px tall and reads as a masthead rather than as a profile
           card. Anything taller starts competing with the headline under it.
         */}
-        <div className="mb-8 flex items-center gap-4 sm:gap-5">
+        <div className="mb-6 flex items-center gap-4 sm:gap-5 sm:mb-8">
           <Portrait />
           <div className="min-w-0">
             {/* The full name, here and nowhere else on screen. This is the
@@ -99,7 +99,13 @@ function Hero() {
           </div>
         </div>
 
-        <h1 className="font-display text-[2rem] leading-[1.12] font-semibold text-balance sm:text-[length:var(--text-display)] lg:text-[3.25rem]">
+        {/*
+          Capped at --text-display rather than the old lg:3.25rem. The headline
+          is two sentences now instead of one, and the second is long; at 52px
+          it ran to four display lines and pushed the proof back under the fold
+          the rewrite was meant to lift it above. Two sizes, not three.
+        */}
+        <h1 className="font-display text-[1.75rem] leading-[1.13] font-semibold text-balance sm:text-[length:var(--text-display)] sm:leading-[1.15]">
           {profile.heroHeadline.map((line) => (
             <span key={line} className="block">
               {line}
@@ -107,39 +113,42 @@ function Hero() {
           ))}
         </h1>
 
-        {/* Smaller than the headline and lighter than the paragraph under it,
-            so it reads as an aside rather than as a second headline. */}
-        <p
-          className="mt-5 max-w-[34rem] text-[length:var(--text-body)] text-pretty italic"
-          style={{ color: 'var(--accent-ink)' }}
-        >
-          {profile.heroSubline}
-        </p>
-
-        <p className="mt-5 max-w-[35rem] text-pretty" style={{ color: 'var(--text-muted)' }}>
+        <p className="mt-4 max-w-[35rem] text-pretty sm:mt-5" style={{ color: 'var(--text-muted)' }}>
           {profile.heroSupport}
         </p>
 
         {/*
-          The employment fact, directly under the claim it belongs to. It sits
-          here rather than in the masthead because the masthead is an
-          introduction and this is a record — and because a third line up there
-          pushed the block past the height at which it stops reading as a
-          masthead and starts competing with the headline.
+          The employment record, promoted 2026-08-08 from a 12px muted footnote
+          to a first-class credential row.
 
-          Mono and small, like the other factual runs on this page. It is meant
-          to be scanned and verified, not read.
+          It was previously the smallest, faintest text in the hero — which
+          meant the most trust-generating element on the page was styled as an
+          apology. It is the opposite: the operations title is the thing that
+          makes the delivery half credible, because the requirements hold up
+          precisely when the person writing them does the job they describe.
+
+          Location joined the row for a plainer reason. It is the first filter
+          on a Singapore search and the one fact nothing above it implies, and
+          it previously appeared nowhere until the Contact section ten
+          thousand pixels down.
+
+          Still mono, because it is a factual run to be scanned rather than
+          read — but the title now carries full text contrast and only the
+          scaffolding around it recedes.
         */}
-        <p
-          className="mt-4 font-mono text-[length:var(--text-label)] tracking-tight"
-          style={{ color: 'var(--text-muted)' }}
-        >
-          {profile.currentRole.title}, {profile.currentRole.employer}
-          <span aria-hidden="true"> · </span>
-          {profile.currentRole.since} – present
+        <p className="mt-4 font-mono text-[length:var(--text-small)] leading-relaxed tracking-tight sm:mt-5">
+          <span className="font-medium">{profile.currentRole.title}</span>
+          <span style={{ color: 'var(--text-muted)' }}>
+            <span aria-hidden="true"> · </span>
+            {profile.currentRole.employer}
+            <span aria-hidden="true"> · </span>
+            {profile.location}
+            <span aria-hidden="true"> · </span>
+            since {profile.currentRole.since}
+          </span>
         </p>
 
-        <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-center">
           <Button href="#work" variant="primary">
             View selected work
           </Button>
@@ -161,8 +170,20 @@ function Hero() {
           )}
         </div>
 
-        {/* The verifiable anchor, above the fold — the fastest proof available */}
-        <div className="mt-12">
+        {/*
+          The verifiable anchor. The comment that used to sit here claimed it
+          was "above the fold — the fastest proof available", and on a 390x844
+          phone it began at y=832, which is to say below it. The claim is now
+          true rather than aspirational: the aphorism above is gone, the
+          support line is one clause, and these four sit two-up instead of
+          stacked, which is ~30px shorter than the single column was.
+
+          Two columns at every breakpoint, not just from `sm`. Stacking the
+          note under the label instead of running it alongside is what buys
+          the room, and it also separates the two AGrader Teacher listings —
+          identical but for their store — into visibly different tiles.
+        */}
+        <div className="mt-7 sm:mt-10">
           <div className="flex items-center gap-4">
             <span
               className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
@@ -173,14 +194,17 @@ function Hero() {
             <span className="h-px flex-1" style={{ background: 'var(--rule)' }} />
           </div>
 
-          <ul className="mt-4 grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+          <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1">
             {appLinks.map((link) => (
               <li key={link.href}>
+                {/* Block-level and min-h-11: these were 23px tall with a 12px
+                    gutter, on the one interaction the whole credibility
+                    argument depends on, for a reader holding a phone. */}
                 <a
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex flex-wrap items-baseline gap-x-2 transition-opacity hover:opacity-70"
+                  className="flex min-h-11 flex-col justify-center py-1 transition-opacity hover:opacity-70"
                 >
                   <span
                     className="text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4"
@@ -188,7 +212,10 @@ function Hero() {
                   >
                     {link.label}
                   </span>
-                  <span className="text-[length:var(--text-label)]" style={{ color: 'var(--text-muted)' }}>
+                  <span
+                    className="mt-0.5 text-[length:var(--text-label)]"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
                     {link.note}
                   </span>
                 </a>
@@ -284,7 +311,7 @@ function Work() {
         </p>
         <Disclosure
           className="mt-5"
-          summary="See the log"
+          summary="See the delivery log"
           hint="Twelve entries across five systems."
         >
           <WorkLog groups={workLog} />
@@ -336,7 +363,7 @@ function Process() {
       */}
       <Disclosure
         className="mt-12"
-        summary="The six things I do every time"
+        summary="See how I write a requirement"
         hint="How a requirement gets written before anyone builds from it."
       >
         <p className="max-w-[45rem] text-[length:var(--text-small)]" style={{ color: 'var(--text-muted)' }}>
@@ -417,7 +444,7 @@ function Process() {
           this follows one of them to a screen that is on this site. */}
       <Disclosure
         className="mt-4"
-        summary="Follow one requirement to a live screen"
+        summary="See one requirement reach a live screen"
         hint="The diagnostic report at four checkable points: the versioned brief, the prototypes, five board items, and two screens published on this site."
       >
         <h3 className="font-display text-[length:var(--text-h3)] font-semibold">{traceTitle}</h3>
@@ -551,7 +578,7 @@ function Skills() {
  */
 function Journey() {
   return (
-    <Disclosure className="mt-8" summary="How I got here" hint={journeySubtitle}>
+    <Disclosure className="mt-8" summary="See how I got here" hint={journeySubtitle}>
       <div id="journey" className="scroll-mt-24 space-y-9">
         {journey.map((phase) => (
           <section key={phase.label}>
@@ -684,7 +711,7 @@ function Contact() {
         <ContactRow label="Email">
           <a
             href={`mailto:${profile.email}`}
-            className="font-display text-[1.125rem] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70 sm:text-[1.25rem]"
+            className="inline-flex min-h-11 items-center font-display text-[1.125rem] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70 sm:text-[1.25rem]"
             style={{ color: 'var(--accent-ink)' }}
           >
             {profile.email}
@@ -697,7 +724,7 @@ function Contact() {
               href={linkedin.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+              className="inline-flex min-h-11 items-center underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
               style={{ color: 'var(--accent-ink)' }}
             >
               {/* Derived, not typed. This was a hardcoded string and went stale

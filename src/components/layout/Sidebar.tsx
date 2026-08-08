@@ -40,10 +40,26 @@ export function Sidebar({
   // case-study navigation should take priority over the global navigation".
   const onCaseStudy = Boolean(toc && toc.length);
 
+  /*
+   * The homepage is the only page whose sections match PRIMARY_NAV's hashes,
+   * so it is the only one where those four links can act as a table of
+   * contents. Gated on `active` rather than on the absence of a toc, because
+   * the standalone pages also render without one and their ids would not
+   * resolve.
+   */
+  const spy = active === 'overview' && !onCaseStudy;
+
   return (
+    /*
+       The right edge exists for dark mode. There, --rail-bg (#0a1219) sits
+       against --bg (#101c25) — about a 2% luminance step, which is close
+       enough that the rail stops reading as chrome and starts reading as more
+       page. Light mode separates on its own and the rule is invisible there,
+       so one hairline fixes the dark theme and costs the light one nothing.
+    */
     <aside
-      className="relative hidden w-[19rem] shrink-0 lg:block"
-      style={{ background: 'var(--rail-bg)' }}
+      className="relative hidden w-[19rem] shrink-0 border-r lg:block"
+      style={{ background: 'var(--rail-bg)', borderColor: 'var(--rail-rule)' }}
     >
       <div className="sticky top-0 h-screen overflow-y-auto">
         {/*
@@ -71,6 +87,17 @@ export function Sidebar({
                     href={item.href}
                     current={active === item.key}
                     compact={onCaseStudy}
+                    /*
+                     * On the homepage only, hand these four to the scroll-spy.
+                     * The script has always existed and has always skipped this
+                     * page: it queries [data-toc-link], only the case-study
+                     * contents emitted that, so "Overview" kept aria-current
+                     * and its teal bar for the whole 10,800px of the page —
+                     * a reader four sections down was being told they were at
+                     * the top. The id is derived from the href so the two
+                     * cannot drift.
+                     */
+                    tocId={spy ? item.href.split('#')[1] : undefined}
                   >
                     {item.label}
                   </RailLink>
@@ -177,32 +204,60 @@ export function Sidebar({
 
 /* ------------------------------------------------------------ Identity --- */
 
-export function Identity({ compact = false }: { compact?: boolean }) {
+export function Identity({
+  compact = false,
+  showRole = true,
+  showMark = true,
+}: {
+  compact?: boolean;
+  /**
+   * The mobile header drops the role line on the homepage, where a live
+   * section label sits beside it. Two truncating strings in a 390px header
+   * meant both were cut — "Operations & ..." next to "OVER…" — and the role
+   * is the redundant one: the hero states it 100px below, and the drawer
+   * states it again. One truncated string is a header; two is a jumble.
+   */
+  showRole?: boolean;
+  /**
+   * The homepage's mobile header drops the monogram too. Header width is a
+   * fixed budget: monogram, name, section label, theme toggle and Menu do not
+   * all fit in 390px, and the label was still being cut with ~87px for a
+   * ~110px string. The monogram is the only one of the five carrying nothing
+   * the others do not — the name is right beside it. It stays everywhere else.
+   */
+  showMark?: boolean;
+}) {
   return (
     // min-w-0 so the name can truncate rather than push the mobile header
     // wider than the viewport. Without it every page scrolled 1px sideways.
     <div className="min-w-0">
-      <Link prefetch={false} href="/#top" className="flex min-w-0 items-center gap-3">
+      <Link
+        prefetch={false}
+        href="/#top"
+        className={`flex min-w-0 items-center gap-3${compact ? ' min-h-11' : ''}`}
+      >
         {/*
           Monogram, not a photograph — there is no photograph yet. A blank
           circle reads as a broken image; two letters read as a decision.
           Deliberately quieter than the name beside it: the revision asks for
           the name and positioning to carry more visual weight than the badge.
         */}
-        <span
-          aria-hidden="true"
-          className={`flex shrink-0 items-center justify-center rounded-full border font-mono font-medium ${
-            compact
-              ? 'h-8 w-8 text-[0.625rem]'
-              : 'h-10 w-10 text-[0.75rem] tracking-[0.02em]'
-          }`}
-          style={{
-            borderColor: 'color-mix(in srgb, var(--rail-accent) 45%, transparent)',
-            color: 'var(--rail-accent)',
-          }}
-        >
-          XW
-        </span>
+        {showMark && (
+          <span
+            aria-hidden="true"
+            className={`flex shrink-0 items-center justify-center rounded-full border font-mono font-medium ${
+              compact
+                ? 'h-8 w-8 text-[0.625rem]'
+                : 'h-10 w-10 text-[0.75rem] tracking-[0.02em]'
+            }`}
+            style={{
+              borderColor: 'color-mix(in srgb, var(--rail-accent) 45%, transparent)',
+              color: 'var(--rail-accent)',
+            }}
+          >
+            XW
+          </span>
+        )}
         <span className="min-w-0">
           <span
             className={`block font-display leading-tight font-semibold ${
@@ -212,12 +267,14 @@ export function Identity({ compact = false }: { compact?: boolean }) {
           >
             {profile.name}
           </span>
-          <span
-            className="mt-0.5 block truncate text-[length:var(--text-label)] leading-tight"
-            style={{ color: 'var(--rail-muted)' }}
-          >
-            {profile.role}
-          </span>
+          {showRole && (
+            <span
+              className="mt-0.5 block truncate text-[length:var(--text-label)] leading-tight"
+              style={{ color: 'var(--rail-muted)' }}
+            >
+              {profile.role}
+            </span>
+          )}
         </span>
       </Link>
 
@@ -274,6 +331,7 @@ export function RailLink({
   muted = false,
   compact = false,
   number,
+  tocId,
   children,
 }: {
   href: string;
@@ -282,24 +340,43 @@ export function RailLink({
   external?: boolean;
   muted?: boolean;
   number?: string | null;
+  /**
+   * Hands this link to the scroll-spy in layout.tsx, which drives colour,
+   * weight, aria-current and the left rule from scroll position.
+   */
+  tocId?: string;
   children: React.ReactNode;
 }) {
+  /*
+   * In spy mode the script owns the entire active treatment, so the server must
+   * not paint one. It renders every link in the resting state and lets the
+   * script mark the right one on load.
+   *
+   * The background tint is the specific reason this matters: the script sets
+   * colour, weight and the bar, and never touches background. A server-rendered
+   * tint on "Overview" would therefore have stayed lit under whichever section
+   * the script actually marked — two links reading as current at once.
+   */
+  const on = current && !tocId;
+
   const style: React.CSSProperties = {
-    color: current ? 'var(--rail-text)' : 'var(--rail-muted)',
-    background: current
-      ? 'color-mix(in srgb, var(--rail-accent) 9%, transparent)'
-      : undefined,
-    fontWeight: current ? 500 : 400,
+    color: on ? 'var(--rail-text)' : 'var(--rail-muted)',
+    background: on ? 'color-mix(in srgb, var(--rail-accent) 9%, transparent)' : undefined,
+    fontWeight: on ? 500 : 400,
     paddingLeft: '1rem',
     opacity: muted ? 0.85 : 1,
   };
 
   const inner = (
     <>
-      {current && (
+      {/* Always in the DOM when spying, at zero opacity — the script toggles
+          opacity and cannot append an element it did not render. */}
+      {(on || tocId) && (
         <span
           aria-hidden="true"
-          className="absolute top-1 bottom-1 left-0 w-[2px] rounded-full"
+          data-toc-bar={tocId ? '' : undefined}
+          suppressHydrationWarning={Boolean(tocId)}
+          className={`absolute top-1 bottom-1 left-0 w-[2px] rounded-full${tocId ? ' opacity-0' : ''}`}
           style={{ background: 'var(--rail-accent)' }}
         />
       )}
@@ -308,7 +385,7 @@ export function RailLink({
           className="mr-2.5 font-mono text-[0.6875rem] tabular-nums"
           // No opacity: dimming --rail-muted to 0.7 put these at 3.91:1.
           // The mono face and smaller size already separate them from the label.
-          style={{ color: current ? 'var(--rail-accent)' : 'inherit' }}
+          style={{ color: on ? 'var(--rail-accent)' : 'inherit' }}
         >
           {number}
         </span>
@@ -336,9 +413,14 @@ export function RailLink({
     <Link
       prefetch={false}
       href={href}
+      data-toc-link={tocId}
+      // The spy writes colour, weight and aria-current onto these before React
+      // hydrates, so React finds attributes it did not render — the same reason
+      // the case-study contents links and the rail canvas carry this.
+      suppressHydrationWarning={Boolean(tocId)}
       className={compact ? LINK_COMPACT : LINK_ROOMY}
       style={style}
-      aria-current={current ? 'page' : undefined}
+      aria-current={on ? 'page' : undefined}
     >
       {inner}
     </Link>

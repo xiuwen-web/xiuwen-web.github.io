@@ -26,9 +26,16 @@ export function Disclosure({
   children: ReactNode;
 }) {
   return (
+    /*
+       --border, not --rule. A hairline at 1.19:1 is fine as decoration and
+       WCAG exempts it there, but this one is the entire visible boundary of a
+       control — it is what tells a reader the summary below is a thing to
+       press rather than a paragraph. A boundary that carries meaning has to
+       clear 3:1 like any other non-text indicator.
+    */
     <details
       className={`group rounded-[var(--radius)] border ${className}`}
-      style={{ borderColor: 'var(--rule)' }}
+      style={{ borderColor: 'var(--border)' }}
     >
       <summary
         className="flex cursor-pointer list-none items-start gap-4 px-5 py-4 [&::-webkit-details-marker]:hidden"

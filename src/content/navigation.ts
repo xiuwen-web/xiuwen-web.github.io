@@ -34,20 +34,26 @@ export const workEntries: WorkEntry[] = [
     description: 'Migrating a live operational system without stopping the business.',
     status: cadmin.status,
     chips: cadmin.chips,
-    diagram: 'rollout',
     /*
-     * The only CAdmin screen that can be published. The system holds live
-     * student records and its interior is never captured (PRD §22) — the front
-     * door holds no data, so it is the one safe frame. Browser chrome cropped:
-     * the address bar showed the internal hostname.
+     * The four-phase rollout, drawn from the phase data — three shipped, one in
+     * progress, which is the same fact the "3 of 4 phases live" badge under the
+     * card states in words.
+     *
+     * This entry also carried a screenshot of the CAdmin sign-in screen until
+     * 2026-08-08. Both were declared, FeaturedCard prefers `visual`, and so the
+     * diagram had been dead since the day the image was added: the flagship
+     * card rendered a login form too small to read, on a flat orange ground
+     * that fights the palette, while the one bespoke systems-literate visual on
+     * the grid never drew. PhaseStrip's own comment still said CAdmin "has no
+     * screenshot and never will".
+     *
+     * public/images/cadmin-login.webp is kept but is now referenced nowhere.
+     * It is the only publishable CAdmin frame — the interior holds live student
+     * records and is never captured (PRD §22) — so it is worth keeping against
+     * a future need rather than deleting on the way past. It costs 17KB in the
+     * export and nothing on any page load.
      */
-    visual: {
-      src: '/images/cadmin-login.webp',
-      alt: 'The CAdmin sign-in screen, branded AGrader, with email and password fields.',
-      caption: 'CAdmin, at the front door.',
-      width: 1440,
-      height: 775,
-    },
+    diagram: 'rollout',
     featured: true,
   },
   {
@@ -58,20 +64,20 @@ export const workEntries: WorkEntry[] = [
     status: ecosystem.status,
     chips: ecosystem.chips,
     /*
-     * Set explicitly. This previously read the first visual out of the area
-     * with id 'admin', and when that area was consolidated into
-     * 'content-access' the lookup silently returned undefined — the card lost
-     * its image and nothing failed. The guard below now catches that class of
-     * regression; this no longer depends on an area id at all.
+     * The five surfaces, replacing the EverLoop logo on 2026-08-08.
+     *
+     * The logo was the product's real identity and rendered correctly, so
+     * nothing was broken — but an owl mascot on a sunk panel tells a reader
+     * nothing about the work, and this card's own intro sentence says it is one
+     * of the two that carry most of it. The five surfaces are the fact the case
+     * study opens with, and the reason the job is a job: they all have to agree
+     * with each other.
+     *
+     * public/images/everloop-logo.webp is kept and, like the CAdmin frame
+     * above, is now referenced nowhere. It is the product's real mark and the
+     * kind of asset that gets wanted back.
      */
-    visual: {
-      src: '/images/everloop-logo.webp',
-      alt: 'The EverLoop logo: an owl mascot in a navy roundel reading “Improvement Starts Here”, above the EverLoop wordmark.',
-      caption: 'EverLoop.',
-      width: 900,
-      height: 748,
-      contain: true,
-    },
+    diagram: 'surfaces',
     featured: true,
   },
   {
@@ -201,6 +207,20 @@ export const workEntries: WorkEntry[] = [
 for (const entry of workEntries) {
   if (entry.featured && !entry.visual && !entry.diagram) {
     throw new Error(`navigation.ts: featured entry ${entry.href} has no visual or diagram`);
+  }
+  /*
+   * The opposite failure, and the one that actually happened. CAdmin declared
+   * both a screenshot and a rollout diagram; FeaturedCard prefers the image, so
+   * the diagram was dead code that no test, type or guard complained about —
+   * it just rendered a bit differently than intended, for months.
+   *
+   * Declaring both is always a mistake rather than a preference, because there
+   * is no card slot for the loser. Fail the build and make the author pick.
+   */
+  if (entry.visual && entry.diagram) {
+    throw new Error(
+      `navigation.ts: entry ${entry.href} declares both a visual and a '${entry.diagram}' diagram — the card renders only one, so the other is dead. Pick one.`,
+    );
   }
 }
 

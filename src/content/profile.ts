@@ -46,12 +46,27 @@ export const profile: Profile = {
   location: 'Singapore',
 
   /*
-   * F5, F28, F12, F21. One line as of 2026-08-04, replacing the two-line
-   * "I run tuition centre operations. / I also specify the software that runs
-   * them." The old pair described two jobs; this names the one thing both
-   * halves are for, which is the claim the case studies actually evidence.
+   * F5, F28, F12, F21. Rewritten 2026-08-08.
+   *
+   * The previous line — "I turn operational problems into systems that work" —
+   * was a claim of the class this page's own principles distrust: true, but
+   * unfalsifiable, and interchangeable with any consultant's. It also named no
+   * job, so a reader scrolling for one found three different answers and
+   * settled on the smallest and most specific.
+   *
+   * This states the double role as a fact instead. Both halves are checkable,
+   * and the second bounds the first: she runs one centre, and the platform she
+   * writes requirements for runs twenty. That is the whole positioning in two
+   * sentences, and it is the sentence someone pastes above the link when they
+   * forward it — which is what this page is for.
+   *
+   * Two array entries, so the break falls between the sentences rather than
+   * wherever the measure happens to put it.
    */
-  heroHeadline: ['I turn operational problems into systems that work.'],
+  heroHeadline: [
+    'I run a tuition centre.',
+    'I write the requirements for the platform twenty of them run on.',
+  ],
   /** Rail identity block. Xiu Wen's own line, supplied 2026-08-02. */
   tagline: 'Turning operational complexity into working digital products.',
 
@@ -74,16 +89,18 @@ export const profile: Profile = {
    * on, and the twenty centres now sit in the credibility strip directly
    * below, where a figure belongs.
    */
-  heroSupport:
-    'I manage frontline operations, define software requirements, coordinate delivery and validate releases across internal platforms used by multiple centres.',
-
   /*
-   * One quiet line under the headline. It sits between the claim and the
-   * credentials because it is the reason the rest of the page is shaped the
-   * way it is — and it is set smaller than both, so it reads as an aside
-   * rather than as a second headline competing with the first.
+   * Cut to the delivery half on 2026-08-08. The headline now carries the
+   * operations half and the twenty-centre scope, so repeating "frontline
+   * operations" and "multiple centres" here said the same thing a third time
+   * in a third register. What is left is the part the headline does not cover:
+   * what she actually does to a release.
+   *
+   * "validate releases" rather than "sign off releases" — she is the business
+   * validation, which is not sole authority over a production deploy.
    */
-  heroSubline: 'The best systems are built close to the people who use them.',
+  heroSupport:
+    'I define the requirements, coordinate the developers and QA, and validate the releases.',
 
   // F5, F19, F20
   about: [

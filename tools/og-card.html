@@ -1,0 +1,189 @@
+<!doctype html>
+<!--
+  Source for public/images/og-card.png.
+
+  The card is the only surface most forwarded-link recipients ever see, and it
+  used to contradict the page: it printed "Project Manager / Product Operations
+  and Business Systems" under her name, which is a title she does not hold, and
+  a strip reading "20 CENTRES · 2 PLATFORMS · 5 USER SURFACES" with every
+  qualifier stripped — the exact unbounded reading snapshot.ts exists to
+  prevent. It also carried neither Singapore nor a single app-store listing,
+  which are the two things that make a forward safe to make.
+
+  Kept as HTML rather than as a binary so the next correction is an edit rather
+  than an archaeology exercise. Regenerate with:
+
+    npx serve . -l 4321
+    open http://localhost:4321/tools/og-card.html at exactly 1200x630
+    screenshot the viewport (not the full page) to public/images/og-card.png
+
+  Palette and type are read from the site's own tokens: --rail-bg ground,
+  --rail-accent for the verified strip, Sora display / Inter sans / IBM Plex
+  Mono, matching globals.css. The three faces are fetched from Google Fonts at
+  render time, which is where next/font gets them during a build too; the PNG
+  bakes them, so the published card has no font dependency of its own.
+-->
+<html lang="en-SG">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --rail-bg: #101c25;
+        --rail-text: #e8edef;
+        --rail-muted: #94a3ab;
+        --rail-rule: #263a48;
+        --rail-accent: #9fcbc5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        background: var(--rail-bg);
+        font-family: 'Inter', sans-serif;
+        color: var(--rail-text);
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* The same 32px blueprint pitch the snapshot band uses on the site, so
+         the card reads as the same object as the page it points at. */
+      .blueprint {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgb(159 203 197 / 5%) 1px, transparent 1px),
+          linear-gradient(to bottom, rgb(159 203 197 / 5%) 1px, transparent 1px);
+        background-size: 32px 32px;
+        mask-image: linear-gradient(to bottom right, black, transparent 75%);
+      }
+
+      .frame {
+        position: relative;
+        height: 100%;
+        padding: 64px 72px 56px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .masthead {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .portrait {
+        width: 104px;
+        height: 104px;
+        border-radius: 999px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid var(--rail-rule);
+      }
+
+      .name {
+        font-family: 'Sora', sans-serif;
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        line-height: 1.1;
+      }
+
+      /* Discipline, not title. The record line at the foot carries the title. */
+      .discipline {
+        margin-top: 6px;
+        font-size: 21px;
+        color: var(--rail-muted);
+      }
+
+      .headline {
+        font-family: 'Sora', sans-serif;
+        font-size: 46px;
+        font-weight: 600;
+        line-height: 1.16;
+        letter-spacing: -0.02em;
+        margin-top: auto;
+        /* Wide enough that the second sentence takes two lines rather than
+           three. At 20ch it ran to four lines total and the card became a
+           wall of display type with the proof strip squeezed under it. */
+        max-width: 980px;
+      }
+
+      .headline .second {
+        display: block;
+        color: var(--rail-accent);
+      }
+
+      .foot {
+        margin-top: auto;
+        border-top: 1px solid var(--rail-rule);
+        padding-top: 22px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 32px;
+      }
+
+      /* Every figure keeps the noun that bounds it. "20 CENTRES" alone reads as
+         remit; "20 CENTRES SUPPORTED" reads as reach, which is the true one. */
+      .proof {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 17px;
+        letter-spacing: 0.02em;
+        color: var(--rail-accent);
+      }
+
+      .record {
+        margin-top: 10px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 16px;
+        letter-spacing: 0.01em;
+        color: var(--rail-muted);
+      }
+
+      .origin {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 16px;
+        color: var(--rail-muted);
+        white-space: nowrap;
+        padding-bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <span class="blueprint"></span>
+    <div class="frame">
+      <div class="masthead">
+        <img class="portrait" src="../public/images/xiu-wen-profile.webp" alt="" />
+        <div>
+          <div class="name">Chng Xiu Wen</div>
+          <div class="discipline">Operations &amp; Product Delivery</div>
+        </div>
+      </div>
+
+      <h1 class="headline">
+        I run a tuition centre.
+        <span class="second">I write the requirements for the platform twenty of them run on.</span>
+      </h1>
+
+      <div class="foot">
+        <div>
+          <div class="proof">4 APP-STORE LISTINGS &nbsp;·&nbsp; 2 INTERNAL PLATFORMS &nbsp;·&nbsp; 20 CENTRES SUPPORTED</div>
+          <div class="record">Tuition Centre Manager, AGrader Learning Centre &nbsp;·&nbsp; Singapore</div>
+        </div>
+        <div class="origin">xiuwen-web.github.io</div>
+      </div>
+    </div>
+  </body>
+</html>

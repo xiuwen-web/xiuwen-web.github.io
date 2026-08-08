@@ -4,6 +4,7 @@ import type { WorkEntry } from '@/types/content';
 import { Card } from './Card';
 import { Badge, Chip } from './Badge';
 import { PhaseStrip } from './RolloutDiagram';
+import { SurfaceStrip } from './Diagram';
 
 /**
  * Entries 01 and 02. The only raised elevation on the site, used exactly
@@ -20,7 +21,7 @@ export function FeaturedCard({
   number: string | null;
 }) {
   return (
-    <Card as="article" raised className="overflow-hidden">
+    <Card as="article" raised className="relative overflow-hidden">
       {entry.visual ? (
         <Image
           src={entry.visual.src}
@@ -45,7 +46,10 @@ export function FeaturedCard({
           loading="lazy"
         />
       ) : (
-        entry.diagram === 'rollout' && <PhaseStrip />
+        <>
+          {entry.diagram === 'rollout' && <PhaseStrip />}
+          {entry.diagram === 'surfaces' && <SurfaceStrip />}
+        </>
       )}
 
       <div className="p-5 sm:p-6">
@@ -62,10 +66,19 @@ export function FeaturedCard({
         </div>
 
         <h3 className="mt-4 font-display text-[1.25rem] leading-snug font-semibold sm:text-[1.375rem]">
+          {/*
+            The card's one link, stretched over the whole card by the pseudo
+            element. It replaced a pair: this title and a separate "Read the
+            case study" underneath, both pointing at the same page, which gave
+            every card two 23px-tall targets and read as two links to a screen
+            reader. Now the target is the card — comfortably past the 44px
+            minimum on the phone this is most often read on — and the label
+            below is left as an affordance rather than a second destination.
+          */}
           <Link
             prefetch={false}
             href={entry.href}
-            className="transition-opacity hover:opacity-70"
+            className="transition-opacity after:absolute after:inset-0 after:content-[''] hover:opacity-70"
           >
             {entry.navLabel}
           </Link>
@@ -88,16 +101,13 @@ export function FeaturedCard({
           </ul>
         )}
 
-        <p className="mt-5">
-          <Link
-            prefetch={false}
-            href={entry.href}
-            className="inline-flex items-center gap-1.5 text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
-            style={{ color: 'var(--accent-ink)' }}
-          >
-            Read the case study
-            <span aria-hidden="true">→</span>
-          </Link>
+        <p
+          aria-hidden="true"
+          className="mt-5 inline-flex items-center gap-1.5 text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4"
+          style={{ color: 'var(--accent-ink)' }}
+        >
+          Read the case study
+          <span>→</span>
         </p>
       </div>
     </Card>
@@ -111,7 +121,7 @@ export function FeaturedCard({
  */
 export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | null }) {
   return (
-    <Card as="li" className="flex flex-col overflow-hidden">
+    <Card as="li" className="relative flex flex-col overflow-hidden">
       {/* Compact media: a third the height of a featured card, so the two
           tiers still read as two tiers. Entries without a visual simply skip
           it and the card starts at the badge row. */}
@@ -156,10 +166,19 @@ export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | 
         </div>
 
         <h3 className="mt-3 font-display text-[length:var(--text-h3)] leading-snug font-semibold">
+          {/*
+            The card's one link, stretched over the whole card by the pseudo
+            element. It replaced a pair: this title and a separate "Read the
+            case study" underneath, both pointing at the same page, which gave
+            every card two 23px-tall targets and read as two links to a screen
+            reader. Now the target is the card — comfortably past the 44px
+            minimum on the phone this is most often read on — and the label
+            below is left as an affordance rather than a second destination.
+          */}
           <Link
             prefetch={false}
             href={entry.href}
-            className="transition-opacity hover:opacity-70"
+            className="transition-opacity after:absolute after:inset-0 after:content-[''] hover:opacity-70"
           >
             {entry.navLabel}
           </Link>
@@ -172,16 +191,15 @@ export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | 
           {entry.description}
         </p>
 
-        <p className="mt-4">
-          <Link
-            prefetch={false}
-            href={entry.href}
-            className="inline-flex items-center gap-1.5 text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
-            style={{ color: 'var(--accent-ink)' }}
-          >
-            Read more
-            <span aria-hidden="true">→</span>
-          </Link>
+        {/* "Read the case study", not "Read more" — same action and same kind
+            of destination as the featured cards, so the same words. */}
+        <p
+          aria-hidden="true"
+          className="mt-4 inline-flex items-center gap-1.5 text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4"
+          style={{ color: 'var(--accent-ink)' }}
+        >
+          Read the case study
+          <span>→</span>
         </p>
       </div>
     </Card>

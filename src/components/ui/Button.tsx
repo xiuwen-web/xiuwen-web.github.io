@@ -2,15 +2,20 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 /**
- * Three variants, one size. 40px high (compact rhythm), radius 8, 14px/500.
+ * Three variants, one size. 44px high, radius 8, 14px/500.
  *
  * Replaces the two ad-hoc button styles that were defined inline in the hero
  * and reused nowhere.
+ *
+ * Was h-10. 40px is a perfectly good desktop button and 4px under the touch
+ * minimum, and these are the two buttons a recruiter reaches for on a phone.
+ * The compact rhythm survives the change — at 14px text the box still reads
+ * tight rather than chunky.
  */
 type Variant = 'primary' | 'secondary' | 'quiet';
 
 const BASE =
-  'inline-flex h-10 items-center justify-center gap-2 rounded-[var(--radius)] px-4 text-[length:var(--text-small)] font-medium transition-colors';
+  'inline-flex h-11 items-center justify-center gap-2 rounded-[var(--radius)] px-4 text-[length:var(--text-small)] font-medium transition-colors';
 
 const VARIANT: Record<Variant, { className: string; style: React.CSSProperties }> = {
   primary: {

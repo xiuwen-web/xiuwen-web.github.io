@@ -238,7 +238,13 @@ export interface WorkEntry {
   status?: ProjectStatus;
   chips?: string[];
   visual?: Visual;
-  diagram?: 'rollout';
+  /**
+   * Card media drawn from data rather than photographed. Mutually exclusive
+   * with `visual`, and the build fails if an entry declares both — that
+   * combination silently rendered the image and dropped the diagram for
+   * months, which is how the CAdmin card ended up showing a login form.
+   */
+  diagram?: 'rollout' | 'surfaces';
   /** Featured entries carry media and a raised card; the rest are compact. */
   featured: boolean;
 }
@@ -428,8 +434,6 @@ export interface Profile {
   tagline: string;
   heroHeadline: string[];
   heroSupport: string;
-  /** The quiet line under the headline — why the work is shaped this way. */
-  heroSubline: string;
   about: string[];
   timeSplit: { label: string; value: number }[];
   /** Opens the Contact section — a statement of direction, not a greeting. */
