@@ -54,18 +54,22 @@ export const profile: Profile = {
    * job, so a reader scrolling for one found three different answers and
    * settled on the smallest and most specific.
    *
-   * This states the double role as a fact instead. Both halves are checkable,
-   * and the second bounds the first: she runs one centre, and the platform she
-   * writes requirements for runs twenty. That is the whole positioning in two
-   * sentences, and it is the sentence someone pastes above the link when they
-   * forward it — which is what this page is for.
+   * This leads with position rather than with capability. "I work inside the
+   * operation" is the fact that makes the second line credible and the one a
+   * neighbouring candidate cannot copy — the requirements hold up because the
+   * person writing them does the job they describe. Stating it first means the
+   * operations half is the argument rather than the thing to look past.
+   *
+   * Note what it does not carry: the twenty-centre scope. That bound now rests
+   * entirely on the credential row directly beneath and on the credibility
+   * strip below it, so neither is optional any more.
    *
    * Two array entries, so the break falls between the sentences rather than
    * wherever the measure happens to put it.
    */
   heroHeadline: [
-    'I run a tuition centre.',
-    'I write the requirements for the platform twenty of them run on.',
+    'I work inside the operation.',
+    'I turn frontline problems into systems you can rely on.',
   ],
   /** Rail identity block. Xiu Wen's own line, supplied 2026-08-02. */
   tagline: 'Turning operational complexity into working digital products.',

@@ -67,7 +67,7 @@ const OG_IMAGE = {
   /* Describes the card as redrawn on 2026-08-08: the discipline rather than a
      title she does not hold, the headline as it now reads, and the proof strip
      with its qualifiers restored. Source: tools/og-card.html. */
-  alt: 'Chng Xiu Wen — Operations & Product Delivery. I run a tuition centre. I write the requirements for the platform twenty of them run on. Four app-store listings, two internal platforms, twenty centres supported. Tuition Centre Manager, AGrader Learning Centre, Singapore.',
+  alt: 'Chng Xiu Wen — Operations & Product Delivery. I work inside the operation. I turn frontline problems into systems you can rely on. Four app-store listings, two internal platforms, twenty centres supported. Tuition Centre Manager, AGrader Learning Centre, Singapore.',
 };
 
 export const metadata: Metadata = {
