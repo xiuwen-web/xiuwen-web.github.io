@@ -1,7 +1,7 @@
 import { Container, Section } from '@/components/layout/Section';
 import { Shell } from '@/components/layout/Shell';
 import { FeaturedCard, WorkRow } from '@/components/ui/FeaturedCard';
-import { HandoffChain } from '@/components/ui/Diagram';
+import { HandoffChain, HandoffSummary } from '@/components/ui/Diagram';
 import { TraceChain } from '@/components/ui/TraceChain';
 import { workEntries, workNumber } from '@/content/navigation';
 import { principles, profile, socialLinks } from '@/content/profile';
@@ -102,6 +102,23 @@ function Hero() {
         </div>
 
         {/*
+          Two columns from lg, one below it.
+
+          The right column is the reason: the handoff chain was the best thing
+          on this page and it was halfway down it, behind the work grid, where
+          a reader deciding in thirty seconds never got to it. The desktop hero
+          also had most of its right half empty — the copy runs out well short
+          of the container — so the strongest evidence on the site and the
+          largest piece of unused space were sitting on the same screen.
+
+          It is desktop-only on purpose. On a phone the same 250px would push
+          the app-store links back under the fold, which is the thing the last
+          revision was for, and the full chain is a scroll away in How I Work
+          on every breakpoint.
+        */}
+        <div className="lg:flex lg:items-start lg:gap-12">
+          <div className="min-w-0 lg:flex-1">
+        {/*
           Capped at --text-display rather than the old lg:3.25rem. The headline
           is two sentences now instead of one, and the second is long; at 52px
           it ran to four display lines and pushed the proof back under the fold
@@ -170,6 +187,34 @@ function Hero() {
               {RESUME_LABEL}
             </Button>
           )}
+        </div>
+
+          </div>
+
+          {/* Fixed width: the tiles are a shape to be read at a glance, and a
+              column that stretched with the viewport would turn them into
+              seven wide bars with the ownership tag stranded far right. */}
+          <div className="hidden lg:block lg:w-[19rem] lg:shrink-0">
+            <h2
+              className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              How a change moves
+            </h2>
+            <div className="mt-3">
+              <HandoffSummary steps={handoff} />
+            </div>
+            {/* The accessible route to the same content in full — the summary
+                above is aria-hidden. Also the honest caption: the two tiles
+                that are not mine are the point of showing it. */}
+            <a
+              href="#process"
+              className="mt-3 inline-flex min-h-11 items-center text-[length:var(--text-label)] leading-snug underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+              style={{ color: 'var(--accent-ink)' }}
+            >
+              Two of the seven are someone else&rsquo;s — see how I work
+            </a>
+          </div>
         </div>
 
         {/*
@@ -288,7 +333,13 @@ function Work() {
         ))}
       </div>
 
-      <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+      {/*
+        The other four, as a divided list rather than as four more cards. The
+        intro above says CAdmin and EverLoop carry most of the work; until now
+        the layout contradicted it by giving all six the same rectangle. Two
+        raised cards over a quiet list says the same thing the sentence does.
+      */}
+      <ul className="mt-10 border-b" style={{ borderColor: 'var(--rule)' }}>
         {rest.map((entry) => (
           <WorkRow key={entry.href} entry={entry} number={workNumber(entry.href)} />
         ))}
@@ -831,9 +882,26 @@ function Contact() {
 
   return (
     <Section id="contact" eyebrow="Contact" title="Contact">
-      <p className="max-w-[45rem] text-pretty">{profile.contactLede}</p>
+      {/*
+        The closing statement, at size.
 
-      <dl className="mt-8 space-y-5">
+        Peak-end says a reader keeps the peak and the end. The peak moved into
+        the hero; this is the end, and it was a paragraph of body copy above a
+        definition list — the page finished on the register of a business card
+        after several thousand words of argument. The sentence was always the
+        right one. It just was not being said out loud.
+
+        Set in display type like the Principles close, so the two statements
+        the page ends on read as the same voice rather than as a heading and
+        an afterthought.
+      */}
+      <p className="max-w-[38rem] font-display text-[1.375rem] leading-snug text-balance sm:text-[1.625rem]">
+        {profile.contactLede}
+      </p>
+
+      {/* The four facts, demoted beneath it. They are reference, not argument:
+          a reader who has decided needs them findable, not persuasive. */}
+      <dl className="mt-10 space-y-5 border-t pt-8" style={{ borderColor: 'var(--rule)' }}>
         <ContactRow label="Email">
           <a
             href={`mailto:${profile.email}`}

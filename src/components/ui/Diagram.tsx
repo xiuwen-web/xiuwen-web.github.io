@@ -430,3 +430,74 @@ export function SurfaceStrip() {
     </div>
   );
 }
+
+/**
+ * The handoff chain, compressed to fit beside the hero copy.
+ *
+ * The full HandoffChain is the strongest artefact on the site — it makes the
+ * limits of the claim visible, which is what makes the rest of it believable —
+ * and it sat at roughly the middle of the page, behind the entire work grid. A
+ * reader deciding in thirty seconds never reached it.
+ *
+ * This is the same seven steps and the same ownership colouring with the
+ * per-step description dropped, so it reads as a shape rather than as prose:
+ * five tiles that are hers, two that are not. The detail is unchanged and
+ * still lives in #process, one anchor away.
+ *
+ * aria-hidden, following PhaseStrip and SurfaceStrip. It states nothing the
+ * full chain below does not state with more detail, and a screen reader
+ * meeting all seven stages twice on one page is worse served than one that
+ * meets them once, in full. The link beneath it is the route there.
+ */
+export function HandoffSummary({ steps }: { steps: HandoffStep[] }) {
+  return (
+    <ol aria-hidden="true" className="space-y-[3px]">
+      {steps.map((step, i) => {
+        const mine = step.owner === 'Mine';
+        return (
+          <li
+            key={step.stage}
+            className="relative flex items-center gap-2.5 rounded-[6px] border px-3 py-2"
+            style={{
+              borderColor: mine ? 'var(--accent)' : 'var(--rule)',
+              /*
+               * Mixed rather than --accent-soft. In dark mode that token is
+               * #1a3239 against a #162a3a surface — about a 1% step, so the
+               * five-versus-two shape that is the entire point of showing this
+               * stopped reading at a glance. Mixing the accent into the
+               * surface is the recipe Badge already uses and it holds in both
+               * themes from one expression.
+               */
+              background: mine
+                ? 'color-mix(in srgb, var(--accent) 14%, var(--surface))'
+                : 'var(--surface)',
+            }}
+          >
+            {/* Connector, in the 3px gap below each tile. */}
+            {i < steps.length - 1 && (
+              <span
+                className="absolute -bottom-[3px] left-1/2 h-[3px] w-px"
+                style={{ background: 'var(--accent)' }}
+              />
+            )}
+            <span
+              className="w-[1.25rem] shrink-0 font-mono text-[0.6875rem] tabular-nums"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span className="min-w-0 flex-1 truncate text-[length:var(--text-label)] font-medium">
+              {step.stage}
+            </span>
+            <span
+              className="shrink-0 font-mono text-[0.625rem] tracking-[0.08em] uppercase"
+              style={{ color: mine ? 'var(--accent-ink)' : 'var(--text-muted)' }}
+            >
+              {step.owner}
+            </span>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}

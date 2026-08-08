@@ -115,93 +115,58 @@ export function FeaturedCard({
 }
 
 /**
- * Entries 03 and 04. Same numbering, less weight — a flat card rather than a
- * raised one, and no media, so the featured pair still reads as the featured
- * pair.
+ * The entries that are not featured, as a dense row rather than as a card.
+ *
+ * They were cards too until 2026-08-08: same shape, same media band, same
+ * "Read the case study" line, four of them under the two that matter. The
+ * section intro says in words that CAdmin and EverLoop "carry most of what I
+ * do", and then the layout said the opposite — six equal rectangles, no
+ * hierarchy, and the longest section on the page pushing How I Work below the
+ * point most readers reach.
+ *
+ * A row keeps every entry present, numbered and clickable, at roughly a fifth
+ * of the height. The media went with the card: a 112px band cropped from a
+ * screenshot was never evidence at that size, and two of the four were
+ * carrying a blueprint placeholder because no publishable image existed.
+ *
+ * One stretched link per row, as on the cards — the whole row is the target.
  */
 export function WorkRow({ entry, number }: { entry: WorkEntry; number: string | null }) {
   return (
-    <Card as="li" className="relative flex flex-col overflow-hidden">
-      {/* Compact media: a third the height of a featured card, so the two
-          tiers still read as two tiers. Entries without a visual simply skip
-          it and the card starts at the badge row. */}
-      {entry.visual ? (
-        <Image
-          src={entry.visual.src}
-          /* As in FeaturedCard above — the written alt was being thrown away. */
-          alt={entry.visual.alt}
-          width={entry.visual.width}
-          height={entry.visual.height}
-          className={`h-28 w-full border-b ${
-            entry.visual.contain ? 'object-contain p-3' : 'object-cover object-top'
-          }`}
-          style={{
-            borderColor: 'var(--rule)',
-            background: entry.visual.contain ? 'var(--surface-sunk)' : undefined,
-          }}
-          loading="lazy"
-        />
-      ) : (
-        /* An entry with no publishable screenshot still needs the band, or it
-           sits half a card lower than its neighbour in the same grid row. The
-           blueprint plate is the theme's own neutral surface. */
+    /* border-t on the row rather than divide-y on the list: border-color is
+       not an inherited property, so divide-y children would have fallen back
+       to currentColor and drawn the rules in text colour. */
+    <li className="relative border-t" style={{ borderColor: 'var(--rule)' }}>
+      <div className="flex flex-col gap-1.5 py-4 sm:flex-row sm:items-baseline sm:gap-4">
         <span
-          aria-hidden="true"
-          className="blueprint block h-28 w-full border-b"
-          style={{ borderColor: 'var(--rule)', background: 'var(--surface-sunk)' }}
-        />
-      )}
-
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          {entry.status ? <Badge status={entry.status} /> : <span />}
-          {number && (
-            <span
-              className="font-mono text-[length:var(--text-label)] tabular-nums"
-              style={{ color: 'var(--text-muted)' }}
-            >
-              {number}
-            </span>
-          )}
-        </div>
-
-        <h3 className="mt-3 font-display text-[length:var(--text-h3)] leading-snug font-semibold">
-          {/*
-            The card's one link, stretched over the whole card by the pseudo
-            element. It replaced a pair: this title and a separate "Read the
-            case study" underneath, both pointing at the same page, which gave
-            every card two 23px-tall targets and read as two links to a screen
-            reader. Now the target is the card — comfortably past the 44px
-            minimum on the phone this is most often read on — and the label
-            below is left as an affordance rather than a second destination.
-          */}
-          <Link
-            prefetch={false}
-            href={entry.href}
-            className="transition-opacity after:absolute after:inset-0 after:content-[''] hover:opacity-70"
-          >
-            {entry.navLabel}
-          </Link>
-        </h3>
-
-        <p
-          className="mt-2 flex-1 text-[length:var(--text-small)]"
+          className="font-mono text-[length:var(--text-label)] tabular-nums sm:pt-[0.15rem]"
           style={{ color: 'var(--text-muted)' }}
         >
-          {entry.description}
-        </p>
+          {number}
+        </span>
 
-        {/* "Read the case study", not "Read more" — same action and same kind
-            of destination as the featured cards, so the same words. */}
-        <p
-          aria-hidden="true"
-          className="mt-4 inline-flex items-center gap-1.5 text-[length:var(--text-small)] font-medium underline decoration-1 underline-offset-4"
-          style={{ color: 'var(--accent-ink)' }}
-        >
-          Read the case study
-          <span>→</span>
-        </p>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <h3 className="font-display text-[length:var(--text-h3)] leading-snug font-semibold">
+              <Link
+                prefetch={false}
+                href={entry.href}
+                className="transition-opacity after:absolute after:inset-0 after:content-[''] hover:opacity-70"
+              >
+                {entry.navLabel}
+              </Link>
+            </h3>
+            {entry.status && <Badge status={entry.status} />}
+          </div>
+
+          <p
+            className="mt-1.5 text-[length:var(--text-small)] text-pretty"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {entry.description}
+          </p>
+        </div>
       </div>
-    </Card>
+    </li>
   );
 }
