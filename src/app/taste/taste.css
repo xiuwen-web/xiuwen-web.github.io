@@ -1,0 +1,215 @@
+/* ------------------------------------------------------------------
+   Styles for the /taste variants only.
+
+   Imported by the variant pages rather than added to globals.css, so
+   nothing here can reach the live site until a variant is adopted.
+   Everything is additive: new tokens, new classes, no overrides.
+------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------
+   The band token
+
+   Variant B puts the four verifiable figures on a band that breaks the
+   page tonally. --navy does that in light: #162a3a on a #f3f6f5 page is
+   the strongest edge on the site.
+
+   In dark it does the opposite of what it is for. --navy resolves to
+   #0c161d against a #101c25 page — a four-point step, which is not a
+   band, it is a rendering artefact. So dark takes --surface instead:
+   #162a3a, the same hue, sitting *above* the page rather than below it.
+
+   That is not an inconsistency, it is the rule the dark palette was
+   already written to (globals.css: "cards lift instead of casting
+   shadow — shadow does not read on dark"). The band reads as a break in
+   both themes; which direction it breaks in is decided by which side of
+   the page background there is room on.
+------------------------------------------------------------------- */
+
+:root {
+  --band: var(--navy);
+  --band-text: var(--rail-text);
+  --band-muted: var(--rail-muted);
+  --band-rule: var(--rail-rule);
+  --band-figure: var(--rail-accent);
+  --band-grid: 0.35;
+}
+
+[data-theme='dark'] {
+  --band: var(--surface);
+  /* #263a48 on #162a3a is the same hairline the rest of dark mode uses. */
+  --band-rule: var(--rule);
+  --band-grid: 0.5;
+}
+
+/* ------------------------------------------------------------------
+   Staggered entry for groups
+
+   Reuses the IntersectionObserver already in layout.tsx: it adds
+   .reveal-ready then .is-visible to the children of any [data-reveal]
+   element, and only ever hides content it has already proved it can
+   reveal again. So this is delay values and nothing else — no new
+   script, no client component, no library.
+
+   Applied to three groups, all of which are a set that arrives as a
+   set: the four figures, the four screenshots, the four smaller
+   projects. Not applied to section headings. Eight headings each
+   sliding up in turn is the templated tic the rest of this variant
+   exists to remove — when everything moves, nothing reads as moving.
+------------------------------------------------------------------- */
+
+.tv-stagger > *:nth-child(2).reveal-ready.is-visible {
+  transition-delay: 70ms;
+}
+.tv-stagger > *:nth-child(3).reveal-ready.is-visible {
+  transition-delay: 140ms;
+}
+.tv-stagger > *:nth-child(4).reveal-ready.is-visible {
+  transition-delay: 210ms;
+}
+.tv-stagger > *:nth-child(5).reveal-ready.is-visible {
+  transition-delay: 280ms;
+}
+.tv-stagger > *:nth-child(6).reveal-ready.is-visible {
+  transition-delay: 350ms;
+}
+
+/* ------------------------------------------------------------------
+   Tactile feedback
+
+   A press and a hover that move. Transform and opacity only, so the
+   compositor does the work and nothing reflows.
+------------------------------------------------------------------- */
+
+.tv-lift {
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms ease-out;
+  will-change: transform;
+}
+
+.tv-lift:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-raised);
+}
+
+.tv-lift:active {
+  transform: translateY(-1px);
+}
+
+/* The media inside a hovered tile, pushed very slightly past its frame.
+   The frame clips it, so the picture reads as being looked into rather
+   than as growing. */
+.tv-zoom img {
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.tv-zoom:hover img {
+  transform: scale(1.035);
+}
+
+/* ------------------------------------------------------------------
+   The time split, filled by scroll position
+
+   The one piece of data on the page that is a proportion, so it is the
+   one thing worth animating as a quantity: the bar draws left to right
+   as the section arrives, which is what makes 40/40/20 legible without
+   reading the three labels under it.
+
+   clip-path rather than scaleX. Scaling a 999px-radius pill squashes
+   the end caps on the way in; a clip reveals it at full fidelity.
+
+   Scroll-driven, so it is tied to the reader's own scrolling rather
+   than to a timer that may have finished before they arrived. Behind
+   @supports: where view() is unavailable the bar is simply drawn full,
+   which is the correct static state.
+------------------------------------------------------------------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tv-bar {
+      animation: tv-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+}
+
+@keyframes tv-fill {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Disclosure open and close
+
+   The four <details> on this page snap. A state change that happens
+   instantly makes the reader re-find their place; one that takes 260ms
+   shows them where the new content came from.
+
+   ::details-content is the modern hook, and interpolate-size is what
+   lets height animate to and from auto. Both are progressive: without
+   them the element opens exactly as it does today. Unscoped, because
+   this stylesheet is imported by the variant page and by nothing else.
+------------------------------------------------------------------- */
+
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 260ms cubic-bezier(0.16, 1, 0.3, 1),
+      content-visibility 260ms allow-discrete,
+      opacity 200ms ease-out;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion
+
+   globals.css already collapses transition and animation durations
+   globally. These are the two cases that need a state as well as a
+   duration: a clip that never animates must not be left clipped, and a
+   disclosure that never animates must not be left at zero height.
+------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-bar {
+    animation: none;
+    clip-path: none;
+  }
+
+  .tv-stagger > *.reveal-ready.is-visible {
+    transition-delay: 0ms;
+  }
+
+  .tv-lift:hover,
+  .tv-zoom:hover img {
+    transform: none;
+  }
+
+  details::details-content,
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+    transition: none;
+  }
+}

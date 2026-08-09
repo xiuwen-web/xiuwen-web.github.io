@@ -1,0 +1,330 @@
+/* ------------------------------------------------------------------
+   Premium material layer — Variant D ("Instrument") only.
+
+   Imported by src/app/taste/d/page.tsx and by nothing else, so none of
+   it reaches the live site or the other variants.
+
+   The brief was "design like a high-end agency". The agency default for
+   that phrase is Ethereal Glass: OLED black, glowing mesh orbs, heavy
+   backdrop-blur. That is the wrong instrument for this page. The whole
+   argument here is that the claims can be checked and the systems can be
+   relied on, and a nightclub surface undercuts it.
+
+   So the vibe archetype is Soft Structuralism, tuned toward precision
+   hardware: machined enclosures, concentric radii, ambient light from a
+   single source above, tabular data, real texture. Expensive the way a
+   measuring instrument is expensive.
+------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------
+   1. ELEVATION
+
+   The live site has one shadow, and it is pure black:
+     0 1px 2px rgb(0 0 0 / 4%), 0 6px 16px rgb(0 0 0 / 5%)
+
+   Two problems. Black shadow on a cool teal-grey ground reads as dirt
+   rather than as depth, because nothing else on the page is neutral.
+   And one level means nothing can be more raised than anything else, so
+   elevation cannot carry hierarchy.
+
+   Three levels, every one tinted with the palette's own navy (22 42 58)
+   and lit from directly above: a tight contact shadow, a mid diffusion,
+   and a wide ambient. The ratios between them are what make a surface
+   read as floating rather than as outlined.
+------------------------------------------------------------------- */
+
+:root {
+  --px-shadow-hue: 22 42 58;
+
+  --px-elev-1:
+    0 1px 1px rgb(var(--px-shadow-hue) / 0.04),
+    0 2px 4px -1px rgb(var(--px-shadow-hue) / 0.04);
+
+  --px-elev-2:
+    0 1px 2px rgb(var(--px-shadow-hue) / 0.05),
+    0 4px 10px -2px rgb(var(--px-shadow-hue) / 0.06),
+    0 14px 30px -8px rgb(var(--px-shadow-hue) / 0.09);
+
+  --px-elev-3:
+    0 2px 4px rgb(var(--px-shadow-hue) / 0.06),
+    0 12px 26px -6px rgb(var(--px-shadow-hue) / 0.1),
+    0 36px 68px -16px rgb(var(--px-shadow-hue) / 0.14);
+
+  /* The top highlight. A machined surface catches light on its upper
+     edge; this is the one-pixel line that sells the material. */
+  --px-highlight: inset 0 1px 0 rgb(255 255 255 / 0.75);
+
+  /* Radii, as a scale rather than a single value. Outer enclosures are
+     soft, inner cores are tighter, and the inner value is always the
+     outer minus the tray padding so the curves stay concentric. */
+  --px-r-xs: 6px;
+  --px-r-sm: 10px;
+  --px-r-md: 16px;
+  --px-r-lg: 22px;
+  --px-r-xl: 28px;
+  --px-tray: 6px;
+
+  /* One curve for everything that moves. Weighted, with a long tail —
+     it decelerates like something with mass. */
+  --px-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+[data-theme='dark'] {
+  /* Shadow does not read on a dark ground: a black blur on near-black is
+     invisible, and lifting the opacity only produces a grey halo. Dark
+     mode separates surfaces with light instead — a hairline ring plus a
+     faint top highlight, which is the same physical story told the only
+     way the medium allows. */
+  --px-elev-1: 0 0 0 1px rgb(255 255 255 / 0.05);
+  --px-elev-2:
+    0 0 0 1px rgb(255 255 255 / 0.07),
+    0 12px 30px -12px rgb(0 0 0 / 0.6);
+  --px-elev-3:
+    0 0 0 1px rgb(255 255 255 / 0.09),
+    0 30px 60px -20px rgb(0 0 0 / 0.75);
+
+  --px-highlight: inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+/* ------------------------------------------------------------------
+   2. GRAIN
+
+   Flat vector surfaces are the giveaway that a page was assembled
+   rather than made. A single fractal-noise layer at 3.5% breaks the
+   digital flatness without ever being consciously visible.
+
+   Fixed and pointer-events-none, per the performance rule: attached to
+   a scrolling container this would repaint the whole layer every frame.
+   Sits above content and below any overlay.
+------------------------------------------------------------------- */
+
+.px-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+[data-theme='dark'] .px-grain {
+  opacity: 0.05;
+}
+
+/* ------------------------------------------------------------------
+   3. THE DOUBLE BEZEL
+
+   A card placed flat on the page is a rectangle. A card placed in a
+   tray is an object.
+
+   .px-tray is the outer enclosure: a faint recessed ground, a hairline
+   ring, six pixels of padding and a soft outer radius. .px-core is what
+   sits in it, at a radius of exactly outer-minus-padding so the two
+   curves are concentric rather than merely both round. Getting that
+   subtraction wrong is what makes nested corners look wobbly, and it is
+   the detail that separates machined from drawn.
+------------------------------------------------------------------- */
+
+.px-tray {
+  padding: var(--px-tray);
+  border-radius: var(--px-r-xl);
+  background: color-mix(in srgb, var(--text) 4%, var(--bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent);
+  transition:
+    transform 600ms var(--px-ease),
+    box-shadow 600ms var(--px-ease);
+}
+
+.px-core {
+  border-radius: calc(var(--px-r-xl) - var(--px-tray));
+  background: var(--surface);
+  box-shadow: var(--px-elev-2), var(--px-highlight);
+  overflow: hidden;
+}
+
+.px-tray-sm {
+  padding: 4px;
+  border-radius: var(--px-r-md);
+  background: color-mix(in srgb, var(--text) 4%, var(--bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.px-core-sm {
+  border-radius: calc(var(--px-r-md) - 4px);
+  background: var(--surface);
+  box-shadow: var(--px-elev-1), var(--px-highlight);
+  overflow: hidden;
+}
+
+/* Hover: the whole enclosure rises, the light under it spreads. */
+@media (prefers-reduced-motion: no-preference) {
+  .px-tray:hover {
+    transform: translateY(-4px);
+  }
+
+  .px-tray:hover .px-core {
+    box-shadow: var(--px-elev-3), var(--px-highlight);
+  }
+}
+
+/* ------------------------------------------------------------------
+   4. THE ISLAND BUTTON
+
+   The trailing arrow never sits naked beside the label. It gets its own
+   circular well, flush with the button's inner padding, and moves
+   diagonally on hover while the button itself compresses on press — so
+   the control has internal kinetic tension rather than a colour change.
+------------------------------------------------------------------- */
+
+.px-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 999px;
+  padding: 0.6875rem 0.6875rem 0.6875rem 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition:
+    transform 400ms var(--px-ease),
+    box-shadow 400ms var(--px-ease),
+    background-color 400ms var(--px-ease);
+}
+
+.px-btn-well {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  transition:
+    transform 500ms var(--px-ease),
+    background-color 400ms var(--px-ease);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .px-btn:hover .px-btn-well {
+    transform: translate(3px, -2px) scale(1.06);
+  }
+
+  .px-btn:active {
+    transform: scale(0.982);
+  }
+}
+
+/* ------------------------------------------------------------------
+   5. ENTRY
+
+   The live reveal is a 12px rise over 300ms. It reads as a UI state
+   change. This is a 24px rise with a 6px defocus over 900ms, which
+   reads as something arriving — the blur is what supplies the weight,
+   because things that move toward you resolve as they land.
+
+   Overrides globals.css by loading after it. The mechanism underneath
+   is unchanged: the markup still ships visible and the observer still
+   only hides what it has already proved it can reveal.
+------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+
+  .reveal-ready.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition:
+      opacity 900ms var(--px-ease),
+      transform 900ms var(--px-ease),
+      filter 700ms var(--px-ease);
+  }
+
+  /* Wider spacing than the 60ms the flow chain uses. At this duration a
+     tight stagger reads as one blurred mass arriving; 90ms lets each
+     item be seen landing separately. */
+  .tv-stagger > *:nth-child(2).reveal-ready.is-visible {
+    transition-delay: 90ms;
+  }
+  .tv-stagger > *:nth-child(3).reveal-ready.is-visible {
+    transition-delay: 180ms;
+  }
+  .tv-stagger > *:nth-child(4).reveal-ready.is-visible {
+    transition-delay: 270ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready,
+  .reveal-ready.is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .px-tray:hover,
+  .px-btn:active,
+  .px-btn:hover .px-btn-well {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   6. TYPE
+
+   Geist replaces Inter for body and Sora for display, and Geist Mono
+   replaces IBM Plex Mono — one superfamily across all three roles. It
+   is a working decision as much as an aesthetic one: the page runs
+   prose, display and tabular data against each other constantly, and a
+   single family with a true mono sibling keeps their proportions
+   related instead of merely adjacent.
+
+   Display sizes get negative tracking. Letterforms set at 60px carry
+   the same side bearings they were drawn with at 16px, so large type
+   always looks loose until it is pulled in.
+------------------------------------------------------------------- */
+
+.px-display {
+  letter-spacing: -0.032em;
+  font-weight: 600;
+  line-height: 1.02;
+}
+
+.px-h2 {
+  letter-spacing: -0.022em;
+  font-weight: 600;
+}
+
+/* Small caps labels get the opposite treatment: opened up, because at
+   11px tight tracking closes the counters and the run stops being
+   scannable. */
+.px-label {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The eyebrow as a pill rather than as bare caps floating over a
+   heading. Used twice on the page, not fifteen times. */
+.px-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.3125rem 0.75rem;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent-ink);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Tabular figures everywhere a number is meant to be compared. */
+.px-nums {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}

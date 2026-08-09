@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local preview roots: copies of out/ served per design variant. Same
+    // reason out/ is ignored — it is build output, and linting it reports
+    // errors in minified Next chunks that no one can act on. CI never has
+    // this directory (it is gitignored), so without this entry `npm run
+    // lint` disagrees with the workflow that gates the deploy.
+    "preview/**",
   ]),
 ]);
 

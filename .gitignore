@@ -110,3 +110,6 @@ PORTFOLIO_*.md
 # them out; the published copy belongs at public/documents/ and nowhere else.
 /*.pdf
 /*.docx
+
+# Taste-variant preview roots, built by copying out/ per variant.
+preview/
