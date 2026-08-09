@@ -184,9 +184,26 @@ export function Sidebar({
             </div>
           )}
 
+          {/*
+            Pinned to the bottom of the rail's own scroll box, not just to the
+            end of its content.
+
+            `mt-auto` alone puts this row at the foot of a column that is taller
+            than the viewport on any laptop: at 800px of viewport the rail's
+            content measures 881px, so the theme toggle sat 57px below the fold
+            inside a container with 81px of internal scroll. Scrolling there
+            chains to the page almost at once, so the control was reachable in
+            principle and unreachable in practice — the site shipped a dark mode
+            most readers could not turn on.
+
+            The negative margin and matching padding let the background run to
+            the rail's edges, so the links underneath scroll out of sight rather
+            than through the row. It costs the glow canvas its bottom 60px,
+            which is the cheaper of the two losses.
+          */}
           <div
-            className="mt-auto flex items-center justify-between border-t pt-4"
-            style={{ borderColor: 'var(--rail-rule)' }}
+            className="sticky bottom-0 -mx-5 -mb-6 mt-auto flex items-center justify-between border-t px-5 pt-4 pb-6"
+            style={{ borderColor: 'var(--rail-rule)', background: 'var(--rail-bg)' }}
           >
             <span
               className="font-mono text-[length:var(--text-label)] tracking-[0.08em] uppercase"
