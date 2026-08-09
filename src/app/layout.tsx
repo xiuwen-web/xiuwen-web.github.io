@@ -1,25 +1,35 @@
 import type { Metadata } from 'next';
-import { IBM_Plex_Mono, Inter, Sora } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import './premium.css';
 import { profile, socialLinks } from '@/content/profile';
 import { SITE_URL } from '@/content/site';
 
-// Self-hosted and subset by next/font — no CDN request, no layout shift.
-const inter = Inter({ variable: '--font-inter', subsets: ['latin'], display: 'swap' });
+/*
+ * One superfamily in three roles, replacing Inter, Sora and IBM Plex Mono.
+ *
+ * Inter was the body face and it is the most recognisable default in
+ * front-end work — the face a page wears when nobody chose one. Sora was a
+ * deliberate pick and a good one, but it is wide, and a headline set in it
+ * has to be small enough not to break.
+ *
+ * Geist is drawn for interface and carries a true monospaced sibling. That
+ * matters here more than it would elsewhere: this site runs prose, display
+ * and tabular data against each other constantly — a credential row, a
+ * figures band, seven diagram tiles, a spec sheet — and a single family
+ * keeps their proportions related rather than merely adjacent.
+ *
+ * Loaded at the root so the case studies match the homepage. A reader who
+ * clicks "Read the case study" must not land on a different typeface.
+ *
+ * Still self-hosted and subset by next/font: no CDN request, no layout
+ * shift. The sans is variable because the scale now uses 400 through 700
+ * and five static cuts would cost more than the variable file does.
+ */
+const geist = Geist({ variable: '--font-geist', subsets: ['latin'], display: 'swap' });
 
-// Sora replaces Fraunces. Fraunces is a warm editorial serif and read as
-// "considered writing"; Sora is geometric and even-width and reads as
-// "specification". Weights are capped at three — the type scale has no use
-// for more.
-const sora = Sora({
-  variable: '--font-sora',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600'],
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: '--font-plex-mono',
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500'],
@@ -530,7 +540,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="light"
-      className={`${inter.variable} ${sora.variable} ${plexMono.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} h-full`}
       suppressHydrationWarning
     >
       <head>
@@ -548,6 +558,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        {/*
+          The grain. Fixed and pointer-events-none, so it never repaints on
+          scroll and never intercepts a click. Site-wide rather than on the
+          homepage alone: it is the page's material, and a case study made
+          of something else would read as a different site.
+        */}
+        <span aria-hidden="true" className="px-grain" />
         {children}
         <script dangerouslySetInnerHTML={{ __html: RAIL_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: TOC_SCRIPT }} />

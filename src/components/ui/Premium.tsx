@@ -228,7 +228,7 @@ export function PremiumHero() {
           <p className="px-label text-[0.6875rem]" style={{ color: 'var(--text-muted)' }}>
             Live now
           </p>
-          <ul className="tv-stagger mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2" data-reveal>
+          <ul className="px-stagger mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2" data-reveal>
             {appLinks.map((link) => (
               <li key={link.href}>
                 <a
@@ -291,7 +291,7 @@ export function PremiumProofBand() {
       />
 
       <Container width="wide" className="relative py-20 sm:py-28">
-        <dl className="tv-stagger grid grid-cols-2 gap-x-10 gap-y-14 lg:grid-cols-4" data-reveal>
+        <dl className="px-stagger grid grid-cols-2 gap-x-10 gap-y-14 lg:grid-cols-4" data-reveal>
           {snapshot.map((fact) => (
             <div key={fact.label}>
               <dt
@@ -361,7 +361,7 @@ export function PremiumFeatured() {
      * different heights is the detail that makes a grid look assembled
      * rather than designed, and it is invisible until it is pointed at.
      */
-    <ul className="tv-stagger grid items-stretch gap-7 sm:grid-cols-2" data-reveal>
+    <ul className="px-stagger grid items-stretch gap-7 sm:grid-cols-2" data-reveal>
       {featured.map((entry) => (
         <li key={entry.href} className="px-tray relative flex">
           <article className="px-core flex flex-1 flex-col">
@@ -437,7 +437,7 @@ export function PremiumWorkTiles() {
   const rest = workEntries.filter((e) => !e.featured);
 
   return (
-    <ul className="tv-stagger mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2" data-reveal>
+    <ul className="px-stagger mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2" data-reveal>
       {rest.map((entry) => (
         <li key={entry.href} className="px-tray relative">
           <div className="px-core flex gap-4 p-4">
@@ -550,7 +550,7 @@ export function PremiumShipped() {
         </p>
 
         <ul
-          className="tv-stagger mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="px-stagger mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
           data-reveal
         >
           {SHIPPED.map((shot) => (

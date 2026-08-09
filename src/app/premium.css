@@ -1,8 +1,10 @@
 /* ------------------------------------------------------------------
-   Premium material layer — Variant D ("Instrument") only.
+   Premium material layer.
 
-   Imported by src/app/taste/d/page.tsx and by nothing else, so none of
-   it reaches the live site or the other variants.
+   Loaded after globals.css in layout.tsx, so it applies to the whole
+   site. Everything here is materials — elevation, radii, texture, motion
+   and type treatment. globals.css still owns the palette, the type scale
+   and the layout tokens, and nothing here redefines them.
 
    The brief was "design like a high-end agency". The agency default for
    that phrase is Ethereal Glass: OLED black, glowing mesh orbs, heavy
@@ -244,13 +246,13 @@
   /* Wider spacing than the 60ms the flow chain uses. At this duration a
      tight stagger reads as one blurred mass arriving; 90ms lets each
      item be seen landing separately. */
-  .tv-stagger > *:nth-child(2).reveal-ready.is-visible {
+  .px-stagger > *:nth-child(2).reveal-ready.is-visible {
     transition-delay: 90ms;
   }
-  .tv-stagger > *:nth-child(3).reveal-ready.is-visible {
+  .px-stagger > *:nth-child(3).reveal-ready.is-visible {
     transition-delay: 180ms;
   }
-  .tv-stagger > *:nth-child(4).reveal-ready.is-visible {
+  .px-stagger > *:nth-child(4).reveal-ready.is-visible {
     transition-delay: 270ms;
   }
 }
@@ -327,4 +329,132 @@
 .px-nums {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
+}
+
+/* ------------------------------------------------------------------
+   7. THE FIGURES BAND
+
+   The four verifiable figures sit on a band that breaks the page
+   tonally. --navy does that in light: #162a3a against a #f3f6f5 page is
+   the strongest edge on the site.
+
+   In dark it does the opposite of what it is for. --navy resolves to
+   #0c161d against a #101c25 page — a four-point step, which is not a
+   band, it is a rendering artefact. So dark takes --surface instead:
+   #162a3a, the same hue, sitting above the page rather than below it.
+
+   Not an inconsistency. It is the rule the dark palette was already
+   written to in globals.css ("cards lift instead of casting shadow —
+   shadow does not read on dark"). The band reads as a break in both
+   themes; which direction it breaks in is decided by which side of the
+   page background there is room on.
+------------------------------------------------------------------- */
+
+:root {
+  --band: var(--navy);
+  --band-text: var(--rail-text);
+  --band-muted: var(--rail-muted);
+  --band-rule: var(--rail-rule);
+  --band-figure: var(--rail-accent);
+  --band-grid: 0.35;
+}
+
+[data-theme='dark'] {
+  --band: var(--surface);
+  --band-rule: var(--rule);
+  --band-grid: 0.5;
+}
+
+/* ------------------------------------------------------------------
+   8. THE TIME SPLIT, FILLED BY SCROLL POSITION
+
+   The one piece of data on the site that is a proportion, so it is the
+   one thing worth animating as a quantity: the bar draws left to right
+   as the section arrives, which is what makes 40/40/20 legible before
+   the three labels under it are read.
+
+   clip-path rather than scaleX. Scaling a 999px-radius pill squashes
+   the end caps on the way in; a clip reveals it at full fidelity.
+
+   Scroll-driven, so it is tied to the reader's own scrolling rather
+   than to a timer that may have finished before they arrived. Behind
+   @supports: where view() is unavailable the bar is simply drawn full,
+   which is the correct static state.
+------------------------------------------------------------------- */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .px-bar {
+      animation: px-fill linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+}
+
+@keyframes px-fill {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ------------------------------------------------------------------
+   9. DISCLOSURE OPEN AND CLOSE
+
+   The disclosures on this site snap. A state change that happens
+   instantly makes the reader re-find their place; one that takes 260ms
+   shows them where the new content came from.
+
+   ::details-content is the modern hook and interpolate-size is what
+   lets height animate to and from auto. Both are progressive: without
+   them the element opens exactly as it did before.
+------------------------------------------------------------------- */
+
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 260ms var(--px-ease),
+      content-visibility 260ms allow-discrete,
+      opacity 200ms ease-out;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------
+   10. REDUCED MOTION
+
+   globals.css already collapses durations globally. These are the two
+   cases that need a state as well as a duration: a clip that never
+   animates must not be left clipped, and a disclosure that never
+   animates must not be left at zero height.
+------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .px-bar {
+    animation: none;
+    clip-path: none;
+  }
+
+  details::details-content,
+  details[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+    transition: none;
+  }
 }
