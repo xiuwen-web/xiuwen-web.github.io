@@ -258,7 +258,9 @@ export const ecosystem: Ecosystem = {
           heading: 'Diagnostic and progress reports',
           detail: { hint: 'How a report reaches a parent. Teacher and parent screenshots.' },
           body: [
-            'Diagnostic reports were written by hand — thirty to forty-five minutes per student, per subject, per term, and the quality depended on how strong a writer each teacher happened to be.',
+            /* The per-report time figure was cut 2026-09-28 at Xiu Wen's
+               request: it read as a time-saved claim (F26). */
+            'Diagnostic reports were written by hand, per student, per subject, per term, and the quality depended on how strong a writer each teacher happened to be.',
           ],
           diagrams: ['report-flow'],
           visuals: [

@@ -190,7 +190,7 @@ export const trace: TraceStep[] = [
     stage: 'Written',
     artefact: 'Project brief, v1.0 → v1.1',
     detail:
-      'A versioned brief with a changelog: the problem quantified at thirty to forty-five minutes per student per subject per term, an eight-step flow across three surfaces, an in and out of scope table, eight risks each with a mitigation, and a four-phase timeline. Version 1.1 records a reversal — Google Forms moved from out of scope to in, because assessment topics change yearly and the education team had to be able to change the form without waiting on a developer.',
+      'A versioned brief with a changelog: the problem statement, an eight-step flow across three surfaces, an in and out of scope table, eight risks each with a mitigation, and a four-phase timeline. Version 1.1 records a reversal — Google Forms moved from out of scope to in, because assessment topics change yearly and the education team had to be able to change the form without waiting on a developer.',
     items: ['8-step flow', 'in/out of scope', '8 risks + mitigations', '4 phases', 'changelog'],
   },
   {
