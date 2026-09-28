@@ -200,6 +200,14 @@ export interface CaseStudy {
  * visibly labelled as one even though it now shares a heading with shipped
  * reporting work. Parts keep their own heading and badge under one anchor.
  */
+export type EcosystemDiagram =
+  | 'system-map'
+  | 'release-flow'
+  | 'content-delivery'
+  | 'topical-quiz'
+  | 'report-flow'
+  | 'calendar-flow';
+
 export interface EcosystemPart {
   heading: string;
   status?: ProjectStatus;
@@ -207,11 +215,17 @@ export interface EcosystemPart {
   visuals?: Visual[];
   link?: { href: string; label: string };
   /**
-   * A diagram belonging to this part rather than to the area above it. Area
-   * diagrams render before the parts, which is the wrong place for one that
-   * illustrates the third part down.
+   * Diagrams belonging to this part, drawn in order after its body. Every
+   * diagram hangs off a part rather than an area since 2026-09-28, so moving a
+   * section moves its drawing with it.
    */
-  diagram?: 'topical-quiz';
+  diagrams?: EcosystemDiagram[];
+  /**
+   * Set on the mechanics sections: the part renders closed, its heading as the
+   * summary and this as the hint, so the page reads as decisions first and the
+   * detail stays one tap away rather than being deleted.
+   */
+  detail?: { hint: string };
   /**
    * The rules a feature runs on, as a term list. For behaviour that is a set
    * of conditions rather than a narrative — prose turns four rules into one
@@ -248,6 +262,8 @@ export interface Ecosystem {
   chips: string[];
   glance: AtAGlance;
   overview: string[];
+  /** Same shape as CaseStudy.role: what she did, one line each. */
+  role: string[];
   areas: EcosystemArea[];
 }
 

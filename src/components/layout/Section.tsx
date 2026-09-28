@@ -18,13 +18,20 @@ const MEASURE: Record<Width, string> = {
 
 export function Container({
   width = 'prose',
+  flush = false,
   className = '',
   children,
 }: {
   width?: Width;
+  /**
+   * No gutter and no measure — for content already inside a padded box such
+   * as a Disclosure, where a second gutter would narrow a phone to ~250px.
+   */
+  flush?: boolean;
   className?: string;
   children: ReactNode;
 }) {
+  if (flush) return <div className={`w-full ${className}`}>{children}</div>;
   const max = MEASURE[width];
   return (
     <div className={`mx-auto w-full px-6 ${className}`} style={{ maxWidth: max }}>
