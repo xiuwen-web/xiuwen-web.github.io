@@ -107,6 +107,29 @@ export interface AnalyticsEvidence {
   image: Visual;
 }
 
+/**
+ * The recruiter's card, directly under a case study's title (added 2026-09-28).
+ *
+ * A screener reads the first screen and the outcome and little else, and on
+ * every study the role, the team and the result sat a scroll or more down.
+ * This restates them in one place. It is a summary, not new material: every
+ * value must already be stated in the body of the same page, so the card can
+ * never claim more than the page argues. No impact or time-saved claims (F26).
+ */
+export interface AtAGlance {
+  /** What she did on it. A function, never a title she does not hold. */
+  role: string;
+  /** Roles and counts only — never names (PRD §22). */
+  team: string;
+  /** Omitted where the page carries no dates rather than an invented span. */
+  timeline?: string;
+  /** Countable scope: centres, surfaces, roles, modules. */
+  scale: string;
+  result: string;
+  /** Competencies the page evidences, in the words a job ad uses. */
+  skills: string[];
+}
+
 export interface CaseStudy {
   id: string;
   /** URL segment: /work/[slug]. Stable — treat as a published address. */
@@ -116,7 +139,9 @@ export interface CaseStudy {
   navLabel: string;
   summary: string;
   status: ProjectStatus;
+  /** The first chip is the role played, so a skim of the tags finds it. */
   chips: string[];
+  glance: AtAGlance;
   context: string[];
   problem: string[];
   role: string[];
@@ -221,6 +246,7 @@ export interface Ecosystem {
   summary: string;
   status: ProjectStatus;
   chips: string[];
+  glance: AtAGlance;
   overview: string[];
   areas: EcosystemArea[];
 }

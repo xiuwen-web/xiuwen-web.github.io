@@ -23,11 +23,19 @@ export const caseStudies: CaseStudy[] = [
       "Took our web learning platform to a shipped mobile product. Two apps across iOS and Android — four listings, all live. The student app launched in December 2025, the teacher app in early 2026.",
     status: "launched",
     chips: [
-      "product definition",
       "release management",
+      "product definition",
       "app store submission",
       "3 developers",
     ],
+    glance: {
+      role: "Wrote the brief, coordinated the developers, tested each build and took both apps through store review",
+      team: "3 developers; no dedicated QA at the time",
+      timeline: "Student app Dec 2025 · teacher app Feb–Mar 2026 · both updated Jul 2026",
+      scale: "2 apps · 4 store listings · iOS and Android",
+      result: "All four listings live. Student app: 2.03K iOS downloads and 1,080 Android installed users by late July 2026",
+      skills: ["Business case", "Scope prioritisation", "Release management", "UAT and release acceptance", "App-store submission"],
+    },
     context: [
       "EverLoop is our learning platform. Students use it for course content, videos, quizzes and revision materials; parents use it to follow their child’s progress. It worked on the web, but parents were checking it on their phones, and a browser is not where people live.",
     ],
@@ -140,14 +148,22 @@ export const caseStudies: CaseStudy[] = [
     navLabel: "CAdmin Migration",
     title: "Migrating a live system without stopping the business",
     summary:
-      "CAdmin runs attendance, enrolment and student records for 20 centres. The version it replaced had been running for seven years and had reached end of life. We rebuilt it in four phases while everyone kept using it.",
+      "CAdmin runs attendance, enrolment and student records for 20 centres. The version it replaced had been running for seven to eight years and had reached end of life. We rebuilt it in four phases while everyone kept using it.",
     status: "partially-launched",
     chips: [
-      "project management",
+      "project manager",
       "phased rollout",
       "pilot",
       "change management",
     ],
+    glance: {
+      role: "Project manager",
+      team: "A backend developer and a frontend developer",
+      timeline: "Build Apr–Jul 2025 · phase 1 live Aug 2025 · phase 3 Oct 2025 · phase 4 in progress",
+      scale: "20 centres · seven to eight years of historical data · 12 modules scoped",
+      result: "Zero downtime. Every centre now runs V2, with three of four phases live",
+      skills: ["Enhance-vs-rebuild evaluation", "Risk-based phasing", "Data migration", "Pilot and UAT", "Change management", "Stakeholder management"],
+    },
     context: [
       "CAdmin is the system our centres run on — attendance, student records, class management, and now HR. Every centre uses it daily. The version it replaced had been in service for seven to eight years.",
       "I was the project manager, working with a backend developer and a frontend developer.",
@@ -287,6 +303,13 @@ export const caseStudies: CaseStudy[] = [
        */
       "built and deployed",
     ],
+    glance: {
+      role: "Wrote the product definition and built it with Claude",
+      team: "Solo, alongside the day job; now handed to a web developer for integration",
+      scale: "3 roles (admin, teacher, student) · 3 marking workflows · end-to-end test suite",
+      result: "Working and deployed, and being integrated into EverLoop. Not yet live to students",
+      skills: ["AI product design", "Human-in-the-loop review", "Role and permission modelling", "Product requirements", "Test planning"],
+    },
     context: [
       "Marking compositions is slow, and the useful part is not the score. It is the specific feedback on this child’s piece of writing — which is exactly the part that gets thinnest when a teacher has a stack of thirty to get through.",
       "WriteWise scans a handwritten composition, transcribes it, and produces feedback against the marking rubric. The teacher stays in charge of everything the student sees.",
@@ -380,7 +403,14 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Inventory and procurement for a consumer-products company, built on Odoo by a single developer working outside their specialty. I wrote what it had to do.",
     status: "launched",
-    chips: ["requirements", "process mapping", "QA", "documentation"],
+    chips: ["business analysis", "requirements", "process mapping", "QA", "documentation"],
+    glance: {
+      role: "Business analysis: requirements, process maps, QA and the operations handbook",
+      team: "1 developer, working outside their specialty",
+      scale: "2 fulfilment models · 6 user roles · 15-section handbook",
+      result: "Live, with the handbook in daily use across purchasing, operations, logistics, finance and the warehouse",
+      skills: ["Requirements", "Process mapping", "Scope definition", "QA issue management", "User documentation"],
+    },
     context: [
       "This one is not AGrader. It belongs to my director’s sister company — Decorably, Strongcore and Superaura — a consumer-products business that sells physical goods rather than lessons.",
       "It runs two fulfilment models at once. One has no warehouse at all: suppliers manufacture, freight forwarders ship, and Amazon holds and sends the stock. The other is a physical warehouse where goods arrive, sit in zones and are picked, packed and shipped by a team. Both run on the same system.",
