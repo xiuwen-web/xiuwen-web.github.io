@@ -29,7 +29,22 @@ export const ecosystem: Ecosystem = {
   summary:
     'A connected learning platform for administrators, teachers, students and parents.',
   status: 'launched-ongoing',
-  chips: ['product definition', 'multi-surface', 'requirements', 'QA'],
+  chips: ['product ownership', 'requirements', 'QA', 'multi-surface'],
+  glance: {
+    role: 'Product ownership: deciding what gets built next, writing the requirements and accepting each release. Also the QA until February 2026',
+    team: '3 web developers; a dedicated QA from February 2026',
+    timeline: 'Live since 11 March 2025, still shipping',
+    scale: '5 surfaces · 4 permission roles · 62 permissions',
+    result: 'Replaced Thinkific. Course release and diagnostic report writing are no longer manual',
+    skills: [
+      'Backlog and prioritisation',
+      'Requirements and acceptance criteria',
+      'Root-cause analysis',
+      'Data integrity',
+      'Access-control testing',
+      'UAT',
+    ],
+  },
 
   overview: [
     'Students used to be on Thinkific. My director decided to build in-house instead, and that decision is how I was brought into technology work in the first place.',

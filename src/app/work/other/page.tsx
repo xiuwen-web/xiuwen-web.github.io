@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Shell } from '@/components/layout/Shell';
 import { Container } from '@/components/layout/Section';
+import { AtAGlance } from '@/components/ui/AtAGlance';
 import { Button } from '@/components/ui/Button';
 import { SupportingWork } from '@/components/ui/SupportingWork';
 import { workNumber } from '@/content/navigation';
-import { otherWork } from '@/content/otherWork';
+import { otherWork, otherWorkGlance } from '@/content/otherWork';
 
 const LEDE =
   'What belongs under none of the systems above — a personal AI assistant I built to pull my coordination work into one place, and then removed the feature I was most pleased with.';
@@ -49,6 +50,8 @@ export default function OtherWorkPage() {
           <p className="mt-4 text-pretty" style={{ color: 'var(--text-muted)' }}>
             {LEDE}
           </p>
+
+          <AtAGlance glance={otherWorkGlance} />
         </Container>
       </header>
 

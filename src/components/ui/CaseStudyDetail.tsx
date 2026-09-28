@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { CaseStudy, Visual } from '@/types/content';
 import { Container } from '@/components/layout/Section';
+import { AtAGlance } from './AtAGlance';
 import { Badge, Chip } from './Badge';
 import { BrowserFrame } from './BrowserFrame';
 import { Button } from './Button';
@@ -353,6 +354,8 @@ function Header({
             </li>
           ))}
         </ul>
+
+        <AtAGlance glance={study.glance} />
       </Container>
     </header>
   );

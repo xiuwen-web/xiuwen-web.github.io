@@ -1,4 +1,4 @@
-import type { SupportingCard } from '@/types/content';
+import type { AtAGlance, SupportingCard } from '@/types/content';
 
 /**
  * Product Experiments — entry 05 (renamed from "Other Work", 2026-08-05).
@@ -31,3 +31,12 @@ export const otherWork: SupportingCard[] = [
     ],
   },
 ];
+
+/** The page's summary card. Nova is the only entry, so the card is its. */
+export const otherWorkGlance: AtAGlance = {
+  role: 'Designed and built it, as a personal project',
+  team: 'Solo',
+  scale: 'Slack, email, calendar, project boards and notes in one conversation',
+  result: 'Runs continuously, and is now used by others on the Operations and Product team',
+  skills: ['Scoping down', 'Guardrails for automation', 'AI tooling'],
+};

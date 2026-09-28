@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Shell } from '@/components/layout/Shell';
 import { Container } from '@/components/layout/Section';
+import { AtAGlance } from '@/components/ui/AtAGlance';
 import { Badge, Chip } from '@/components/ui/Badge';
 import { BrowserFrame } from '@/components/ui/BrowserFrame';
 import { Button } from '@/components/ui/Button';
@@ -80,6 +81,8 @@ export default function EverLoopPage() {
                 </li>
               ))}
             </ul>
+
+            <AtAGlance glance={ecosystem.glance} />
           </Container>
         </header>
 
