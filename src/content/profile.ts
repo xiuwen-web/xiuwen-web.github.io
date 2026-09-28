@@ -289,19 +289,34 @@ export const profile: Profile = {
  *
  * The last one carries no body on purpose. It is the conclusion the other
  * three arrive at, and explaining it would weaken it.
+ *
+ * Rewritten 2026-09-28. The headings were the generic part ("Understand
+ * before building") and the specific line sat underneath, where a skimmer
+ * never reached it; the specific line is now the heading. Each also points to
+ * the place on the site where it was applied, which turns a claim into a
+ * reference — and turns the overlap with the method rules into a cross-link.
  */
 export const principles: Principle[] = [
   {
-    heading: 'Understand before building',
-    body: 'A clear problem is worth more than a fast solution. Most of the rework I have seen was decided before anyone opened an editor.',
+    heading: 'Most rework is decided before anyone writes code',
+    body: 'A clear problem is worth more than a fast solution, so I write down what was observed before anyone proposes what to build.',
+    seenIn: { label: 'How I deliver: a requirement I wrote', href: '/#process' },
   },
   {
-    heading: 'Design for reality',
-    body: 'Workflows should reflect how people actually behave, not how a process diagram assumes they behave. The gap between those two is where systems get abandoned.',
+    heading: 'Build for how people behave, not how the diagram says they do',
+    body: 'Workflows should reflect what people actually do. The gap between the two is where systems get abandoned.',
+    seenIn: {
+      label: 'Mobile launch: deciding what earns a place on a phone',
+      href: '/work/mobile-launch/',
+    },
   },
   {
-    heading: 'Details are operational',
-    body: 'A small edge case becomes a large problem once a system scales. At twenty centres, the case that happens rarely happens somewhere every week.',
+    heading: 'At twenty centres, the rare case happens somewhere every week',
+    body: 'A small edge case becomes a large problem once a system scales, so the cases that must not happen go into the specification rather than the support queue.',
+    seenIn: {
+      label: 'CAdmin: the pilot that caught two silent payroll faults',
+      href: '/work/cadmin-migration/',
+    },
   },
   { heading: 'Technology is only useful when people can trust it' },
 ];
