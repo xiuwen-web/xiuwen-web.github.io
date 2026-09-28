@@ -304,7 +304,10 @@ function About() {
         <Heading title="About" />
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[20rem_1fr] lg:gap-16">
-          <div className="lg:sticky lg:top-24 lg:self-start">
+          {/* No longer sticky (2026-09-28): with the Background card the column
+              is taller than a laptop viewport, and a pinned column that tall
+              hides its own last rows until the section ends. */}
+          <div className="lg:self-start">
             <p className="text-[1.375rem] leading-snug font-semibold tracking-[-0.022em] text-balance">
               {profile.aboutLede}
             </p>
@@ -346,6 +349,8 @@ function About() {
                 </ul>
               </div>
             </div>
+
+            <Background />
           </div>
 
           <div className="min-w-0">
@@ -370,22 +375,65 @@ function About() {
                 </div>
               </div>
             ))}
-
-            <p className="mt-16 text-[1.5rem] leading-snug font-semibold tracking-[-0.024em] text-balance">
-              {profile.closingPrinciple.line}
-            </p>
-            <p
-              className="mt-3 text-[length:var(--text-small)]"
-              style={{ color: 'var(--text-muted)' }}
-            >
-              {profile.closingPrinciple.support}
-            </p>
           </div>
         </div>
 
         <Skills />
       </Container>
     </section>
+  );
+}
+
+/**
+ * The career record under the time split: what a screener cross-checks
+ * against the résumé. Dates and names only — the narrative is to the right.
+ */
+function Background() {
+  return (
+    <div className="px-tray-sm mt-6">
+      <div className="px-core-sm p-5">
+        <p className="px-label text-[0.625rem]" style={{ color: 'var(--text-muted)' }}>
+          Background
+        </p>
+        <ul className="mt-4 space-y-4">
+          {profile.background.map((role) => (
+            <li key={role.org}>
+              <p className="px-nums font-mono text-[length:var(--text-label)]" style={{ color: 'var(--text-muted)' }}>
+                {role.period}
+              </p>
+              <p className="mt-0.5 text-[length:var(--text-small)] leading-snug font-medium">
+                {role.title}
+              </p>
+              <p className="text-[length:var(--text-small)] leading-snug" style={{ color: 'var(--text-muted)' }}>
+                {role.org}
+              </p>
+              {role.note && (
+                <p className="mt-1 text-[length:var(--text-label)] leading-snug" style={{ color: 'var(--text-muted)' }}>
+                  {role.note}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        <p
+          className="px-label mt-6 border-t pt-4 text-[0.625rem]"
+          style={{ color: 'var(--text-muted)', borderColor: 'var(--rule)' }}
+        >
+          Education
+        </p>
+        <ul className="mt-3 space-y-3">
+          {profile.education.map((item) => (
+            <li key={item.degree}>
+              <p className="text-[length:var(--text-small)] leading-snug font-medium">{item.degree}</p>
+              <p className="text-[length:var(--text-small)] leading-snug" style={{ color: 'var(--text-muted)' }}>
+                {item.school} · {item.year}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
 
