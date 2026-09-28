@@ -103,8 +103,23 @@ export const profile: Profile = {
    * "validate releases" rather than "sign off releases" — she is the business
    * validation, which is not sole authority over a production deploy.
    */
+  /*
+   * Scope added 2026-09-28. A recruiter on a phone saw "Tuition Centre
+   * Manager" as the first hard fact and had to scroll a full screen to reach
+   * the twenty centres and the store releases. Both figures are already on the
+   * page (snapshot.ts, appLinks) — this only moves them above the fold.
+   */
   heroSupport:
-    'I define the requirements, coordinate the developers and QA, and validate the releases.',
+    'I define the requirements, coordinate the developers and QA, and validate the releases for two internal platforms used across 20 centres, including four app-store releases.',
+
+  /*
+   * Added 2026-09-28. "Operations & Product Delivery" is positioning, not a
+   * title anyone searches for, and the only statement of what the work maps
+   * to sat at the very end of the page. These are the job-ad words for the
+   * work the case studies show. Stated as fit rather than availability: no
+   * "open to", no "seeking" — the search stays discreet.
+   */
+  roleFit: ['Product Owner', 'Business Analyst', 'Product Operations'],
 
   /*
    * The About narrative, restructured 2026-08-08 from a six-paragraph

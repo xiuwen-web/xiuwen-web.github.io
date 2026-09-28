@@ -434,6 +434,11 @@ export interface Profile {
   tagline: string;
   heroHeadline: string[];
   heroSupport: string;
+  /**
+   * The kinds of role the work maps to, in the words a job ad uses. Fit, not
+   * availability — nothing here may read as a job search.
+   */
+  roleFit: string[];
   /** The single positioning line the whole About section argues for. */
   aboutLede: string;
   aboutSupport: string;

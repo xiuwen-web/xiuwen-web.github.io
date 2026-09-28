@@ -121,8 +121,8 @@ function Work() {
       <Container width="wide">
         <Heading
           pill="Selected work"
-          title="Six bodies of work"
-          intro="CAdmin Migration and the EverLoop Ecosystem carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
+          title="Five case studies and a set of experiments"
+          intro="CAdmin (our internal admin platform) and EverLoop (the learning platform for teachers, students and parents) carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
         />
 
         <div className="mt-12">

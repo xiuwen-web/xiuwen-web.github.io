@@ -18,10 +18,14 @@ import type { ExternalLink, SnapshotFact } from '@/types/content';
  */
 export const snapshot: SnapshotFact[] = [
   { figure: '20', label: 'centres', qualifier: 'systems and workflows supported' },
-  { figure: '2', label: 'internal platforms', qualifier: 'CAdmin and EverLoop' },
+  {
+    figure: '2',
+    label: 'internal platforms',
+    qualifier: 'CAdmin (admin) and EverLoop (learning)',
+  },
   {
     figure: '5',
-    label: 'user surfaces',
+    label: 'user-facing apps',
     qualifier: 'admin, teacher and student, web and mobile',
   },
   /*
@@ -29,10 +33,14 @@ export const snapshot: SnapshotFact[] = [
    * February 2026 and is the first on either system; every case study says
    * three, and a team size is the kind of figure someone checks.
    */
-  /* '3+1', not '3 + 1'. Set in 24px mono with default word spacing the spaced
-     form let the plus float, and the pair read as two separate numbers before
-     it resolved into one figure. */
-  { figure: '3+1', label: 'developers and QA', qualifier: 'the delivery team I coordinate' },
+  /* '4', not '3+1' (changed 2026-09-28). The compound figure read as a puzzle
+     to anyone outside the team; the split now sits in the qualifier, where it
+     stays checkable without being decoded. */
+  {
+    figure: '4',
+    label: 'developers and QA',
+    qualifier: '3 developers and 1 QA — the delivery team I coordinate',
+  },
 ];
 
 /**
