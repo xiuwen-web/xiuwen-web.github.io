@@ -69,11 +69,13 @@ export function IslandButton({
   const cls = 'px-btn text-[length:var(--text-small)] sm:text-[length:var(--text-body)]';
 
   if (external) {
+    /* A mailto opened in a new tab leaves an empty tab behind in some
+       browsers; the rail's RailLink already skips it for the same reason. */
+    const newTab = !href.startsWith('mailto:');
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         aria-label={ariaLabel}
         className={cls}
         style={style}

@@ -6,7 +6,7 @@ import {
   workEntries,
   workNumber,
 } from '@/content/navigation';
-import { profile, socialLinks } from '@/content/profile';
+import { emailHref, profile, socialLinks } from '@/content/profile';
 
 /**
  * The rail (PORTFOLIO_SIDEBAR_FLOW_REVISION.md, 2026-08-02).
@@ -176,7 +176,7 @@ export function Sidebar({
                   </li>
                 ))}
                 <li>
-                  <RailLink href={`mailto:${profile.email}`} external>
+                  <RailLink href={emailHref} external>
                     Email
                   </RailLink>
                 </li>
