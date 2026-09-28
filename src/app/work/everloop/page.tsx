@@ -7,17 +7,22 @@ import { BrowserFrame } from '@/components/ui/BrowserFrame';
 import { Button } from '@/components/ui/Button';
 import { ReleaseFlow } from '@/components/ui/ReleaseFlow';
 import { Diagram, FlowChart, SystemMap } from '@/components/ui/Diagram';
+import { Disclosure } from '@/components/ui/Disclosure';
 import {
   calendarFlow,
   contentDeliveryFlow,
   everloopMap,
   reportFlow,
   topicalQuizFlow,
-  writewiseResponsibility,
 } from '@/content/diagrams';
 import { ecosystem } from '@/content/ecosystem';
 import { workNumber } from '@/content/navigation';
-import { STATUS_META, type EcosystemPart, type Visual } from '@/types/content';
+import {
+  STATUS_META,
+  type EcosystemDiagram,
+  type EcosystemPart,
+  type Visual,
+} from '@/types/content';
 
 export const metadata: Metadata = {
   title: `${ecosystem.title} — Case study`,
@@ -33,6 +38,7 @@ export const metadata: Metadata = {
 
 const TOC = [
   { id: 'overview', label: 'Overview' },
+  { id: 'role', label: 'My role' },
   ...ecosystem.areas.map((area) => ({ id: area.id, label: area.navLabel })),
 ];
 
@@ -98,6 +104,22 @@ export default function EverLoopPage() {
             </section>
           </Container>
 
+          <Container>
+            <section id="role" className="scroll-mt-24">
+              <Label>My role</Label>
+              <ul className="mt-3 space-y-2">
+                {ecosystem.role.map((line) => (
+                  <li key={line} className="flex gap-3">
+                    <span aria-hidden="true" style={{ color: 'var(--text-muted)' }}>
+                      —
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </Container>
+
           {ecosystem.areas.map((area) => (
             <section key={area.id} id={area.id} className="scroll-mt-24">
               <Container>
@@ -123,121 +145,150 @@ export default function EverLoopPage() {
                 )}
               </Container>
 
-              {/* One diagram per question, per the plan — never one that tries
-                  to explain the whole ecosystem. */}
-              {area.id === 'platform' && (
-                <>
-                  <Diagram
-                    heading="Who uses what"
-                    intro="One platform, three groups, and the parts each of them touches."
-                    caption="Every row here is the same underlying record seen from a different side. That is why one feature is five pieces of work — one per surface — rather than one."
-                  >
-                    <SystemMap
-                      root="EverLoop"
-                      upstream={{ title: 'CAdmin', edge: 'operational data' }}
-                      branches={everloopMap}
-                    />
-                  </Diagram>
-
-                  <Container width="content" className="mt-8">
-                    <ReleaseFlow />
-                  </Container>
-                </>
-              )}
-
-              {area.id === 'content-access' && (
-                <Diagram
-                  heading="How a course reaches a student"
-                  intro="Set up once, released by rule."
-                  caption="Nobody grants access. The tags decide who, and the class start date in CAdmin decides when."
-                >
-                  <FlowChart steps={contentDeliveryFlow} dense />
-                </Diagram>
-              )}
-
-              {area.id === 'reporting' && (
-                <>
-                  <Diagram
-                    heading="How a report reaches a parent"
-                    intro="Five interfaces, one approval gate."
-                    caption="The gate is the third step. Nothing reaches a parent that a teacher has not signed off."
-                  >
-                    <FlowChart steps={reportFlow} dense />
-                  </Diagram>
-
-                  <Diagram
-                    heading="How the calendar stays correct"
-                    intro="The awkward cases are the whole problem."
-                    caption="Merging on the server rather than on the device is what stops web, iOS and Android drifting apart — and lets a rule change ship without an app-store release."
-                  >
-                    <FlowChart steps={calendarFlow} dense />
-                  </Diagram>
-                </>
-              )}
-
-              {area.id === 'writewise' && (
-                <Diagram
-                  heading="Who is responsible for what"
-                  intro="The AI never has the last word."
-                  caption="Handwriting transcription is imperfect and AI marking is confident whether or not it is right. A teacher confirms the text against the original, and approves before a child sees anything."
-                >
-                  <FlowChart steps={writewiseResponsibility} dense />
-                </Diagram>
-              )}
-
               {area.visuals?.map((visual) => <Figure key={visual.src} visual={visual} />)}
 
               {/* Consolidated areas: one anchor in the rail, but each merged
                   section keeps its own heading and its own status badge. The
-                  refinement asked to consolidate navigation, not content. */}
-              {area.parts?.map((part) => (
-                <div key={part.heading} className="mt-10">
-                  <Container>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="font-display text-[length:var(--text-h3)] leading-snug font-semibold">
-                        {part.heading}
-                      </h3>
-                      {part.status && <Badge status={part.status} />}
-                    </div>
-                    <div className="mt-3 space-y-3">
-                      {part.body.map((para) => (
-                        <p key={para.slice(0, 40)}>{para}</p>
-                      ))}
-                    </div>
-                    {part.link && (
-                      <p className="mt-5">
-                        <Button href={part.link.href} variant="quiet">
-                          {part.link.label} <span aria-hidden="true">→</span>
-                        </Button>
-                      </p>
-                    )}
+                  refinement asked to consolidate navigation, not content.
+                  Detail parts render closed, one tap from the decision they
+                  support. */}
+              {area.parts?.map((part) =>
+                part.detail ? (
+                  <Container key={part.heading} width="content" className="mt-4">
+                    <Disclosure summary={part.heading} hint={part.detail.hint}>
+                      <PartContent part={part} flush />
+                    </Disclosure>
                   </Container>
-
-                  {part.diagram === 'topical-quiz' && (
-                    <Diagram
-                      heading="Quiz to video to e-Bucks"
-                      intro="What happens between getting a question wrong and being paid for it."
-                      caption="The reward is deliberately two steps past the quiz. Disabling skip and fast-forward is what stops the last three nodes collapsing into one — without it the gate is a button, not a condition."
-                    >
-                      <FlowChart steps={topicalQuizFlow} dense columns={3} />
-                    </Diagram>
-                  )}
-
-                  {part.rules && (
-                    <Container width="content" className="mt-8">
-                      <RulesPanel rules={part.rules} />
+                ) : (
+                  <div key={part.heading} className="mt-10">
+                    <Container>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h3 className="font-display text-[length:var(--text-h3)] leading-snug font-semibold">
+                          {part.heading}
+                        </h3>
+                        {part.status && <Badge status={part.status} />}
+                      </div>
                     </Container>
-                  )}
-
-                  {part.visuals?.map((visual) => <Figure key={visual.src} visual={visual} />)}
-                </div>
-              ))}
+                    <PartContent part={part} />
+                  </div>
+                ),
+              )}
             </section>
           ))}
         </div>
       </article>
     </Shell>
   );
+}
+
+/**
+ * A part's body, diagrams, rules and screenshots. `flush` drops the page
+ * gutters for content already inside a Disclosure's padded box.
+ */
+function PartContent({ part, flush = false }: { part: EcosystemPart; flush?: boolean }) {
+  return (
+    <>
+      {part.body.length > 0 && (
+        <Container flush={flush}>
+          <div className={`space-y-3 ${flush ? '' : 'mt-3'}`}>
+            {part.body.map((para) => (
+              <p key={para.slice(0, 40)}>{para}</p>
+            ))}
+          </div>
+          {part.link && (
+            <p className="mt-5">
+              <Button href={part.link.href} variant="quiet">
+                {part.link.label} <span aria-hidden="true">→</span>
+              </Button>
+            </p>
+          )}
+        </Container>
+      )}
+
+      {part.diagrams?.map((key) => <PartDiagram key={key} name={key} flush={flush} />)}
+
+      {part.rules && (
+        <Container width="content" flush={flush} className="mt-8">
+          <RulesPanel rules={part.rules} />
+        </Container>
+      )}
+
+      {part.visuals?.map((visual) => (
+        <Figure key={visual.src} visual={visual} flush={flush} />
+      ))}
+    </>
+  );
+}
+
+/** One diagram per question, per the plan — never one that tries to explain the whole ecosystem. */
+function PartDiagram({ name, flush }: { name: EcosystemDiagram; flush: boolean }) {
+  switch (name) {
+    case 'system-map':
+      return (
+        <Diagram
+          flush={flush}
+          heading="Who uses what"
+          intro="One platform, three groups, and the parts each of them touches."
+          caption="Every row here is the same underlying record seen from a different side. That is why one feature is five pieces of work — one per surface — rather than one."
+        >
+          <SystemMap
+            root="EverLoop"
+            upstream={{ title: 'CAdmin', edge: 'operational data' }}
+            branches={everloopMap}
+          />
+        </Diagram>
+      );
+    case 'release-flow':
+      return (
+        <Container width="content" flush={flush} className="mt-8">
+          <ReleaseFlow />
+        </Container>
+      );
+    case 'content-delivery':
+      return (
+        <Diagram
+          flush={flush}
+          heading="How a course reaches a student"
+          intro="Set up once, released by rule."
+          caption="Nobody grants access. The tags decide who, and the class start date in CAdmin decides when."
+        >
+          <FlowChart steps={contentDeliveryFlow} dense />
+        </Diagram>
+      );
+    case 'topical-quiz':
+      return (
+        <Diagram
+          flush={flush}
+          heading="Quiz to video to e-Bucks"
+          intro="What happens between getting a question wrong and being paid for it."
+          caption="The reward is deliberately two steps past the quiz. Disabling skip and fast-forward is what stops the last three nodes collapsing into one — without it the gate is a button, not a condition."
+        >
+          <FlowChart steps={topicalQuizFlow} dense columns={3} />
+        </Diagram>
+      );
+    case 'report-flow':
+      return (
+        <Diagram
+          flush={flush}
+          heading="How a report reaches a parent"
+          intro="Five interfaces, one approval gate."
+          caption="The gate is the third step. Nothing reaches a parent that a teacher has not signed off."
+        >
+          <FlowChart steps={reportFlow} dense />
+        </Diagram>
+      );
+    case 'calendar-flow':
+      return (
+        <Diagram
+          flush={flush}
+          heading="How the calendar stays correct"
+          intro="The awkward cases are the whole problem."
+          caption="Merging on the server rather than on the device is what stops web, iOS and Android drifting apart — and lets a rule change ship without an app-store release."
+        >
+          <FlowChart steps={calendarFlow} dense />
+        </Diagram>
+      );
+  }
 }
 
 /**
@@ -270,9 +321,9 @@ function RulesPanel({ rules }: { rules: NonNullable<EcosystemPart['rules']> }) {
   );
 }
 
-function Figure({ visual }: { visual: Visual }) {
+function Figure({ visual, flush = false }: { visual: Visual; flush?: boolean }) {
   return (
-    <Container width="content" className="mt-6">
+    <Container width="content" flush={flush} className="mt-6">
       <figure>
         <BrowserFrame visual={visual} label={ecosystem.navLabel} />
         <figcaption

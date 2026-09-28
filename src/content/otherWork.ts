@@ -25,7 +25,12 @@ export const otherWork: SupportingCard[] = [
     title: 'Nova — an assistant, and the feature I removed',
     status: 'personal-project',
     body: [
-      'A personal AI assistant I built in TypeScript to pull my coordination work — Slack, email, calendar, project boards, notes — into one conversation. It runs continuously and is now used by others on the Operations and Product team.',
+      /*
+       * Rewritten 2026-09-28 from Xiu Wen's description. "Built in TypeScript"
+       * sat beside "I am not a developer" on the same site; "built on Claude"
+       * is her account of it. Internal board names are left out.
+       */
+      'A personal AI assistant I built on Claude, reached through Telegram and Slack. Its working memory is our Monday.com boards and a Notion workspace, and it also reads Gmail, Google Calendar and Google Sheets — so my coordination work happens in one conversation: triaging the inbox, logging bug tickets from a screenshot, turning meeting notes into action items, and briefing me before a meeting. It runs continuously and is now used by others on the Operations and Product team.',
       'The part worth reporting is what I took out. Auto-enrichment generated sub-tasks for me, and it was the feature I was most pleased with, and it kept generating: tasks bloated, pages flooded, and my workspace became harder to use than before I automated anything. I could have tuned it — narrower triggers, tighter prompts, a cap. I did not, because the feature saved me a small amount of writing and its failure mode made the system unusable. That is a bad trade at any level of tuning.',
       'What replaced it were limits that apply to everything rather than to that one feature: a hard cap on records created in a rolling window, a confirmation prompt before anything creates more than a handful at once, a weekly check for abnormal growth, and backups. Limits before features, whenever something runs unattended against real data.',
     ],
@@ -34,9 +39,9 @@ export const otherWork: SupportingCard[] = [
 
 /** The page's summary card. Nova is the only entry, so the card is its. */
 export const otherWorkGlance: AtAGlance = {
-  role: 'Designed and built it, as a personal project',
+  role: 'Designed and built it on Claude, as a personal project',
   team: 'Solo',
-  scale: 'Slack, email, calendar, project boards and notes in one conversation',
+  scale: 'Telegram and Slack · Monday.com and Notion as its memory · Gmail, Calendar and Sheets',
   result: 'Runs continuously, and is now used by others on the Operations and Product team',
-  skills: ['Scoping down', 'Guardrails for automation', 'AI tooling'],
+  skills: ['Workflow automation', 'Scoping down', 'Guardrails for automation', 'AI tooling'],
 };

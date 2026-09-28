@@ -47,16 +47,19 @@ export function Diagram({
   intro,
   caption,
   width = 'content',
+  flush = false,
   children,
 }: {
   heading: string;
   intro?: string;
   caption?: string;
   width?: 'prose' | 'content' | 'wide';
+  /** Passed to Container — see there. */
+  flush?: boolean;
   children: ReactNode;
 }) {
   return (
-    <Container width={width} className="mt-8">
+    <Container width={width} flush={flush} className="mt-8">
       <figure>
         <h3 className="font-display text-[length:var(--text-h3)] leading-snug font-semibold">
           {heading}
