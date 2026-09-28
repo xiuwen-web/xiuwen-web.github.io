@@ -13,7 +13,7 @@ import { ecosystem } from './ecosystem';
 export const PRIMARY_NAV = [
   { href: '/#top', label: 'Overview', key: 'overview' },
   { href: '/#work', label: 'Selected Work', key: 'work' },
-  { href: '/#process', label: 'How I Work', key: 'process' },
+  { href: '/#process', label: 'How I Deliver', key: 'process' },
   { href: '/#about', label: 'About', key: 'about' },
   /* Added 2026-09-28: the capability lists are what a screener scans for, and
      they sat four phone screens into About with no way to jump to them. */

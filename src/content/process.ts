@@ -21,7 +21,7 @@ export const handoff: HandoffStep[] = [
     mine: 'I hit it running a centre, or a centre reports it to me.',
   },
   {
-    stage: 'Requirement clarification',
+    stage: 'Requirements',
     owner: 'Mine',
     mine: 'I go back to what was observed and write that down — not the solution someone arrived with.',
   },
@@ -41,7 +41,7 @@ export const handoff: HandoffStep[] = [
     mine: 'QA runs the testing. I supply the cases that only break in a real centre.',
   },
   {
-    stage: 'Operational acceptance',
+    stage: 'Business acceptance',
     owner: 'Mine',
     mine: 'I check the build against the criteria I wrote, and decide whether it is ready to release.',
   },
@@ -52,16 +52,19 @@ export const handoff: HandoffStep[] = [
   },
 ];
 
-export const processIntro =
-  'Every change goes the same way, from something going wrong in a centre to something running in production. I am at both ends of it.';
-
-/**
- * The sentence the seven steps are for. It closes the section rather than
- * opening it: stated up front it is a slogan, stated after the reader has seen
- * where she sits in the chain it is a conclusion.
+/*
+ * "Five of the seven" added 2026-09-28: the point of the chain was in the
+ * caption under it, two phone screens down. Stated first, the seven cards
+ * read as evidence for it rather than as a list to get through.
  */
-export const processPrinciple =
-  'Technology should not make people adapt to broken workflows. It should make good work easier to do.';
+export const processIntro =
+  'Every change goes the same way, from something going wrong in a centre to something running in production. I own five of the seven steps, and I am at both ends of it.';
+
+/*
+ * The principle that sat beside the caption ("Technology should not make
+ * people adapt to broken workflows…") was cut 2026-09-28 — the Principles
+ * section further down already makes the case, and the chain makes it better.
+ */
 
 export const handoffCaption =
   'Two of the seven belong to someone else, and I am still in both: the developers decide how to build it, QA decides whether it works, and I decide whether it does the job it was asked to do. On our board this runs to thirteen columns, and the acceptance one is named after me.';
@@ -179,7 +182,7 @@ export const specimen: Specimen = {
  * what order. Counts are from the board itself, not from memory.
  */
 export const traceIntro =
-  'The section above describes how I write a requirement. This is one followed all the way through — the same piece of work at four points where evidence exists rather than assertion.';
+  'The section above describes how I write a requirement. This is one followed all the way through — the same piece of work at four points in the record. The brief and the prototypes are internal; the two screens it produced are published on the EverLoop page.';
 
 export const traceTitle = 'One requirement, end to end';
 
