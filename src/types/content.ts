@@ -315,7 +315,7 @@ export interface SnapshotFact {
 /**
  * One stage of the spec-to-shipped chain. The chain is the site's own thesis
  * applied to itself: everything else describes the method, this shows a single
- * requirement at four checkable points.
+ * requirement at four points in the record.
  */
 export interface TraceStep {
   stage: string;

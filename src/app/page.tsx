@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Container } from '@/components/layout/Section';
 import { Shell } from '@/components/layout/Shell';
 import { HandoffChain } from '@/components/ui/Diagram';
@@ -11,7 +12,6 @@ import {
   method,
   methodIntro,
   processIntro,
-  processPrinciple,
   specimen,
   specimenIntro,
   trace,
@@ -160,33 +160,30 @@ function Process() {
   return (
     <section id="process" className="py-20 sm:py-28">
       <Container width="content">
-        <Heading title="How I work" intro={processIntro} />
+        <Heading title="How I deliver" intro={processIntro} />
 
         <div className="mt-12">
           <HandoffChain steps={handoff} />
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_19rem]">
-          <p
-            className="max-w-[60ch] text-[length:var(--text-small)] leading-relaxed"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            {handoffCaption}
-          </p>
+        <p
+          className="mt-10 max-w-[60ch] text-[length:var(--text-small)] leading-relaxed"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {handoffCaption}
+        </p>
 
-          {/* The principle, in a tray. It is the sentence the seven steps
-              exist to earn, and it was a left border on a paragraph. */}
-          <div className="px-tray-sm self-start">
-            <div className="px-core-sm p-5">
-              <p className="text-[1.0625rem] leading-snug text-pretty">{processPrinciple}</p>
-            </div>
-          </div>
-        </div>
+        {/* The requirement, previewed in the open (2026-09-28). It is the
+            evidence a product-owner or analyst screener is looking for, and
+            it was three taps deep behind a label that did not say what was
+            inside. The preview is the title, the problem and the first three
+            acceptance criteria; the full specimen stays one tap away. */}
+        <SpecimenPreview />
 
         <Disclosure
-          className="mt-14"
-          summary="See how I write a requirement"
-          hint="How a requirement gets written before anyone builds from it."
+          className="mt-4"
+          summary="How I write a requirement: six rules"
+          hint="What I do every time, before anyone builds from it."
         >
           <p
             className="max-w-[45rem] text-[length:var(--text-small)] leading-relaxed"
@@ -216,67 +213,8 @@ function Process() {
 
         <Disclosure
           className="mt-4"
-          summary="See a requirement I wrote"
-          hint="One recreated in full: current behaviour, proposed behaviour, a worked example, business rules and acceptance criteria."
-        >
-          <p
-            className="max-w-[45rem] text-[length:var(--text-small)] leading-relaxed"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            {specimenIntro}
-          </p>
-
-          <div className="px-tray mt-7">
-            <article className="px-core p-6 sm:p-8">
-              <h3 className="text-[1.0625rem] font-medium tracking-[-0.014em]">{specimen.title}</h3>
-              <p
-                className="mt-2.5 max-w-[42rem] text-[length:var(--text-small)] leading-relaxed"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                {specimen.standfirst}
-              </p>
-
-              <div className="mt-8 grid gap-7 sm:grid-cols-2">
-                {specimen.sections.map((section) => (
-                  <section key={section.heading}>
-                    <h4
-                      className="px-label text-[0.6875rem] font-medium"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      {section.heading}
-                    </h4>
-                    <ul className="mt-3 space-y-2">
-                      {section.lines.map((line) => (
-                        <li
-                          key={line.slice(0, 40)}
-                          className="pl-4 text-[length:var(--text-small)] leading-relaxed"
-                          style={{
-                            borderLeft:
-                              '1px solid color-mix(in srgb, var(--text) 14%, transparent)',
-                          }}
-                        >
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                ))}
-              </div>
-
-              <p
-                className="mt-8 max-w-[42rem] text-[length:var(--text-small)] leading-relaxed"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                {specimen.footnote}
-              </p>
-            </article>
-          </div>
-        </Disclosure>
-
-        <Disclosure
-          className="mt-4"
-          summary="See one requirement reach a live screen"
-          hint="The diagnostic report at four checkable points: the versioned brief, the prototypes, five board items, and two screens published on this site."
+          summary="Follow one requirement to a live screen"
+          hint="The diagnostic report at four points in the record: the versioned brief, the prototypes, five board items, and the two screens it produced."
         >
           <h3 className="text-[length:var(--text-h3)] font-semibold tracking-[-0.018em]">
             {traceTitle}
@@ -289,9 +227,102 @@ function Process() {
           </p>
           <p className="px-pill mt-5">{traceSubject}</p>
           <TraceChain steps={trace} />
+          <Link
+            prefetch={false}
+            href="/work/everloop/#detail"
+            className="mt-6 inline-flex min-h-11 items-center text-[length:var(--text-small)] underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+            style={{ color: 'var(--accent-ink)' }}
+          >
+            See the two screens on the EverLoop page, under Diagnostic and progress reports
+          </Link>
         </Disclosure>
       </Container>
     </section>
+  );
+}
+
+/** How many acceptance criteria show before the reader opens the full specimen. */
+const PREVIEW_CRITERIA = 3;
+
+function SpecimenPreview() {
+  const criteria = specimen.sections.find((section) => section.heading === 'Acceptance criteria');
+  const rest = criteria ? criteria.lines.length - PREVIEW_CRITERIA : 0;
+
+  return (
+    <div className="px-tray mt-12">
+      <article className="px-core p-6 sm:p-8">
+        <p className="px-label text-[0.625rem]" style={{ color: 'var(--text-muted)' }}>
+          A requirement I wrote
+        </p>
+        <h3 className="mt-3 text-[1.0625rem] font-medium tracking-[-0.014em]">{specimen.title}</h3>
+        <p
+          className="mt-2.5 max-w-[42rem] text-[length:var(--text-small)] leading-relaxed"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {specimen.standfirst}
+        </p>
+
+        {criteria && (
+          <section className="mt-6">
+            <h4 className="px-label text-[0.6875rem] font-medium" style={{ color: 'var(--text-muted)' }}>
+              Acceptance criteria · first {PREVIEW_CRITERIA} of {criteria.lines.length}
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {criteria.lines.slice(0, PREVIEW_CRITERIA).map((line) => (
+                <li
+                  key={line.slice(0, 40)}
+                  className="pl-4 text-[length:var(--text-small)] leading-relaxed"
+                  style={{ borderLeft: '1px solid color-mix(in srgb, var(--text) 14%, transparent)' }}
+                >
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        <Disclosure
+          className="mt-7"
+          summary="See the full requirement"
+          hint={`Current and proposed behaviour, a worked example, business rules${rest > 0 ? `, and all ${criteria?.lines.length} acceptance criteria` : ''}.`}
+        >
+          <p
+            className="max-w-[45rem] text-[length:var(--text-small)] leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {specimenIntro}
+          </p>
+
+          <div className="mt-7 grid gap-7 sm:grid-cols-2">
+            {specimen.sections.map((section) => (
+              <section key={section.heading}>
+                <h4 className="px-label text-[0.6875rem] font-medium" style={{ color: 'var(--text-muted)' }}>
+                  {section.heading}
+                </h4>
+                <ul className="mt-3 space-y-2">
+                  {section.lines.map((line) => (
+                    <li
+                      key={line.slice(0, 40)}
+                      className="pl-4 text-[length:var(--text-small)] leading-relaxed"
+                      style={{ borderLeft: '1px solid color-mix(in srgb, var(--text) 14%, transparent)' }}
+                    >
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+
+          <p
+            className="mt-8 max-w-[42rem] text-[length:var(--text-small)] leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {specimen.footnote}
+          </p>
+        </Disclosure>
+      </article>
+    </div>
   );
 }
 

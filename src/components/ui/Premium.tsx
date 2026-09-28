@@ -226,7 +226,7 @@ export function PremiumHero() {
               className="mt-4 inline-flex min-h-11 items-center text-[length:var(--text-label)] leading-snug underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
               style={{ color: 'var(--accent-ink)' }}
             >
-              Two of the seven are someone else&rsquo;s, see how I work
+              Two of the seven are someone else&rsquo;s, see how I deliver
             </a>
           </div>
         </div>
