@@ -1,6 +1,6 @@
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { ACTIVE_KEY_TO_HREF, PRIMARY_NAV, workEntries, workNumber } from '@/content/navigation';
-import { profile, socialLinks } from '@/content/profile';
+import { emailHref, profile, socialLinks } from '@/content/profile';
 import { hasResume } from '@/content/resume';
 import { Identity, RailHeading, RailLink } from './Sidebar';
 
@@ -73,7 +73,7 @@ export function MobileNav({ active }: { active?: string }) {
               On a ~13,000px page the email otherwise first appears in the
               last section, or two taps deep in the drawer. */}
           <a
-            href={`mailto:${profile.email}`}
+            href={emailHref}
             className="flex h-11 items-center rounded-[var(--radius)] px-2 text-[length:var(--text-small)] font-medium"
             style={{ color: 'var(--rail-text)' }}
           >
@@ -151,7 +151,7 @@ export function MobileNav({ active }: { active?: string }) {
                 </li>
               ))}
               <li>
-                <RailLink href={`mailto:${profile.email}`} external>
+                <RailLink href={emailHref} external>
                   Email
                 </RailLink>
               </li>

@@ -281,6 +281,14 @@ export const profile: Profile = {
 };
 
 /**
+ * Every email link on the site, in one place (2026-09-28). The subject line
+ * means a message that starts here arrives already labelled, so it can be
+ * found and filtered among everything else in the inbox. The structured data
+ * in layout.tsx keeps the bare mailto — a subject is not part of an address.
+ */
+export const emailHref = `mailto:${profile.email}?subject=${encodeURIComponent('Via your portfolio')}`;
+
+/**
  * Principles I work by.
  *
  * Kept apart from the six method rules in the Process section, which are

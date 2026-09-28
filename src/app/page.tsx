@@ -5,7 +5,7 @@ import { HandoffChain } from '@/components/ui/Diagram';
 import { TraceChain } from '@/components/ui/TraceChain';
 import { Disclosure } from '@/components/ui/Disclosure';
 import { WorkLog } from '@/components/ui/WorkLog';
-import { principles, profile, socialLinks } from '@/content/profile';
+import { emailHref, principles, profile, socialLinks } from '@/content/profile';
 import {
   handoff,
   handoffCaption,
@@ -591,7 +591,7 @@ function Contact() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3 sm:gap-4">
-              <IslandButton href={`mailto:${profile.email}`} external>
+              <IslandButton href={emailHref} external>
                 {profile.email}
               </IslandButton>
               {hasResume && (
@@ -621,6 +621,15 @@ function Contact() {
                 </a>
               </Row>
             )}
+            {/* The address as plain text, beside the button (2026-09-28). A
+                recruiter on webmail gets nothing from a mailto click, and text
+                inside a link is awkward to select; select-all copies the
+                whole address in one tap. */}
+            <Row label="Email">
+              <span className="text-[length:var(--text-small)] break-all select-all">
+                {profile.email}
+              </span>
+            </Row>
             <Row label="Location">{profile.location}</Row>
           </dl>
         </div>
