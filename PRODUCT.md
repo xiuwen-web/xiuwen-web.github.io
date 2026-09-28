@@ -44,7 +44,8 @@ manager cannot truthfully claim the delivery half.
 
 ## Operating Context
 
-- Current role: Tuition Centre Manager, AGrader Learning Centre, since July 2020.
+- Current role: Tuition Centre Manager & Technology Project Lead, AGrader Learning Centre, since July 2020
+  (the title is official, confirmed 2026-09-28).
 - Systems: CAdmin (internal admin platform) and EverLoop (student/teacher
   platform), plus four shipped app-store listings.
 - Delivery team coordinated: three developers and one QA (QA joined February 2026).

@@ -37,8 +37,13 @@ export const profile: Profile = {
    * Modest title, substantial work: the case studies are right there to argue
    * the level. Hiding it would only move the conversation, not win it.
    */
+  /*
+   * "& Technology Project Lead" added 2026-09-28, after Xiu Wen confirmed it
+   * is an official title — the résumé already printed it, and the site
+   * printing only half of it was the first mismatch a screener would find.
+   */
   currentRole: {
-    title: 'Tuition Centre Manager',
+    title: 'Tuition Centre Manager & Technology Project Lead',
     employer: 'AGrader Learning Centre',
     since: 'July 2020',
   },
@@ -206,7 +211,7 @@ export const profile: Profile = {
   background: [
     {
       period: '2020 – now',
-      title: 'Tuition Centre Manager',
+      title: 'Tuition Centre Manager & Technology Project Lead',
       org: 'AGrader Learning Centre',
       note: 'Technology delivery since 2024',
     },
@@ -267,6 +272,9 @@ export const profile: Profile = {
    */
   resumePath: '/documents/Xiu-Wen-Resume.pdf',
   photoPath: '/images/xiu-wen-profile.webp',
+  /* The résumé photo since 2026-09-28, at Xiu Wen's request: background
+     replaced with plain light grey, cropped square from the 211x267 original
+     — enough for the 104px portrait at 2x. */
   photoAlt: 'Xiu Wen, Operations and Product Delivery',
 };
 
