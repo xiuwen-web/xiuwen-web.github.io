@@ -271,7 +271,9 @@ export const profile: Profile = {
    * because the filename is part of what gets exposed.
    */
   resumePath: '/documents/Xiu-Wen-Resume.pdf',
-  photoPath: '/images/xiu-wen-profile.webp',
+  /* Dated filename: the photo was replaced in place on 2026-09-28 and caches
+     kept serving the old one under the same URL. A new name is a new URL. */
+  photoPath: '/images/xiu-wen-portrait-2026-09.webp',
   /* The résumé photo since 2026-09-28, at Xiu Wen's request: background
      replaced with plain light grey, cropped square from the 211x267 original
      — enough for the 104px portrait at 2x. */
