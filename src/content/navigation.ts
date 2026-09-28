@@ -1,6 +1,7 @@
 import type { WorkEntry } from '@/types/content';
 import { getCaseStudy } from './caseStudies';
 import { ecosystem } from './ecosystem';
+import { otherWorkGlance } from './otherWork';
 
 /**
  * The information architecture, in one place
@@ -29,6 +30,17 @@ if (!cadmin || !mobile || !erp || !writewise) {
   throw new Error('navigation.ts: a case study named in the IA is missing');
 }
 
+
+/**
+ * A card's role-and-result line, from data the case study already carries:
+ * the first chip (the role played, by the convention in types/content.ts) and
+ * the glance result. One source, so the homepage cannot drift from the page.
+ */
+function outcomeOf(chips: string[], result: string): WorkEntry['outcome'] {
+  const role = chips[0];
+  return { role: role.charAt(0).toUpperCase() + role.slice(1), result };
+}
+
 export const workEntries: WorkEntry[] = [
   {
     href: '/work/cadmin-migration/',
@@ -37,6 +49,7 @@ export const workEntries: WorkEntry[] = [
     description: 'Migrating a live operational system without stopping the business.',
     status: cadmin.status,
     chips: cadmin.chips,
+    outcome: outcomeOf(cadmin.chips, cadmin.glance.result),
     /*
      * The four-phase rollout, drawn from the phase data — three shipped, one in
      * progress, which is the same fact the "3 of 4 phases live" badge under the
@@ -66,6 +79,7 @@ export const workEntries: WorkEntry[] = [
     description: ecosystem.summary,
     status: ecosystem.status,
     chips: ecosystem.chips,
+    outcome: outcomeOf(ecosystem.chips, ecosystem.glance.result),
     /*
      * The five surfaces, replacing the EverLoop logo on 2026-08-08.
      *
@@ -90,6 +104,7 @@ export const workEntries: WorkEntry[] = [
     description: 'Taking the EverLoop web platform to four app-store listings.',
     status: mobile.status,
     chips: mobile.chips,
+    outcome: outcomeOf(mobile.chips, mobile.glance.result),
     visual: {
       src: '/images/agrader-student-app-store.webp',
       alt: 'Four App Store screenshots of the AGrader student app.',
@@ -123,6 +138,7 @@ export const workEntries: WorkEntry[] = [
       'An AI marking prototype I specified and built with Claude, then deployed myself — now being taken into EverLoop by one of our developers.',
     status: writewise.status,
     chips: writewise.chips,
+    outcome: outcomeOf(writewise.chips, writewise.glance.result),
     /*
      * Not the case study's visual. That is the full admin screen at 1280x900,
      * and cropped to a 112px band it lands on the empty textarea at the top —
@@ -150,6 +166,7 @@ export const workEntries: WorkEntry[] = [
       'Requirements, process maps and the operations handbook for a consumer-products ERP.',
     status: erp.status,
     chips: erp.chips,
+    outcome: outcomeOf(erp.chips, erp.glance.result),
     /*
      * The dashboard with every figure masked. The source shows revenue,
      * average order value, order counts and a monthly sales trend for a
@@ -174,8 +191,13 @@ export const workEntries: WorkEntry[] = [
      * built and then deliberately cut back. The URL stays /work/other/ — a
      * published address is not renamed for a label change.
      */
-    navLabel: 'Product Experiments',
-    title: 'Product Experiments',
+    /*
+     * Retitled 2026-09-28 from "Product Experiments", which promised a set of
+     * prototypes and workflow work to a reader who then found one project.
+     * The URL stays /work/other/.
+     */
+    navLabel: 'Nova: an AI assistant',
+    title: 'Nova: an AI assistant',
     /*
      * "Everything that belongs under neither CAdmin, EverLoop nor the ERP"
      * defined the entry by what it was not, which made 05 read as the drawer
@@ -183,7 +205,8 @@ export const workEntries: WorkEntry[] = [
      * says what is in it (FINAL_REFINEMENT_BRIEF §11).
      */
     description:
-      'Selected experiments and smaller systems work — product prototypes, internal workflow improvements, and decisions where I deliberately reduced scope.',
+      'An assistant I built on Claude for my own coordination work, now used by the Operations and Product team, and the feature I removed from it.',
+    outcome: { role: 'Personal project', result: otherWorkGlance.result },
     /*
      * Cropped to the row band rather than letterboxed. The source is a square
      * illustration, and contained in a 3.8:1 plate it rendered 112px wide — a
