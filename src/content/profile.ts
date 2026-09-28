@@ -271,9 +271,10 @@ export const profile: Profile = {
    * because the filename is part of what gets exposed.
    */
   resumePath: '/documents/Xiu-Wen-Resume.pdf',
-  /* Dated filename: the photo was replaced in place on 2026-09-28 and caches
-     kept serving the old one under the same URL. A new name is a new URL. */
-  photoPath: '/images/xiu-wen-portrait-2026-09.webp',
+  /* Versioned filename: a photo replaced in place is served stale from
+     caches under the same URL, so every edit gets a new name. v2 has the
+     earbud retouched out, at Xiu Wen's request. */
+  photoPath: '/images/xiu-wen-portrait-2026-09-v2.webp',
   /* The résumé photo since 2026-09-28, at Xiu Wen's request: background
      replaced with plain light grey, cropped square from the 211x267 original
      — enough for the 104px portrait at 2x. */
