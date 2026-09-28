@@ -8,10 +8,10 @@ import { workNumber } from '@/content/navigation';
 import { otherWork, otherWorkGlance } from '@/content/otherWork';
 
 const LEDE =
-  'What belongs under none of the systems above — a personal AI assistant I built to pull my coordination work into one place, and then removed the feature I was most pleased with.';
+  'A personal AI assistant I built on Claude to pull my coordination work into one place — and then removed the feature I was most pleased with.';
 
 export const metadata: Metadata = {
-  title: 'Product Experiments — Nova',
+  title: 'Nova — an AI assistant',
   description: LEDE,
   alternates: { canonical: '/work/other/' },
 };
@@ -20,7 +20,7 @@ const TOC = otherWork.map((card) => ({ id: card.id, label: card.title.split(' �
 
 export default function OtherWorkPage() {
   return (
-    <Shell active="other" toc={TOC} tocTitle="Product Experiments">
+    <Shell active="other" toc={TOC} tocTitle="Nova: an AI assistant">
       <header
         className="relative border-b pt-8 pb-10 sm:pt-10 sm:pb-12"
         style={{ borderColor: 'var(--rule)' }}
@@ -44,7 +44,7 @@ export default function OtherWorkPage() {
           </p>
 
           <h1 className="mt-2 font-display text-[length:var(--text-page-title)] leading-[1.15] font-semibold text-balance sm:text-[length:var(--text-display)]">
-            Product Experiments
+            Nova: an AI assistant
           </h1>
 
           <p className="mt-4 text-pretty" style={{ color: 'var(--text-muted)' }}>

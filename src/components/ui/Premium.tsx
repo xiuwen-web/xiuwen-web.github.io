@@ -406,6 +406,14 @@ export function PremiumFeatured() {
                 {entry.description}
               </p>
 
+              <p className="mt-3 text-[length:var(--text-small)] leading-relaxed text-pretty">
+                <span className="font-medium">{entry.outcome.role}</span>
+                <span aria-hidden="true" style={{ color: 'var(--text-muted)' }}>
+                  {' · '}
+                </span>
+                {entry.outcome.result}
+              </p>
+
               {entry.chips && (
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {entry.chips.map((chip) => (
@@ -497,6 +505,14 @@ export function PremiumWorkTiles() {
               >
                 {entry.description}
               </p>
+
+              <p className="mt-3 text-[length:var(--text-small)] leading-relaxed text-pretty">
+                <span className="font-medium">{entry.outcome.role}</span>
+                <span aria-hidden="true" style={{ color: 'var(--text-muted)' }}>
+                  {' · '}
+                </span>
+                {entry.outcome.result}
+              </p>
             </div>
           </div>
         </li>
@@ -555,7 +571,7 @@ export function PremiumShipped() {
           className="mt-4 max-w-[52ch] text-[1.0625rem] leading-relaxed text-pretty"
           style={{ color: 'var(--text-muted)' }}
         >
-          Four of the surfaces behind the figures above. Two internal platforms, one store listing
+          Four of the systems in use today: two internal platforms, one store listing
           and the external ERP.
         </p>
 

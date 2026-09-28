@@ -277,6 +277,12 @@ export interface WorkEntry {
   navLabel: string;
   title: string;
   description: string;
+  /**
+   * The card's role-and-result line (added 2026-09-28). Derived in
+   * navigation.ts from the study's first chip and its glance.result, never
+   * written here, so the card cannot claim a different outcome from the page.
+   */
+  outcome: { role: string; result: string };
   status?: ProjectStatus;
   chips?: string[];
   visual?: Visual;

@@ -121,7 +121,7 @@ function Work() {
       <Container width="wide">
         <Heading
           pill="Selected work"
-          title="Five case studies and a set of experiments"
+          title="Five case studies and a side project"
           intro="CAdmin (our internal admin platform) and EverLoop (the learning platform for teachers, students and parents) carry most of what I do. Each page says what I decided and why, and anything still in progress says so."
         />
 

@@ -24,7 +24,7 @@ export const workLogHeading = 'Selected delivery log';
  * business, so they moved to sit with the entries they summarise (F70, F17).
  */
 export const workLogIntro =
-  'The case studies above go in depth. Behind them sit around fifty briefs, test cycles, guides and rollouts across 25 months of unbroken delivery, over sprints 3 to 14, each with a stated objective. Twelve are listed here — a sample rather than the archive.';
+  'The case studies above go in depth. Behind them sit around fifty briefs, test cycles, guides and rollouts across 25 months, each with a stated objective. Twelve are listed here — a sample rather than the archive.';
 
 export const workLog: WorkLogGroup[] = [
   {
