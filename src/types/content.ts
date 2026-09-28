@@ -487,7 +487,13 @@ export interface Profile {
   /** Named narrative sections, in reading order. */
   aboutSections: { id: string; heading: string; body: string[] }[];
   /** Closes the narrative before the capability lists. */
-  closingPrinciple: { line: string; support: string };
+  /**
+   * The career record, restated from the résumé (added 2026-09-28). A reader
+   * cross-checks the site against the PDF, and until this the homepage named
+   * no degree and no earlier role at all. No GPAs, at Xiu Wen's instruction.
+   */
+  background: { period: string; title: string; org: string; note?: string }[];
+  education: { degree: string; school: string; year: string }[];
   timeSplit: { label: string; value: number }[];
   /** Opens the Contact section — a statement of direction, not a greeting. */
   contactLede: string;

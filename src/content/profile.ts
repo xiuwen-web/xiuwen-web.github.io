@@ -134,7 +134,14 @@ export const profile: Profile = {
    */
 
   /** The whole position in one line. Everything under it is evidence for it. */
-  aboutLede: 'I operate the business and help build the systems behind it.',
+  /*
+   * Was "I operate the business and help build the systems behind it". "Help
+   * build" undersold case studies in which she was the project manager, and
+   * the fix is a precise verb, not a bigger one: specify, coordinate and
+   * validate are the three things the process section shows her doing.
+   * "Validate", not "sign off" — see heroSupport.
+   */
+  aboutLede: 'I run a tuition centre, and I specify, coordinate and validate the systems behind it.',
 
   /*
    * "Those two halves are about even" is gone. It was doing the 40/40/20
@@ -142,14 +149,22 @@ export const profile: Profile = {
    * 50/50 split, which is not what the bar shows.
    */
   aboutSupport:
-    'I manage operations at one of AGrader’s tuition centres while working on the systems used across the wider organisation. My role sits between frontline operations, product delivery and technology coordination — which means I often experience the problem first, define what needs to change, and help carry the solution through to release.',
+    'I manage operations at one of AGrader’s tuition centres while working on the systems used across the wider organisation. My role sits between frontline operations, product delivery and technology coordination — which means I often experience the problem first, define what needs to change, and carry the solution through to release.',
 
   aboutSections: [
     {
       id: 'how-i-got-here',
       heading: 'How I got here',
+      /*
+       * Rewritten 2026-09-28. The old version opened "I did not originally set
+       * out to…", which read as having drifted into the work. The facts are
+       * the same — the director's decision, the mentor, the order she took the
+       * work on in (F82) — with the dates and the outcomes put back. 2024 is
+       * the résumé's start date for the platform work.
+       */
       body: [
-        'I did not originally set out to work in product or technology. My director began assigning technology projects to me and arranged for me to learn from someone experienced in the area. I started with requirements gathering, then moved into developer coordination, testing, rollout and delivery. Over time the role became a combination of operations and technology.',
+        'In 2024 my director decided to move our student platform off Thinkific and build it in-house, put me on the project, and arranged for me to learn from someone experienced in the area. I started with requirements, then took on developer coordination, testing, rollout and release acceptance.',
+        'EverLoop went live in March 2025. By the end of that year I had run the CAdmin migration as project manager and taken two apps through app-store review. The operations job never went away; the role became both.',
       ],
     },
     {
@@ -182,18 +197,45 @@ export const profile: Profile = {
   ],
 
   /*
-   * The closing of the About narrative, and the last thing before the
-   * capability lists. Replaces "I believe recurring problems deserve more than
-   * temporary fixes. They deserve a system that makes the work clearer the
-   * next time around." — same idea, half the words.
-   *
-   * Set larger with more space around it, not as a quotation. It is a working
-   * principle, not a motto.
+   * The closing principle ("Recurring problems deserve systems, not repeated
+   * fixes") was cut 2026-09-28: it sat directly before a Principles section
+   * that ends on its own one-line conclusion, so a reader met three mottos in
+   * a row.
    */
-  closingPrinciple: {
-    line: 'Recurring problems deserve systems, not repeated fixes.',
-    support: 'That principle sits behind most of the work I choose to do.',
-  },
+
+  background: [
+    {
+      period: '2020 – now',
+      title: 'Tuition Centre Manager',
+      org: 'AGrader Learning Centre',
+      note: 'Technology delivery since 2024',
+    },
+    {
+      period: '2015 – 2022',
+      title: 'Inventory Control Specialist (part-time)',
+      org: 'Fullerton Healthcare Group',
+      /* The link the ERP study otherwise lacks: it is titled "a business I do
+         not work in", and it is a stock system. */
+      note: 'Stock movements and cycle counts — the ground the ERP specification stands on',
+    },
+    {
+      period: '2011 – 2019',
+      title: 'Kumon Centre Assistant',
+      org: 'Chrysalis Campus & I-Journey Learning',
+    },
+  ],
+  education: [
+    {
+      degree: 'Master of Applied Research in Social Sciences',
+      school: 'Singapore University of Social Sciences',
+      year: '2026',
+    },
+    {
+      degree: 'BA (Hons) Psychology with Business',
+      school: 'Singapore University of Social Sciences',
+      year: '2020',
+    },
+  ],
 
   timeSplit: [
     { label: 'Centre operations', value: 40 },
