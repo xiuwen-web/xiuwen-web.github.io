@@ -394,6 +394,11 @@ export interface MethodRule {
 export interface Principle {
   heading: string;
   body?: string;
+  /**
+   * Where on the site the principle was applied (added 2026-09-28). A
+   * principle is a claim; the link makes it a reference a reader can follow.
+   */
+  seenIn?: { label: string; href: string };
 }
 
 /**

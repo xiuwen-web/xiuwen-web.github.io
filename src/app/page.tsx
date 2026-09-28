@@ -549,6 +549,19 @@ function Principles() {
               >
                 {rule.body}
               </p>
+              {rule.seenIn && (
+                <p className="mt-2 text-[length:var(--text-small)]">
+                  <span style={{ color: 'var(--text-muted)' }}>Seen in: </span>
+                  <Link
+                    prefetch={false}
+                    href={rule.seenIn.href}
+                    className="underline decoration-1 underline-offset-4 transition-opacity hover:opacity-70"
+                    style={{ color: 'var(--accent-ink)' }}
+                  >
+                    {rule.seenIn.label}
+                  </Link>
+                </p>
+              )}
             </li>
           ))}
         </ol>
