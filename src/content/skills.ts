@@ -21,6 +21,14 @@ export const skillGroups: SkillGroup[] = [
       'User stories',
       'Acceptance criteria',
       'Scope definition',
+      /*
+       * Added 2026-09-28 for screening searches. Both are on record: sprints
+       * 3 to 14 in the delivery log, and ecosystem.ts has her writing "items on
+       * our board" that go "into a sprint with acceptance criteria attached".
+       * "Scrum" is deliberately absent — nothing here evidences its ceremonies.
+       */
+      'Backlog management',
+      'Agile sprint delivery',
       'Release planning',
       'Phased rollout',
       'Developer coordination',
