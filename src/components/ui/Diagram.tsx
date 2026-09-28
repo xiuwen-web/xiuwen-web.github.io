@@ -401,7 +401,7 @@ function Panel({
  *
  * Sourced from ecosystem.ts's overview ("five connected surfaces — admin,
  * teacher web and mobile, student and parent web and mobile") and it agrees
- * with the "5 user surfaces" figure in the credibility strip. Neither is
+ * with the "5 user-facing apps" figure in the credibility strip. Neither is
  * allowed to drift without the other.
  */
 const SURFACES: { surface: string; client: string }[] = [

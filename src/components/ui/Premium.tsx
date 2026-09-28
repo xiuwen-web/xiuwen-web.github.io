@@ -170,6 +170,16 @@ export function PremiumHero() {
               {profile.heroSupport}
             </p>
 
+            <p
+              className="mt-4 text-[length:var(--text-small)] leading-relaxed"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <span className="font-medium" style={{ color: 'var(--text)' }}>
+                Work that maps to:
+              </span>{' '}
+              {profile.roleFit.join(' · ')}
+            </p>
+
             {/* The employment record, as a trayed strip rather than a mono
                 run. It is the single most trust-generating line on the page
                 and it was set like a footnote. */}

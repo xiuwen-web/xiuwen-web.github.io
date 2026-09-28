@@ -69,6 +69,16 @@ export function MobileNav({ active }: { active?: string }) {
         </div>
 
         <div className="flex shrink-0 items-center gap-1">
+          {/* Contact in the one piece of chrome a phone reader always has.
+              On a ~13,000px page the email otherwise first appears in the
+              last section, or two taps deep in the drawer. */}
+          <a
+            href={`mailto:${profile.email}`}
+            className="flex h-11 items-center rounded-[var(--radius)] px-2 text-[length:var(--text-small)] font-medium"
+            style={{ color: 'var(--rail-text)' }}
+          >
+            Email
+          </a>
           <ThemeToggle onRail />
           <button
             type="button"

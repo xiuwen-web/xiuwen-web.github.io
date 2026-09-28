@@ -117,7 +117,7 @@ export const workEntries: WorkEntry[] = [
      * place next to work that shipped to twenty centres.
      */
     description:
-      'An AI marking prototype I specified, built and deployed myself — now being taken into EverLoop by one of our developers.',
+      'An AI marking prototype I specified and built with Claude, then deployed myself — now being taken into EverLoop by one of our developers.',
     status: writewise.status,
     chips: writewise.chips,
     /*
