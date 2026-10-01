@@ -7,9 +7,9 @@
  * previous value pointed at a Vercel deployment that served an unrelated site,
  * so this constant has already been wrong once.
  *
- * Note there is a second live copy of this site at wen-portfolio.up.railway.app,
- * auto-deployed from the same repository. That is deliberate and harmless: it
- * builds from these files too, so its canonical tags point back here and search
- * engines are told which of the two is authoritative.
+ * GitHub Pages is the only host. A second auto-deployed copy on Railway
+ * (wen-portfolio.up.railway.app) was retired on 2026-10-01; its canonical tags
+ * pointed here, so any search engine that indexed it was already told this
+ * origin is the authoritative one.
  */
 export const SITE_URL = 'https://xiuwen-web.github.io';

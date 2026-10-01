@@ -62,9 +62,10 @@ manager cannot truthfully claim the delivery half.
 - Content lives in `src/content/` as typed data. `src/types/content.ts` is
   deliberately strict: a case study missing its `decisions` or `lessons` fails
   the build rather than shipping thin.
-- Deployed to GitHub Pages at `https://xiuwen-web.github.io`, with a second
-  auto-deployed copy at `wen-portfolio.up.railway.app` that canonicalises back.
-  Hosting choice between the two is still open.
+- Deployed to GitHub Pages at `https://xiuwen-web.github.io`, the only
+  host. A second copy on Railway (`wen-portfolio.up.railway.app`) was retired
+  on 2026-10-01 after its build failed while Pages built the same commit
+  cleanly; one host means one version for a recruiter to land on.
 - A nicer custom domain is wanted but unfunded; nothing chosen.
 - Planning documents describing the employer's internal systems are kept out of
   the repository.
