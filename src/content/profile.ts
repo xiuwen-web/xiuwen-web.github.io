@@ -153,8 +153,13 @@ export const profile: Profile = {
    * bar's job in words, and doing it less precisely — "even" reads as a
    * 50/50 split, which is not what the bar shows.
    */
+  /*
+   * Cut to one sentence 2026-10-01. The two sentences before it restated the
+   * lede, the 40/40/20 split and the Background card directly above; what is
+   * left is the one thing those do not say.
+   */
   aboutSupport:
-    'I manage operations at one of AGrader’s tuition centres while working on the systems used across the wider organisation. My role sits between frontline operations, product delivery and technology coordination — which means I often experience the problem first, define what needs to change, and carry the solution through to release.',
+    'I often meet the problem first, define what needs to change, and carry the solution through to release.',
 
   aboutSections: [
     {
@@ -182,7 +187,8 @@ export const profile: Profile = {
       heading: 'Why operations still matters',
       body: [
         'The part I would not give up is operations. It is why the requirements I write tend to hold up: I am specifying systems for a job I do myself.',
-        'Working close to teachers, parents, administrators and daily centre workflows gives me direct exposure to the friction behind a feature request. I am not only documenting what someone asks for — I am trying to understand why the problem exists, and whether the proposed solution will actually work in practice.',
+        /* Shortened 2026-10-01: about fifty words restating the line above. */
+        'Working beside teachers, parents and admins every day, I see the friction behind a feature request before it reaches the board.',
       ],
     },
     {
