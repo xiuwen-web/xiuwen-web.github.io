@@ -28,10 +28,8 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which runs `npm run
 lint` and `npm run build` and then publishes `out/` to GitHub Pages. Both are
 gates: a lint error or a type error fails the job and nothing is published.
 
-A second copy builds from the same repository at
-`wen-portfolio.up.railway.app`. Its canonical tags point back at the Pages
-origin in `src/content/site.ts`, so search engines are told which of the two is
-authoritative.
+GitHub Pages is the only host. A second copy on Railway
+(`wen-portfolio.up.railway.app`) was retired on 2026-10-01.
 
 ## How it is organised
 
