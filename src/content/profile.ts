@@ -271,12 +271,11 @@ export const profile: Profile = {
    * because the filename is part of what gets exposed.
    */
   resumePath: '/documents/Xiu-Wen-Resume.pdf',
-  /* Dated filename: the photo was replaced in place on 2026-09-28 and caches
-     kept serving the old one under the same URL. A new name is a new URL. */
-  photoPath: '/images/xiu-wen-portrait-2026-09.webp',
-  /* The résumé photo since 2026-09-28, at Xiu Wen's request: background
-     replaced with plain light grey, cropped square from the 211x267 original
-     — enough for the 104px portrait at 2x. */
+  /* Versioned filename: a photo replaced in place is served stale from
+     caches under the same URL, so every new photo gets a new name. */
+  photoPath: '/images/xiu-wen-portrait-2026-10.webp',
+  /* Xiu Wen's studio headshot since 2026-10-01, supplied from her Drive at
+     1086x1448 and cropped square to 512px. Plain light background as shot. */
   photoAlt: 'Xiu Wen, Operations and Product Delivery',
 };
 
