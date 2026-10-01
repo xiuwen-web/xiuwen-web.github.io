@@ -4,7 +4,6 @@ import { Container } from '@/components/layout/Section';
 import { AtAGlance } from '@/components/ui/AtAGlance';
 import { Button } from '@/components/ui/Button';
 import { SupportingWork } from '@/components/ui/SupportingWork';
-import { workNumber } from '@/content/navigation';
 import { otherWork, otherWorkGlance } from '@/content/otherWork';
 
 const LEDE =
@@ -39,7 +38,9 @@ export default function OtherWorkPage() {
             style={{ color: 'var(--text-muted)' }}
           >
             <span aria-hidden="true">[ </span>
-            Case study {workNumber('/work/other/')}
+            {/* "Side project", not "Case study 06" (2026-10-01): the homepage
+                calls it a side project, and the label should agree. */}
+            Side project
             <span aria-hidden="true"> ]</span>
           </p>
 
