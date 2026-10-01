@@ -1,4 +1,5 @@
 import { Container } from '@/components/layout/Section';
+import { Disclosure } from './Disclosure';
 import { EvidenceGallery } from './EvidenceGallery';
 import {
   analyticsInsight,
@@ -88,19 +89,24 @@ export function AnalyticsEvidenceSection({ items }: { items: AnalyticsEvidence[]
         <p className="text-pretty">{analyticsSummary}</p>
       </Container>
 
+      {/* Closed by default (2026-10-01). The four figures above are the
+          evidence a reader acts on; the screenshots are its receipts, and
+          open they made this the longest page on the site. One tap away,
+          nothing removed. */}
       <Container width="content" className="mt-12">
-        <h3 className="font-display text-[length:var(--text-h3)] font-semibold">
-          The screenshots behind the figures
-        </h3>
-        <p
-          className="mt-2 max-w-[60ch] text-[length:var(--text-small)]"
-          style={{ color: 'var(--text-muted)' }}
+        <Disclosure
+          summary="See the screenshots behind the figures"
+          hint="Four store-console screenshots, cropped to the metric and its date range, with account details removed."
         >
-          Cropped to the metric and its date range, with the account details removed. Select one to
-          enlarge it.
-        </p>
+          <p
+            className="max-w-[60ch] text-[length:var(--text-small)]"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            Select one to enlarge it.
+          </p>
 
-        <EvidenceGallery items={items} />
+          <EvidenceGallery items={items} />
+        </Disclosure>
       </Container>
 
       <Container className="mt-10">
