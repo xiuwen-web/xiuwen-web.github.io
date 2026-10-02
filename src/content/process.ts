@@ -43,7 +43,10 @@ export const handoff: HandoffStep[] = [
   {
     stage: 'Business acceptance',
     owner: 'Mine',
-    mine: 'I check the build against the criteria I wrote, and decide whether it is ready to release.',
+    /* Was "…and decide whether it is ready to release" until 2026-10-02: it
+       read as sole release authority, which the site deliberately does not
+       claim. The caption below already states the bounded version. */
+    mine: 'I check the build against the criteria I wrote, and confirm it does the job before it is released.',
   },
   {
     stage: 'Production feedback',
@@ -115,6 +118,14 @@ export const method: MethodRule[] = [
 export const specimenIntro =
   'One of mine, recreated. The internal document is confidential, so this is rebuilt with the same structure and reasoning and the identifying detail removed — an ordinary request that turns out to have a rule problem underneath it.';
 
+/**
+ * Why the specimen's last two acceptance criteria matter most. Its own
+ * constant (2026-10-02) because the homepage preview shows those two with this
+ * reason, and the footnote below says the same thing — one sentence, one place.
+ */
+export const specimenKeyCriteriaWhy =
+  'The audit line exists because the first question when something disappears is always who removed it — and the preview exists because an automation that silently changes what the public can see is one nobody will trust enough to switch on.';
+
 export const specimen: Specimen = {
   title: 'Automated Public Course Rollover',
   standfirst:
@@ -166,8 +177,7 @@ export const specimen: Specimen = {
       ],
     },
   ],
-  footnote:
-    'The last two criteria are the ones that matter. A preview exists because an automation that silently changes what the public can see is one nobody will trust enough to switch on — and the audit line exists because the first question when something disappears is always who removed it.',
+  footnote: `The last two criteria are the ones that matter. ${specimenKeyCriteriaWhy}`,
 };
 
 /**
