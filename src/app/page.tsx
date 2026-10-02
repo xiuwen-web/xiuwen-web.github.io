@@ -13,6 +13,7 @@ import {
   methodIntro,
   processIntro,
   specimen,
+  specimenKeyCriteriaWhy,
   specimenIntro,
   trace,
   traceIntro,
@@ -177,7 +178,8 @@ function Process() {
             evidence a product-owner or analyst screener is looking for, and
             it was three taps deep behind a label that did not say what was
             inside. The preview is the title, the problem and the first three
-            acceptance criteria; the full specimen stays one tap away. */}
+            acceptance criteria; the full specimen stays one tap away.
+            Since 2026-10-02 the preview shows the two criteria that matter most. */}
         <SpecimenPreview />
 
         <Disclosure
@@ -241,12 +243,16 @@ function Process() {
   );
 }
 
-/** How many acceptance criteria show before the reader opens the full specimen. */
-const PREVIEW_CRITERIA = 3;
+/**
+ * How many acceptance criteria the preview shows: the last ones, which the
+ * specimen's own footnote names as the ones that matter (2026-10-02). The
+ * first three were routine and hid the two that show judgement.
+ */
+const KEY_CRITERIA = 2;
 
 function SpecimenPreview() {
   const criteria = specimen.sections.find((section) => section.heading === 'Acceptance criteria');
-  const rest = criteria ? criteria.lines.length - PREVIEW_CRITERIA : 0;
+  const rest = criteria ? criteria.lines.length - KEY_CRITERIA : 0;
 
   return (
     <div className="px-tray mt-12">
@@ -265,10 +271,10 @@ function SpecimenPreview() {
         {criteria && (
           <section className="mt-6">
             <h4 className="px-label text-[0.6875rem] font-medium" style={{ color: 'var(--text-muted)' }}>
-              Acceptance criteria · first {PREVIEW_CRITERIA} of {criteria.lines.length}
+              Acceptance criteria · the {KEY_CRITERIA} that matter most, of {criteria.lines.length}
             </h4>
             <ul className="mt-3 space-y-2">
-              {criteria.lines.slice(0, PREVIEW_CRITERIA).map((line) => (
+              {criteria.lines.slice(-KEY_CRITERIA).map((line) => (
                 <li
                   key={line.slice(0, 40)}
                   className="pl-4 text-[length:var(--text-small)] leading-relaxed"
@@ -278,6 +284,12 @@ function SpecimenPreview() {
                 </li>
               ))}
             </ul>
+            <p
+              className="mt-4 max-w-[42rem] text-[length:var(--text-small)] leading-relaxed"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {specimenKeyCriteriaWhy}
+            </p>
           </section>
         )}
 
