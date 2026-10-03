@@ -229,10 +229,17 @@ export const profile: Profile = {
          not work in", and it is a stock system. */
       note: 'Stock movements and cycle counts — the ground the ERP specification stands on',
     },
+    /* Split into its two centres 2026-10-03, with the dates and titles from
+       the coaching résumé; the single 2011 – 2019 line did not match it. */
     {
-      period: '2011 – 2019',
-      title: 'Kumon Centre Assistant',
-      org: 'Chrysalis Campus & I-Journey Learning',
+      period: '2015 – 2019',
+      title: 'Assistant Teacher',
+      org: 'I-Journey Learning Centre (Kumon)',
+    },
+    {
+      period: '2008 – 2015',
+      title: 'Assistant Instructor',
+      org: 'Chrysalis Campus (Kumon)',
     },
   ],
   education: [
@@ -247,6 +254,9 @@ export const profile: Profile = {
       year: '2020',
     },
   ],
+
+  outsideWork:
+    'NROC-registered badminton coach and MOE-registered CCA instructor. I designed and ran a preschool badminton programme from scratch.',
 
   timeSplit: [
     { label: 'Centre operations', value: 40 },

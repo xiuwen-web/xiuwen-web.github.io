@@ -505,6 +505,11 @@ export interface Profile {
    */
   background: { period: string; title: string; org: string; note?: string }[];
   education: { degree: string; school: string; year: string }[];
+  /**
+   * One line, under Education (added 2026-10-03). Coaching is kept to a line
+   * so the site stays one story; availability and services are not here.
+   */
+  outsideWork: string;
   timeSplit: { label: string; value: number }[];
   /** Opens the Contact section — a statement of direction, not a greeting. */
   contactLede: string;

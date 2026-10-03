@@ -475,6 +475,14 @@ function Background() {
             </li>
           ))}
         </ul>
+
+        <p
+          className="px-label mt-6 border-t pt-4 text-[0.625rem]"
+          style={{ color: 'var(--text-muted)', borderColor: 'var(--rule)' }}
+        >
+          Outside work
+        </p>
+        <p className="mt-3 text-[length:var(--text-small)] leading-snug">{profile.outsideWork}</p>
       </div>
     </div>
   );
