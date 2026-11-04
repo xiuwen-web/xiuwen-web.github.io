@@ -18,6 +18,9 @@ const eslintConfig = defineConfig([
     // this directory (it is gitignored), so without this entry `npm run
     // lint` disagrees with the workflow that gates the deploy.
     "preview/**",
+    // Vendored HyperFrames agent skills (heygen-com/hyperframes). Their
+    // scripts are upstream code run by Claude Code, not part of the site.
+    ".claude/**",
   ]),
 ]);
 
