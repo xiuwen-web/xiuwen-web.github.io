@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    # Security updates only. A limit of 0 turns off routine version-bump PRs,
+    # which this repo has never had; security update PRs are not affected.
+    open-pull-requests-limit: 0
+    schedule:
+      interval: "weekly"
+    exclude-paths:
+      # Vendored HyperFrames agent skills. Their test fixtures carry their own
+      # package.json files that the site never installs or ships, so alerts on
+      # them are noise. Update the skills from upstream instead.
+      - ".claude/**"
